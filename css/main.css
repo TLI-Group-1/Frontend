@@ -13,3 +13,69 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+
+html, body {
+    background-color: #f6fbfd;
+    color: #1d2345;
+    font-family: "Popppins", "Now", "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+p {
+    margin: 0.5em auto;
+}
+
+a {
+    text-decoration: underline;
+}
+
+footer {
+    padding: 2rem;
+}
+
+.card {
+    background-color: #ffffff;
+    box-shadow:
+        0 0.08rem 0.06rem -0.62rem rgba(0, 0, 0, 0.061),
+        0 0.28rem 0.21rem -0.62rem rgba(0, 0, 0, 0.089),
+        0 1.25rem 0.93rem -0.62rem rgba(0, 0, 0, 0.15);
+    border-radius: 1.8rem;
+}
+
+.border-thin {
+    border: 0.08rem solid #e0e0e0;
+}
+
+.region-dark {
+    background-color: #1d2345;
+    color: #ffffff;
+}
+
+.indented {
+    padding-left: 2rem;
+}
+
+/* custom link style */
+.link-light {
+    text-decoration: underline;
+}
+.link-light:link,
+.link-light:visited
+{
+    text-decoration: underline;
+    color: inherit;
+}
+.link-light:hover,
+.link-light:active
+{
+    text-decoration: none;
+}
