@@ -20,9 +20,14 @@ function GetSensoData(){
         .then(response => response.json())
         // log the response in the browser console
         .then(responseData => {
-            console.log(responseData);
+            // console.log(responseData);
+            changeSpan(responseData.datetime);
         });
 }
 
 // call the GetSensoData function
 GetSensoData()
+
+function changeSpan(content){
+    document.getElementById("demo_field").innerHTML=content;
+}
