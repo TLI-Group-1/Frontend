@@ -13,3 +13,16 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+
+function GetSensoData(){
+    fetch("http://worldtimeapi.org/api/timezone/America/Toronto")
+        // store response from the API in JSON
+        .then(response => response.json())
+        // log the response in the browser console
+        .then(responseData => {
+            console.log(responseData);
+        });
+}
+
+// call the GetSensoData function
+GetSensoData()
