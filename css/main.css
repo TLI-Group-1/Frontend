@@ -17,7 +17,19 @@ limitations under the License.
 html, body {
     background-color: #f6fbfd;
     color: #1d2345;
-    font-family: "Popppins", "Now", "Roboto", "Helvetica", "Arial", sans-serif;
+    font-family: "Poppins", "Poppins Latin", "Now",
+                 "Roboto", "Helvetica", "Arial", sans-serif;
+    font-size: 14px;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
 }
 
 h1 {
@@ -31,7 +43,7 @@ h2 {
 }
 
 p {
-    margin: 0.5em auto;
+    margin: 1em auto;
 }
 
 a {
@@ -40,6 +52,15 @@ a {
 
 footer {
     padding: 2rem 4rem;
+    margin-top: auto;
+    flex-shrink: 0;
+}
+
+article.license {
+    width: 50rem;
+    margin: 0 auto;
+    word-wrap: normal;
+    max-width: inherit;
 }
 
 .card {

@@ -14,20 +14,18 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-function GetSensoData(){
-    fetch("http://worldtimeapi.org/api/timezone/America/Toronto")
+function demoDayAPICall(){
+    fetch("http://localhost:8080/demo?budget=200")
         // store response from the API in JSON
         .then(response => response.json())
-        // log the response in the browser console
+        // write the response to the demo field
         .then(responseData => {
-            // console.log(responseData);
-            changeSpan(responseData.datetime);
+            populateDemoDiv(responseData.body.slice(0, 1800));
         });
 }
 
-// call the GetSensoData function
-GetSensoData()
-
-function changeSpan(content){
+function populateDemoDiv(content){
     document.getElementById("demo_field").innerHTML=content;
 }
+
+demoDayAPICall()
