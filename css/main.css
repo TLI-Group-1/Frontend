@@ -1,0 +1,102 @@
+/*
+Copyright (c) 2021 Ruofan Chen, Samm Du, Nada Eldin, Shalev Lifshitz
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at:
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+html, body {
+    background-color: #f6fbfd;
+    color: #1d2345;
+    font-family: "Poppins", "Poppins Latin", "Now",
+                 "Roboto", "Helvetica", "Arial", sans-serif;
+    font-size: 14px;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+p {
+    margin: 1em auto;
+}
+
+a {
+    text-decoration: underline;
+}
+
+footer {
+    padding: 2rem 4rem;
+    margin-top: auto;
+    flex-shrink: 0;
+}
+
+article.license {
+    width: 50rem;
+    margin: 0 auto;
+    word-wrap: normal;
+    max-width: inherit;
+}
+
+.card {
+    background-color: #ffffff;
+    box-shadow:
+        0 0.08rem 0.06rem -0.62rem rgba(0, 0, 0, 0.061),
+        0 0.28rem 0.21rem -0.62rem rgba(0, 0, 0, 0.089),
+        0 1.25rem 0.93rem -0.62rem rgba(0, 0, 0, 0.15);
+    border-radius: 1.8rem;
+}
+
+.border-thin {
+    border: 0.08rem solid #e0e0e0;
+}
+
+.region-dark {
+    background-color: #1d2345;
+    color: #ffffff;
+}
+
+.indented {
+    padding-left: 2rem;
+}
+
+/* custom link style */
+.link-light {
+    text-decoration: underline;
+}
+.link-light:link,
+.link-light:visited
+{
+    text-decoration: underline;
+    color: inherit;
+}
+.link-light:hover,
+.link-light:active
+{
+    text-decoration: none;
+}
