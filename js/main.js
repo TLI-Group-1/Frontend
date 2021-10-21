@@ -20,7 +20,7 @@ function demoDayAPICall(){
         .then(response => response.json())
         // write the response to the demo field
         .then(responseData => {
-            populateDemoDiv(responseData.body.slice(0, 1800));
+            populateDemoDiv(responseData.body);
         });
 }
 
