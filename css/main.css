@@ -145,6 +145,7 @@ footer div.footer-spacer {
 /* custom link style */
 .link-light {
     text-decoration: underline;
+    word-break: break-all;
 }
 .link-light:link,
 .link-light:visited
