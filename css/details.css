@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 main {
-    width: 50rem;
+    width: 60rem;
     max-width: 90%;
     max-height: 60rem;
     margin: 5rem auto;
@@ -53,8 +53,6 @@ main > nav {
 }
 
 main > div {
-    flex-grow: 10;
-
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -71,7 +69,7 @@ main > div section {
     flex-grow: 2;
     border-radius: 0 0 1.8rem 0;
     padding: 1rem;
-    max-width: 66%;
+    max-width: 75%;
     min-height: 30rem;
     /* overflow-y: auto; */
 }
