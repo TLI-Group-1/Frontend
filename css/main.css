@@ -101,13 +101,6 @@ aside.attrib h3 {
 
 aside.attrib img {
     width: 12rem;
-    transition: transform 250ms ease;
-}
-aside.attrib img:hover {
-    transform: translateX(0.5em);
-}
-aside.attrib img:active {
-    transform: translateX(0);
 }
 
 /*
@@ -163,4 +156,15 @@ footer div.footer-spacer {
 .link-light:active
 {
     text-decoration: none;
+}
+
+/* buttons that shift right when hovered */
+.btn-shifty {
+    transition: transform 250ms ease;
+}
+.btn-shifty:hover {
+    transform: translateX(0.5em);
+}
+.btn-shifty:active {
+    transform: translateX(0);
 }
