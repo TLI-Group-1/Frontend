@@ -64,20 +64,35 @@ footer {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap-reverse;
+    row-gap: 2em;
     column-gap: 2.5em;
 }
 
-article.license {
-    flex-grow: 4;
-    max-width: 50rem;
+section.license {
+    flex-grow: 1;
+    width: 40rem;
+    min-width: 12rem;
     word-wrap: normal;
 }
 
+section.license article {
+    max-width: 40rem;
+    min-width: inherit;
+    margin: 0 auto;
+}
+
 aside.attrib {
-    margin: 1em 0 1em 0;
+    flex-grow: 1;
+    width: 12rem;
+    min-width: 12rem;
+    max-width: 40rem;
+
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
     row-gap: 1.5em;
+    column-gap: 2em;
 }
 
 aside.attrib h3 {
@@ -86,13 +101,23 @@ aside.attrib h3 {
 
 aside.attrib img {
     width: 12rem;
-    transition: transform 250ms ease;
 }
-aside.attrib img:hover {
-    transform: translateX(0.5em);
+
+/*
+    this adds invisible spacer divs around the footer
+    content on screens wider than 1080px, which eats
+    up free flex space, so that on wider screens:
+        - the footer content can remain centered;
+        - the attrib block will remain vertical;
+*/
+footer div.footer-spacer {
+    display: none;
 }
-aside.attrib img:active {
-    transform: translateX(0);
+@media all and (min-width: 1080px) {
+    footer div.footer-spacer {
+        display: block;
+        flex-grow: 5;
+    }
 }
 
 .card {
@@ -120,6 +145,7 @@ aside.attrib img:active {
 /* custom link style */
 .link-light {
     text-decoration: underline;
+    word-break: break-all;
 }
 .link-light:link,
 .link-light:visited
@@ -131,4 +157,15 @@ aside.attrib img:active {
 .link-light:active
 {
     text-decoration: none;
+}
+
+/* buttons that shift right when hovered */
+.btn-shifty {
+    transition: transform 250ms ease;
+}
+.btn-shifty:hover {
+    transform: translateX(0.5em);
+}
+.btn-shifty:active {
+    transform: translateX(0);
 }
