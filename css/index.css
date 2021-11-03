@@ -1,0 +1,49 @@
+/*
+Copyright (c) 2021 Ruofan Chen, Samm Du, Nada Eldin, Shalev Lifshitz
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at:
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+main {
+    width: 60rem;
+    max-width: 90%;
+    margin: 2rem auto;
+    background-color: inherit;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    flex-wrap: wrap;
+    row-gap: 2rem;
+    column-gap: 2rem;
+}
+
+main > aside {
+    flex-grow: 1;
+    flex-shrink: 0;
+    width: 15rem;
+}
+
+main > aside > header {
+    min-height: 5rem;
+    background-color: #ffffff;
+}
+
+main > section {
+    min-height: 5rem;
+    flex-grow: 2;
+    width: 35rem;
+}
+
+main > section > nav {
+    min-height: 5rem;
+}
