@@ -35,11 +35,11 @@ header {
     justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;
+    column-gap: 1em;
 }
 
 header h1 {
     color: #36cf9b;
-    margin: 0 1rem;
 }
 
 header img {
