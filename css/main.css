@@ -116,7 +116,7 @@ footer div.footer-spacer {
 @media all and (min-width: 1080px) {
     footer div.footer-spacer {
         display: block;
-        flex-grow: 5;
+        flex-grow: 4;
     }
 }
 
