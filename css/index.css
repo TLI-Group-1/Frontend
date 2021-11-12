@@ -36,7 +36,7 @@ main > aside {
 
 main > aside > header {
     background-color: #ffffff;
-    padding: 1.5rem;
+    padding: 2rem 1.5rem;
 }
 
 main > aside > header h1 {
@@ -47,6 +47,10 @@ main > aside > header img {
     height: 1.5em;
     width: auto;
     padding-left: 2px;
+}
+
+main > aside > header article {
+    margin: 1rem 0;
 }
 
 main > aside > header ul {
@@ -64,7 +68,7 @@ main > aside > header button {
     border: none;
     border-radius: 0.5rem;
     width: 100%;
-    margin: 0.5rem auto 0 auto;
+    margin: 1rem auto 0 auto;
     padding: 1rem;
     font-size: 1.5rem;
     font-weight: 500;

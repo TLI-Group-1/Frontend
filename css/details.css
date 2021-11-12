@@ -45,6 +45,7 @@ header h1 {
 header img {
     height: 2.2em;
     width: auto;
+    padding-left: 2px;
 }
 
 main > nav {
