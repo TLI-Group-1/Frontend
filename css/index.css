@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 main {
-    width: 60rem;
+    width: 70rem;
     max-width: 90%;
     margin: 2rem auto 5rem auto;
     background-color: inherit;
@@ -30,18 +30,49 @@ main {
 main > aside {
     flex-grow: 1;
     flex-shrink: 0;
-    width: 15rem;
+    width: 18rem;
     max-width: 25rem;
 }
 
 main > aside > header {
-    min-height: 5rem;
     background-color: #ffffff;
+    padding: 1.5rem;
+}
+
+main > aside > header h1 {
+    color: #36cf9b;
+}
+
+main > aside > header img {
+    height: 1.5em;
+    width: auto;
+    padding-left: 2px;
+}
+
+main > aside > header ul {
+    list-style-type: disc;
+    margin: 0.5em 0 0 1.5em;
+}
+
+main > aside > header ul li {
+    margin-bottom: 1em;
+}
+
+main > aside > header button {
+    background-color: #d81b43;
+    color: #ffffff;
+    border: none;
+    border-radius: 0.5rem;
+    width: 100%;
+    margin: 0.5rem auto 0 auto;
+    padding: 1rem;
+    font-size: 1.5rem;
+    font-weight: 500;
 }
 
 main > section {
     min-height: 5rem;
-    flex-grow: 2;
+    flex-grow: 3;
     width: 35rem;
 }
 
