@@ -11,3 +11,5 @@ One way to serve the frontend locally is to use Python3's built-in `http.server`
 sudo python3 -m http.server 80 --bind 0.0.0.0
 ```
 Note that the Python HTTP server is not suited for production use and should only be used for local testing purposes.
+
+Currently, it assumes that the Backend API server is running at http://localhost:8080
