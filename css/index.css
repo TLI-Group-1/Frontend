@@ -59,7 +59,7 @@ main > aside > header ul {
 }
 
 main > aside > header ul li {
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
 }
 
 main > aside > header button {
