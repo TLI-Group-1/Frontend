@@ -74,6 +74,14 @@ main > aside > header button {
     padding: 1rem;
     font-size: 1.5rem;
     font-weight: 500;
+    transition: all ease 0.2s;
+}
+main > aside > header button:hover {
+    background-color: #b81638;
+    transform: translateY(-0.2rem);
+}
+main > aside > header button:active {
+    transform: none;
 }
 
 /* left-side styles: search bar and car listings */
