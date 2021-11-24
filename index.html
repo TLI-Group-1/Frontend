@@ -28,7 +28,9 @@ limitations under the License. -->
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/index.css">
     <!-- Scripts -->
-    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/mustache-4.2.0.min.js" defer></script>
+    <script type="text/javascript" src="js/main.js" defer></script>
+    <script type="text/javascript" src="js/discover.js" defer></script>
 </head>
 <body>
     <main>
@@ -48,7 +50,7 @@ limitations under the License. -->
                         <li>Agree to our terms of service</li>
                     </ul>
                 </article>
-                <button type="button" name="login">
+                <button type="button" name="login" onclick="userLogin();">
                     Agree & continue
                 </button>
             </header>
@@ -56,13 +58,26 @@ limitations under the License. -->
             </section>
         </aside>
         <section>
-            <nav class="card region-dark">
-
+            <nav class="search-bar card region-dark">
+                <span class="sort-combo">
+                    <button type="button" name="sortOrder" id="sortOrder" onclick="setSortOrder();">
+                            <img id="sortIcon" src="assets/icons/sort-top-down-min.svg" alt="Sort by" />
+                    </button>
+                    <select name="sortBy" id="sortBy" onchange="setSortBy();">
+                        <option value="apr" selected>Interest rate</option>
+                        <option value="payment_mo">Monthly payment</option>
+                        <option value="price">Retail price</option>
+                        <option value="total_sum">Total cost</option>
+                        <option value="term_length">Loan term length</option>
+                    </select>
+                </span>
+                <form class="search-container" onsubmit="submitSearch(); return false;">
+                    <button type="submit">
+                        <img src="assets/icons/search-icon-min.svg" alt="Search" />
+                    </button>
+                    <input type="text" id="searchBox">
+                </form>
             </nav>
-            <h3></h3>
-            <div class="">
-
-            </div>
         </section>
     </main>
 

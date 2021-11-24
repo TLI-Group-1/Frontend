@@ -27,6 +27,8 @@ main {
     column-gap: 2rem;
 }
 
+/* right-side styles: interaction widget & claimed loans */
+
 main > aside {
     flex-grow: 1;
     flex-shrink: 0;
@@ -74,12 +76,92 @@ main > aside > header button {
     font-weight: 500;
 }
 
+/* left-side styles: search bar and car listings */
+
 main > section {
     min-height: 5rem;
     flex-grow: 3;
     width: 35rem;
 }
 
-main > section > nav {
-    min-height: 5rem;
+nav.search-bar {
+    min-height: 4rem;
+    padding: 1rem 2rem;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    row-gap: 1rem;
+}
+
+nav.search-bar span.sort-combo {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 1em;
+}
+
+nav.search-bar span.sort-combo img {
+    -webkit-transform: scaleY(-1);
+    -moz-transform: scaleY(-1);
+    transform: scaleY(-1);
+}
+
+nav.search-bar button {
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    margin: 0;
+    padding: 0;
+    line-height: 1em;
+    font-size: 1em;
+    color: #ffffff;
+}
+
+nav.search-bar select {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    padding: 0;
+    height: auto;
+    font-family: inherit;
+    font-size: 1.2em;
+    color: #ffffff;
+    display: inline-block;
+}
+
+nav.search-bar form.search-container {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+nav.search-bar form.search-container button {
+    background-color: #ffffff;
+    padding: 0 0.5rem 0 0.5rem;
+    height: 2rem;
+    border-radius: 1rem 0 0 1rem;
+    display: inline-flex;
+    align-items: center;
+}
+
+nav.search-bar form.search-container button img {
+    flex-shrink: 0;
+    height: 1.5rem;
+    width: auto;
+}
+
+nav.search-bar form.search-container input {
+    flex-grow: 2;
+    border: none;
+    min-width: 5rem;
+    height: 2rem;
+    padding: 0.25em;
+    border-radius: 0 1rem 1rem 0;
 }
