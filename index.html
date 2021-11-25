@@ -95,48 +95,7 @@ limitations under the License. -->
                     <input type="text" id="searchBox">
                 </form>
             </nav>
-            <div class="cars-container">
-                <div class="car-offer card border-thin">
-                    <img src="assets/img/car-1.jpg" alt="Car Picture">
-                    <article>
-                        <div class="car-info-pair">
-                            <h5>Make:</h5>
-                            <span>Audi</span>
-                        </div>
-                        <div class="car-info-pair">
-                            <h5>Model:</h5>
-                            <span>Random Sedan</span>
-                        </div>
-                        <div class="car-info-pair">
-                            <h5>Retail price:</h5>
-                            <span>$20,000</span>
-                        </div>
-                        <div class="car-info-pair"></div>
-                        <div class="car-info-pair">
-                            <h5>Interest rate:</h5>
-                            <span class="green-text">5.25%</span>
-                        </div>
-                        <div class="car-info-pair">
-                            <h5>You pay:</h5>
-                            <span class="green-text">$300/mo</span>
-                        </div>
-                        <div class="car-info-pair">
-                            <h5>Loan term:</h5>
-                            <span class="green-text">12 years</span>
-                        </div>
-                        <div class="car-info-pair">
-                            <h5>Total cost:</h5>
-                            <span class="green-text">$26,000</span>
-                        </div>
-                    </article>
-                    <button type="button" class="region-gray rounded-bottom claim-unavailable" style="display: none;">
-                        Agree to view offers
-                    </button>
-                    <button type="button" class="claim-btn rounded-bottom" display="inline-flex">
-                        <span class="btn-dark-blue claim-text">Claim this offer</span>
-                        <span class="btn-red bg-heart-filled claim-heart"></span>
-                    </button>
-                </div>
+            <div class="cars-container" id="carsContainer" onload="demoAddDummyCars();">
             </div>
         </section>
     </main>
@@ -181,5 +140,61 @@ limitations under the License. -->
         </aside>
         <div class="footer-spacer"></div>
     </footer>
+
+    <!-- Mustache templates below; rendered in JavaScript -->
+    <script type="text/html" id="tmpl_CarOffer">
+        <div class="car-offer card border-thin">
+            <img src="assets/img/car-1.jpg" alt="Car Picture">
+            <article>
+                {{&car_info}}
+                {{&loan_info}}
+            </article>
+            {{&button}}
+        </div>
+    </script>
+    <script type="text/html" id="tmpl_CarOfferCarInfo">
+        <div class="car-info-pair">
+            <h5>Make:</h5>
+            <span>{{make}}</span>
+        </div>
+        <div class="car-info-pair">
+            <h5>Model:</h5>
+            <span>{{model}}</span>
+        </div>
+        <div class="car-info-pair">
+            <h5>Retail price:</h5>
+            <span>&#36;{{price}}</span>
+        </div>
+        <div class="car-info-pair" style="visibility: hidden;"></div>
+    </script>
+    <script type="text/html" id="tmpl_CarOfferLoanInfo">
+        <div class="car-info-pair">
+            <h5>Interest rate:</h5>
+            <span class="green-text">{{apr}}&#37;</span>
+        </div>
+        <div class="car-info-pair">
+            <h5>You pay:</h5>
+            <span class="green-text">&#36;{{payment_mo}}/mo</span>
+        </div>
+        <div class="car-info-pair">
+            <h5>Loan term:</h5>
+            <span class="green-text">{{loan_term}} years</span>
+        </div>
+        <div class="car-info-pair">
+            <h5>Total cost:</h5>
+            <span class="green-text">&#36;{{total_sum}}</span>
+        </div>
+    </script>
+    <script type="text/html" id="tmpl_CarOfferBtnUnavailable">
+        <button type="button" class="region-gray rounded-bottom claim-unavailable">
+            Agree to view offers
+        </button>
+    </script>
+    <script type="text/html" id="tmpl_CarOfferBtnAvailable">
+        <button type="button" class="claim-btn rounded-bottom">
+            <span class="btn-dark-blue claim-text">Claim this offer</span>
+            <span class="btn-red bg-heart-filled claim-heart"></span>
+        </button>
+    </script>
 </body>
 </html>

@@ -19,11 +19,16 @@ limitations under the License.
 */
 
 async function userLogin() {
-    /* hide agreement and reveil financial form parameters */
+    // hide agreement and reveil financial form parameters
     const agreementContent = document.getElementById("side-agreement");
     agreementContent.style.display = "none";
     const financialParams = document.getElementById("side-params");
     financialParams.style.display = "block";
+
+    // remove all cars without loan info and add cars with loan info
+    let carsContainer = document.getElementById("carsContainer");
+    carsContainer.innerHTML = "";
+    demoAddDummyCarsWithLoan();
 
     console.log("login");
 }
@@ -59,3 +64,66 @@ async function submitSearch() {
 /*
     Get cars and loan offers
 */
+
+function demoAddDummyCarsNoLoan() {
+    for (let i = 0; i < 10; i++) {
+        addCarToContainer("Honda", "Civic", 15000, "");
+    }
+}
+
+function demoAddDummyCarsWithLoan() {
+    for (let i = 0; i < 10; i++) {
+        addCarToContainer("Honda", "Civic", 15000, 5.2, 250, 12, 21050);
+    }
+}
+
+function addCarToContainer(
+    make, model, price, apr, payment_mo, loan_term, total_sum
+) {
+    // get render target
+    let carsContainer = document.getElementById("carsContainer");
+
+    // get mustache templates
+    const tmpl_CarOffer = document.getElementById("tmpl_CarOffer").innerHTML;
+    const tmpl_CarOfferCarInfo = document.getElementById("tmpl_CarOfferCarInfo").innerHTML;
+    const tmpl_CarOfferLoanInfo = document.getElementById("tmpl_CarOfferLoanInfo").innerHTML;
+
+    // render car info
+    const carData = {
+        make: make,
+        model: model,
+        price: price
+    };
+    const carInfoRendered = Mustache.render(tmpl_CarOfferCarInfo, carData);
+
+    // if given loan data, render loan info with available button
+    if ((apr !== "") && (apr !== null)) {
+        const loanData = {
+            apr: apr,
+            payment_mo: payment_mo,
+            loan_term: loan_term,
+            total_sum: total_sum
+        };
+        var loanInfoRendered = Mustache.render(tmpl_CarOfferLoanInfo, loanData);
+        var carOfferBtn = document.getElementById("tmpl_CarOfferBtnAvailable").innerHTML;
+    }
+    // otherwise, provide empty loan info and an unavailable button
+    else {
+        var loanInfoRendered = "";
+        var carOfferBtn = document.getElementById("tmpl_CarOfferBtnUnavailable").innerHTML;
+    }
+
+    // assemble car offer
+    const carOfferData = {
+        car_info: carInfoRendered,
+        loan_info: loanInfoRendered,
+        button: carOfferBtn
+    }
+    const carOfferRendered = Mustache.render(tmpl_CarOffer, carOfferData);
+
+    // append car offer element to cars container
+    carsContainer.innerHTML += carOfferRendered;
+
+}
+
+demoAddDummyCarsNoLoan();

@@ -28,4 +28,4 @@ function populateDemoDiv(content){
     document.getElementById("demo_field").innerHTML=content;
 }
 
-demoDayAPICall()
+demoDayAPICall();
