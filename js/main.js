@@ -14,6 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+/*
+    DEMO CODE: REMOVE WHEN NO LONGER NEEDED
+*/
 function demoDayAPICall(){
     fetch("http://localhost:8080/demo?budget=200")
         // store response from the API in JSON
@@ -23,9 +26,32 @@ function demoDayAPICall(){
             populateDemoDiv(responseData.body);
         });
 }
-
 function populateDemoDiv(content){
     document.getElementById("demo_field").innerHTML=content;
 }
-
 demoDayAPICall();
+
+
+/*
+    Get a URL query string parameter by its key. Return null if non-existent.
+*/
+function fetchQueryParamByKey(key) {
+    // get the querystring from the url bar and parse parameters
+    var query_string = window.location.search;
+    var url_params = new URLSearchParams(query_string);
+    return url_params.get(key);
+}
+
+/*
+    Append a key-value pair to the page URL query string
+*/
+function appendPairToQuery(key, value) {
+    // get the querystring from the url bar and parse parameters
+    var query_string = window.location.search;
+    var url_params = new URLSearchParams(query_string);
+    // append the given key-value pair to the query
+    url_params.set(key, value);
+    // place the amended query string at the browser address bar
+    var new_params = '?' + url_params.toString();
+    window.history.replaceState(null, null, new_params);
+}

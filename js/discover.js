@@ -15,10 +15,40 @@ limitations under the License.
 */
 
 /*
-    Login feature
+    Always called when the discovery page is loaded.
 */
+async function onPageLoad() {
+    // check for user ID on page load, and log in if present
+    const userIDCurr = fetchQueryParamByKey("user_id");
+    if (userIDCurr === null) {
+        demoAddDummyCarsNoLoan();
+    }
+    else {
+        displayLoggedInView();
+    }
+}
 
+/*
+    Login/agreement feature
+*/
 async function userLogin() {
+    // check and possibly generate user ID
+    const userIDCurr = fetchQueryParamByKey("user_id");
+    if (userIDCurr === null) {
+        const userIDNew = genNewUserID();
+        appendPairToQuery("user_id", userIDNew);
+    }
+
+    displayLoggedInView();
+
+    // DEMO CODE: REMOVE WHEN NO LONGER NEEDED
+    console.log("login");
+}
+
+/*
+    Display the view appropriate for after the user has logged in
+*/
+async function displayLoggedInView() {
     // hide agreement and reveil financial form parameters
     const agreementContent = document.getElementById("side-agreement");
     agreementContent.style.display = "none";
@@ -28,9 +58,10 @@ async function userLogin() {
     // remove all cars without loan info and add cars with loan info
     let carsContainer = document.getElementById("carsContainer");
     carsContainer.innerHTML = "";
-    demoAddDummyCarsWithLoan();
 
-    console.log("login");
+    // add cars with loan offer info
+    // DEMO CODE: REMOVE WHEN NO LONGER NEEDED
+    demoAddDummyCarsWithLoan();
 }
 
 /*
@@ -41,10 +72,14 @@ function setSortOrder() {
     const sortIcon = document.getElementById("sortIcon");
     if (sortIcon.style.transform == "none") {
         sortIcon.style.transform = "scaleY(-1)";
+
+        // DEMO CODE: REMOVE WHEN NO LONGER NEEDED
         console.log("toggle sort order: ASC");
     }
     else {
         sortIcon.style.transform = "none";
+
+        // DEMO CODE: REMOVE WHEN NO LONGER NEEDED
         console.log("toggle sort order: DESC");
     }
 }
@@ -52,12 +87,19 @@ function setSortOrder() {
 function setSortBy() {
     const sortBySelect = document.getElementById("sortBy");
     const sortByVal = sortBySelect.options[sortBySelect.selectedIndex].value;
+
+    // DEMO CODE: REMOVE WHEN NO LONGER NEEDED
     console.log("set sort by: " + sortByVal);
 }
 
+/*
+    Can be called either by the search bar or by "Find your car"
+*/
 async function submitSearch() {
     const searchBox = document.getElementById("searchBox");
     const searchVal = searchBox.value;
+
+    // DEMO CODE: REMOVE WHEN NO LONGER NEEDED
     console.log("search: " + searchVal);
 }
 
@@ -65,18 +107,42 @@ async function submitSearch() {
     Get cars and loan offers
 */
 
+// DEMO CODE: REMOVE WHEN NO LONGER NEEDED
 function demoAddDummyCarsNoLoan() {
     for (let i = 0; i < 10; i++) {
         addCarToContainer("Honda", "Civic", 15000, "");
     }
 }
 
+// DEMO CODE: REMOVE WHEN NO LONGER NEEDED
 function demoAddDummyCarsWithLoan() {
     for (let i = 0; i < 10; i++) {
         addCarToContainer("Honda", "Civic", 15000, 5.2, 250, 12, 21050);
     }
 }
 
+/*
+    Generate a new user ID randomly, with the last three digits being the credit score
+*/
+function genNewUserID() {
+    const cs_min = 300; // minimum credit score, VantageScore 3.0
+    const cs_max = 850; // maximum credit score, VantageScore 3.0
+    const utc_string = JSON.stringify(new Date().getTime()); // current UTC timestamp
+    const rand_credit_score = JSON.stringify(
+        Math.floor(Math.random() * (cs_max - cs_min)) + cs_min
+    );
+    return "u" + utc_string + rand_credit_score;
+}
+
+
+/*
+    Add a car offer card to the car offers container.
+    - if all parameters provided, then construct an available car offer
+        - this option should be used after agreement/login
+    - if the apr field is null or "", then construct an unavailable car offer with
+      car info only
+        - this option should be used before agreement/login
+*/
 function addCarToContainer(
     make, model, price, apr, payment_mo, loan_term, total_sum
 ) {
@@ -123,7 +189,7 @@ function addCarToContainer(
 
     // append car offer element to cars container
     carsContainer.innerHTML += carOfferRendered;
-
 }
 
-demoAddDummyCarsNoLoan();
+// always call this function on page load
+onPageLoad();
