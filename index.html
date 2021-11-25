@@ -35,26 +35,43 @@ limitations under the License. -->
 <body>
     <main>
         <aside>
-            <header class="card border-thin">
-                <img src="assets/icons/senso_logo_text_dark-min.svg" alt="senso-logo">
-                <h1>AutoDirect</h1>
-                <article>
-                    <h3>You will be able to:</h3>
-                    <ul>
-                        <li>Browse cars that you can afford</li>
-                        <li>Get exclusive loan offers at competitive rates tailored for you</li>
-                    </ul>
-                    <h3>You need to:</h3>
-                    <ul>
-                        <li>Agree to share your credit proﬁle with us</li>
-                        <li>Agree to our terms of service</li>
-                    </ul>
+            <section class="card border-thin sec-inputs">
+                <header>
+                    <img src="assets/icons/senso_logo_text_dark-min.svg" alt="senso-logo">
+                    <h1>AutoDirect</h1>
+                </header>
+                <article id="side-agreement">
+                    <div class="inset-content">
+                        <h3>You will be able to:</h3>
+                        <ul>
+                            <li>Browse cars that you can afford</li>
+                            <li>Get exclusive loan offers at competitive rates tailored for you</li>
+                        </ul>
+                        <h3>You need to:</h3>
+                        <ul>
+                            <li>Agree to share your credit proﬁle with us</li>
+                            <li>Agree to our terms of service</li>
+                        </ul>
+                        <button type="button" name="login" class="btn-red" onclick="userLogin();">
+                            Agree & continue
+                        </button>
+                    </div>
                 </article>
-                <button type="button" name="login" onclick="userLogin();">
-                    Agree & continue
-                </button>
-            </header>
-            <section class="card border-thin" style="display: none;">
+                <article id="side-params" style="display: none;">
+                    <form onsubmit="submitSearch(); return false;">
+                        <div class="inset-content">
+                            <label for="budget_mo"><h3>Monthly budget:</h3></label>
+                            <input type="number" name="budget_mo" placeholder="200.00">
+                            <label for="down_payment"><h3>Down payment:</h3></label>
+                            <input type="number" name="down_payment" placeholder="500.00">
+                        </div>
+                        <button type="submit" name="updateFinancials" class="btn-green rounded-bottom">
+                            Find your car
+                        </button>
+                    </form>
+                </article>
+            </section>
+            <section class="card border-thin sec-claimed-offers" style="display: none;">
             </section>
         </aside>
         <section>
@@ -94,41 +111,31 @@ limitations under the License. -->
                             <h5>Retail price:</h5>
                             <span>$20,000</span>
                         </div>
-                    </article>
-                </div>
-                <div class="car-offer card border-thin">
-                    <img src="assets/img/car-1.jpg" alt="Car Picture">
-                    <article>
+                        <div class="car-info-pair"></div>
                         <div class="car-info-pair">
-                            <h5>Make:</h5>
-                            <span>Audi</span>
+                            <h5>Interest rate:</h5>
+                            <span class="green-text">5.25%</span>
                         </div>
                         <div class="car-info-pair">
-                            <h5>Model:</h5>
-                            <span>Random Sedan</span>
+                            <h5>You pay:</h5>
+                            <span class="green-text">$300/mo</span>
                         </div>
                         <div class="car-info-pair">
-                            <h5>Retail price:</h5>
-                            <span>$20,000</span>
-                        </div>
-                    </article>
-                </div>
-                <div class="car-offer card border-thin">
-                    <img src="assets/img/car-1.jpg" alt="Car Picture">
-                    <article>
-                        <div class="car-info-pair">
-                            <h5>Make:</h5>
-                            <span>Audi</span>
+                            <h5>Loan term:</h5>
+                            <span class="green-text">12 years</span>
                         </div>
                         <div class="car-info-pair">
-                            <h5>Model:</h5>
-                            <span>Random Sedan</span>
-                        </div>
-                        <div class="car-info-pair">
-                            <h5>Retail price:</h5>
-                            <span>$20,000</span>
+                            <h5>Total cost:</h5>
+                            <span class="green-text">$26,000</span>
                         </div>
                     </article>
+                    <button type="button" class="region-gray rounded-bottom claim-unavailable" style="display: none;">
+                        Agree to view offers
+                    </button>
+                    <button type="button" class="claim-btn rounded-bottom" display="inline-flex">
+                        <span class="btn-dark-blue claim-text">Claim this offer</span>
+                        <span class="btn-red bg-heart-filled claim-heart"></span>
+                    </button>
                 </div>
             </div>
         </section>

@@ -64,6 +64,7 @@ a {
 button {
     font-family: inherit;
     font-size: 1em;
+    border: none;
     display: inline-flex;
     justify-content: center;
 }
@@ -72,10 +73,60 @@ button:hover {
     cursor: pointer;
 }
 
+.btn-dark-blue {
+    background-color: #1d2345;
+    color: #ffffff;
+}
+.btn-dark-blue:hover {
+    background-color: #14182f;
+}
+.btn-dark-blue:active {
+    background-color: #1d2345;
+}
+
+.btn-red {
+    background-color: #d81b43;
+    color: #ffffff;
+}
+.btn-red:hover {
+    background-color: #b81638;
+}
+.btn-red:active {
+    background-color: #d81b43;
+}
+
+.btn-green {
+    background-color: #36cf9b;
+    color: #ffffff;
+}
+.btn-green:hover {
+    background-color: #2cac81;
+}
+.btn-green:active {
+    background-color: #36cf9b;
+}
+
+.rounded-bottom {
+    border-radius: 0 0 1.1rem 1.1rem;
+}
+
 input, select {
     font-family: inherit;
     font-size: 1em;
 }
+
+/* remove increment arrows from number fields */
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* shared footer styling */
 
 footer {
     padding: 2rem 4rem;
@@ -91,20 +142,20 @@ footer {
     column-gap: 2.5em;
 }
 
-section.license {
+footer section.license {
     flex-grow: 1;
     width: 40rem;
     min-width: 12rem;
     word-wrap: normal;
 }
 
-section.license article {
+footer section.license article {
     max-width: 40rem;
     min-width: inherit;
     margin: 0 auto;
 }
 
-aside.attrib {
+footer aside.attrib {
     flex-grow: 1;
     width: 12rem;
     min-width: 12rem;
@@ -118,11 +169,11 @@ aside.attrib {
     column-gap: 2em;
 }
 
-aside.attrib h3 {
+footer aside.attrib h3 {
     margin-bottom: 0.5em;
 }
 
-aside.attrib img {
+footer aside.attrib img {
     width: 12rem;
 }
 
@@ -143,6 +194,8 @@ footer div.footer-spacer {
     }
 }
 
+/* general purpose class styling */
+
 .card {
     background-color: #ffffff;
     box-shadow:
@@ -158,6 +211,11 @@ footer div.footer-spacer {
 
 .region-dark {
     background-color: #1d2345;
+    color: #ffffff;
+}
+
+.region-gray {
+    background-color: #808080;
     color: #ffffff;
 }
 
@@ -191,4 +249,8 @@ footer div.footer-spacer {
 }
 .btn-shifty:active {
     transform: translateX(0);
+}
+
+.green-text {
+    color: #36cf9b;
 }

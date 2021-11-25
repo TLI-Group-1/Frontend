@@ -19,6 +19,12 @@ limitations under the License.
 */
 
 async function userLogin() {
+    /* hide agreement and reveil financial form parameters */
+    const agreementContent = document.getElementById("side-agreement");
+    agreementContent.style.display = "none";
+    const financialParams = document.getElementById("side-params");
+    financialParams.style.display = "block";
+
     console.log("login");
 }
 
