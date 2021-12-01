@@ -40,7 +40,11 @@ main > aside > section {
     background-color: #ffffff;
 }
 
-main > aside > section > header {
+section.sec-inputs {
+    margin-bottom: 2rem;
+}
+
+section.sec-inputs header {
     padding: 2rem 1.5rem 0.5rem 1.5rem;
 }
 
@@ -109,6 +113,27 @@ section.sec-inputs button[name="updateFinancials"] {
     transition: all 250ms ease;
     font-size: 1.2rem;
     font-weight: 500;
+}
+
+section.sec-claimed-offers {
+
+}
+
+section.sec-claimed-offers header {
+    width: 100%;
+    border-radius: 1.1rem 1.1rem 0 0;
+    padding: 1rem 1.5rem;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 1rem;
+}
+
+section.sec-claimed-offers header img {
+    height: 1.5em;
+    width: auto;
+    padding-left: 2px;
 }
 
 /* left-side styles: search bar */
