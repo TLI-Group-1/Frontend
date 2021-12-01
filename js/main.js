@@ -15,22 +15,9 @@ limitations under the License.
 */
 
 /*
-    DEMO CODE: REMOVE WHEN NO LONGER NEEDED
+    The URL root of the API backend
 */
-function demoDayAPICall(){
-    fetch("http://localhost:8080/demo?budget=200")
-        // store response from the API in JSON
-        .then(response => response.json())
-        // write the response to the demo field
-        .then(responseData => {
-            populateDemoDiv(responseData.body);
-        });
-}
-function populateDemoDiv(content){
-    document.getElementById("demo_field").innerHTML=content;
-}
-demoDayAPICall();
-
+var API_URL = "http://localhost:8080"
 
 /*
     Get a URL query string parameter by its key. Return null if non-existent.

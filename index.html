@@ -58,12 +58,12 @@ limitations under the License. -->
                     </div>
                 </article>
                 <article id="side-params" style="display: none;">
-                    <form onsubmit="submitSearch(); return false;">
+                    <form id="form-finanicals" onsubmit="submitSearch(); return false;">
                         <div class="inset-content">
                             <label for="budget_mo"><h3>Monthly budget:</h3></label>
-                            <input type="number" name="budget_mo" placeholder="200.00">
+                            <input type="number" name="budget_mo" value="300.00">
                             <label for="down_payment"><h3>Down payment:</h3></label>
-                            <input type="number" name="down_payment" placeholder="500.00">
+                            <input type="number" name="down_payment" value="1000.00">
                         </div>
                         <button type="submit" name="updateFinancials" class="btn-green rounded-bottom">
                             Find your car
@@ -77,7 +77,7 @@ limitations under the License. -->
         <section>
             <nav class="search-bar card region-dark">
                 <span class="sort-combo">
-                    <button type="button" name="sortOrder" id="sortOrder" onclick="setSortOrder();">
+                    <button type="button" name="sortOrder" id="sortOrder" onclick="toggleSortOrder();">
                             <img id="sortIcon" src="assets/icons/sort-top-down-min.svg" alt="Sort by" />
                     </button>
                     <select name="sortBy" id="sortBy" onchange="setSortBy();">
@@ -162,6 +162,14 @@ limitations under the License. -->
             <span>{{model}}</span>
         </div>
         <div class="car-info-pair">
+            <h5>Year:</h5>
+            <span>{{year}}</span>
+        </div>
+        <div class="car-info-pair">
+            <h5>Usage:</h5>
+            <span>{{kms}} km</span>
+        </div>
+        <div class="car-info-pair">
             <h5>Retail price:</h5>
             <span>&#36;{{price}}</span>
         </div>
@@ -191,7 +199,7 @@ limitations under the License. -->
         </button>
     </script>
     <script type="text/html" id="tmpl_CarOfferBtnAvailable">
-        <button type="button" class="claim-btn rounded-bottom">
+        <button type="button" class="claim-btn rounded-bottom" name="{{id}}" onclick="claimOffer(this.name);">
             <span class="btn-dark-blue claim-text">Claim this offer</span>
             <span class="btn-red bg-heart-filled claim-heart"></span>
         </button>
