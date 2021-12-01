@@ -66,23 +66,23 @@ async function displayLoggedInView() {
 */
 
 var searchParams = new URLSearchParams();
-searchParams.set('down_payment', null);
-searchParams.set('budget_mo', null);
+searchParams.set('down_payment', '');
+searchParams.set('budget_mo', '');
 searchParams.set('sort_by', 'apr');
-searchParams.set('sort_asc', true);
+searchParams.set('sort_asc', 'true');
 searchParams.set('keywords', '');
 
 function toggleSortOrder() {
     const sortIcon = document.getElementById('sortIcon');
-    if (searchParams.get('sort_asc') == false) {
-        searchParams.set('sort_asc', true);
+    if (searchParams.get('sort_asc') == 'false') {
+        searchParams.set('sort_asc', 'true');
         sortIcon.style.transform = 'scaleY(-1)';
 
         // DEMO CODE: REMOVE WHEN NO LONGER NEEDED
         console.log('toggle sort order: ASC');
     }
     else {
-        searchParams.set('sort_asc', false);
+        searchParams.set('sort_asc', 'false');
         sortIcon.style.transform = 'none';
 
         // DEMO CODE: REMOVE WHEN NO LONGER NEEDED

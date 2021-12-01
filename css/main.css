@@ -126,6 +126,15 @@ input[type="number"]::-webkit-inner-spin-button {
     margin: 0;
 }
 
+.round-empty-pill {
+    display: inline-block;
+    height: 2.4rem;
+    padding: 0.25em 1.5em;
+    border: 2.5px solid #1d2345;
+    border-radius: 1.2rem;
+    text-decoration: none;
+}
+
 /* shared footer styling */
 
 footer {

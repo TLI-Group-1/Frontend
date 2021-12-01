@@ -61,9 +61,9 @@ limitations under the License. -->
                     <form id="form-finanicals" onsubmit="submitSearch(); return false;">
                         <div class="inset-content">
                             <label for="budget_mo"><h3>Monthly budget:</h3></label>
-                            <input type="number" name="budget_mo" value="300.00">
+                            <input class="round-empty-pill" type="number" name="budget_mo" value="300.00">
                             <label for="down_payment"><h3>Down payment:</h3></label>
-                            <input type="number" name="down_payment" value="1000.00">
+                            <input class="round-empty-pill" type="number" name="down_payment" value="1000.00">
                         </div>
                         <button type="submit" name="updateFinancials" class="btn-green rounded-bottom">
                             Find your car
@@ -77,11 +77,36 @@ limitations under the License. -->
                     <h3>Your loan offers</h3>
                 </header>
                 <ul class="loan-offers">
-                    <li>
-
+                    <li class="loan-offer-entry">
+                        <img src="./assets/img/car-1.jpg" alt="">
+                        <div class="loan-offer-summary">
+                            <span>BMW Random SUV</span>
+                            <span>$250/mo 3 years 3.6%</span>
+                        </div>
+                    </li>
+                    <li class="loan-offer-entry">
+                        <img src="./assets/img/car-1.jpg" alt="">
+                        <div class="loan-offer-summary">
+                            <span>BMW Random SUV</span>
+                            <span>$250/mo 3 years 3.6%</span>
+                        </div>
+                    </li>
+                    <li class="loan-offer-entry">
+                        <img src="./assets/img/car-1.jpg" alt="">
+                        <div class="loan-offer-summary">
+                            <span>BMW Random SUV</span>
+                            <span>$250/mo 3 years 3.6%</span>
+                        </div>
+                    </li>
+                    <li class="loan-offer-entry">
+                        <img src="./assets/img/car-1.jpg" alt="">
+                        <div class="loan-offer-summary">
+                            <span>BMW Random SUV</span>
+                            <span>$250/mo 3 years 3.6%</span>
+                        </div>
                     </li>
                 </ul>
-                <a href="./details.html"></a>
+                <a class="round-empty-pill" href="./details.html">See all offer details</a>
             </section>
         </aside>
         <section>
