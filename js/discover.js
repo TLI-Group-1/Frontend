@@ -40,7 +40,7 @@ async function userLogin() {
         appendPairToQuery('user_id', userIDNew);
     }
 
-    // displayLoggedInView();
+    displayLoggedInView();
 
     // DEMO CODE: REMOVE WHEN NO LONGER NEEDED
     console.log('login');
@@ -57,7 +57,19 @@ async function displayLoggedInView() {
     financialParams.style.display = 'block';
 
     // add cars with loan offer info
-    submitSearch();
+    // submitSearch();
+    demoAddDummyCarsWithLoan();
+
+    // display the claimed offers widget
+    const claimOffers = document.getElementById('claimedOffersWidget');
+    claimOffers.style.display = 'flex';
+}
+
+// DEMO CODE: REMOVE WHEN NO LONGER NEEDED
+function demoAddDummyCarsWithLoan() {
+    for (let i = 0; i < 10; i++) {
+        addCarToContainer(123, "Honda", "Civic", 2019, 0, 15000, 5.2, 250, 8, 21050);
+    }
 }
 
 
