@@ -37,6 +37,11 @@ h1 {
     font-weight: 600;
 }
 
+h1 a {
+    color: inherit;
+    text-decoration: none;
+}
+
 h2 {
     font-size: 2rem;
     font-weight: 500;
@@ -208,9 +213,9 @@ footer div.footer-spacer {
 .card {
     background-color: #ffffff;
     box-shadow:
-        0 0.08rem 0.06rem -0.62rem rgba(0, 0, 0, 0.061),
-        0 0.28rem 0.21rem -0.62rem rgba(0, 0, 0, 0.089),
-        0 1.25rem 0.93rem -0.62rem rgba(0, 0, 0, 0.15);
+        0 0.08rem 0.06rem -0.62rem rgba(0, 0, 0, 0.065),
+        0 0.28rem 0.21rem -0.62rem rgba(0, 0, 0, 0.095),
+        0 1.25rem 0.93rem -0.62rem rgba(0, 0, 0, 0.17);
     border-radius: 1.2rem;
 }
 

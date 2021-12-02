@@ -38,7 +38,7 @@ limitations under the License. -->
             <section class="card border-thin sec-inputs">
                 <header>
                     <img src="assets/icons/senso_logo_text_dark-min.svg" alt="senso-logo">
-                    <h1>AutoDirect</h1>
+                    <h1><a href="/">AutoDirect</a></h1>
                 </header>
                 <article id="side-agreement">
                     <div class="inset-content">
@@ -78,38 +78,38 @@ limitations under the License. -->
                 </header>
                 <ul class="loan-offers">
                     <li class="loan-offer-entry">
-                            <img src="./assets/img/car-1.jpg" alt="">
-                            <div class="loan-offer-summary">
-                                <span>BMW Random SUV</span>
-                                <span>$250/mo 3 years 3.6%</span>
-                            </div>
-                    </li>
-                    <li class="loan-offer-entry">
                         <img src="./assets/img/car-1.jpg" alt="">
                         <div class="loan-offer-summary">
-                            <span>BMW Random SUV</span>
-                            <span>$250/mo 3 years 3.6%</span>
+                            <span class="offer-car-info">BMW Random SUV</span>
+                            <span class="offer-loan-info">$250/mo 3 years 3.6%</span>
                         </div>
                     </li>
                     <li class="loan-offer-entry">
                         <img src="./assets/img/car-1.jpg" alt="">
                         <div class="loan-offer-summary">
-                            <span>BMW Random SUV</span>
-                            <span>$250/mo 3 years 3.6%</span>
+                            <span class="offer-car-info">BMW Random SUV</span>
+                            <span class="offer-loan-info">$250/mo 3 years 3.6%</span>
                         </div>
                     </li>
                     <li class="loan-offer-entry">
                         <img src="./assets/img/car-1.jpg" alt="">
                         <div class="loan-offer-summary">
-                            <span>BMW Random SUV</span>
-                            <span>$250/mo 3 years 3.6%</span>
+                            <span class="offer-car-info">BMW Random SUV</span>
+                            <span class="offer-loan-info">$250/mo 3 years 3.6%</span>
                         </div>
                     </li>
                     <li class="loan-offer-entry">
                         <img src="./assets/img/car-1.jpg" alt="">
                         <div class="loan-offer-summary">
-                            <span>BMW Random SUV</span>
-                            <span>$250/mo 3 years 3.6%</span>
+                            <span class="offer-car-info">BMW Random SUV</span>
+                            <span class="offer-loan-info">$250/mo 3 years 3.6%</span>
+                        </div>
+                    </li>
+                    <li class="loan-offer-entry">
+                        <img src="./assets/img/car-1.jpg" alt="">
+                        <div class="loan-offer-summary">
+                            <span class="offer-car-info">BMW Random SUV</span>
+                            <span class="offer-loan-info">$250/mo 3 years 3.6%</span>
                         </div>
                     </li>
                 </ul>
@@ -138,6 +138,7 @@ limitations under the License. -->
                 </form>
             </nav>
             <div class="cars-container" id="carsContainer" onload="demoAddDummyCars();">
+                <center style="font-size: 2rem;">Loading...</center>
             </div>
         </section>
     </main>
@@ -243,7 +244,7 @@ limitations under the License. -->
     <script type="text/html" id="tmpl_CarOfferBtnAvailable">
         <button type="button" class="claim-btn rounded-bottom" name="{{id}}" onclick="claimOffer(this.name);">
             <span class="btn-dark-blue claim-text">Claim this offer</span>
-            <span class="btn-red bg-heart-filled claim-heart"></span>
+            <span class="btn-red bg-heart-empty claim-heart"></span>
         </button>
     </script>
 </body>

@@ -67,6 +67,7 @@ async function displayLoggedInView() {
 
 // DEMO CODE: REMOVE WHEN NO LONGER NEEDED
 function demoAddDummyCarsWithLoan() {
+    removeAllCarsOffers();
     for (let i = 0; i < 10; i++) {
         addCarToContainer(123, "Honda", "Civic", 2019, 0, 15000, 5.2, 250, 8, 21050);
     }
@@ -207,7 +208,7 @@ function addCarToContainer(
         make: make,
         model: model,
         year: year,
-        kms: Math.round(kms * 100) / 100,
+        kms: Math.round(kms),
         price: Math.round(price * 100) / 100
     };
     const carInfoRendered = Mustache.render(tmpl_CarOfferCarInfo, carData);

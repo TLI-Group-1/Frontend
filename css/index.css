@@ -49,9 +49,6 @@ main > aside > section {
     min-width: 20rem;
 }
 
-section.sec-inputs {
-}
-
 section.sec-inputs header {
     padding: 2rem 1.5rem 0.5rem 1.5rem;
 }
@@ -181,6 +178,14 @@ li.loan-offer-entry img {
 li.loan-offer-entry div.loan-offer-summary {
     display: inline-flex;
     flex-direction: column;
+}
+
+li.loan-offer-entry span.offer-car-info {
+    font-weight: 600;
+}
+
+li.loan-offer-entry span.offer-loan-info {
+    color: #333333;
 }
 
 section.sec-claimed-offers a {
@@ -337,6 +342,7 @@ div.cars-container {
 
 .car-offer article .car-info-pair > span {
     font-size: 1.2rem;
+    text-transform: capitalize;
 }
 
 .car-offer button {
