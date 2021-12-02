@@ -142,6 +142,11 @@ section.sec-claimed-offers header img {
     padding-left: 2px;
 }
 
+section.sec-claimed-offers ul.loan-offers {
+    max-height: 18rem;
+    overflow-y: auto;
+}
+
 li.loan-offer-entry {
     padding: 0.5rem 1rem;
     display: flex;
@@ -154,6 +159,7 @@ li.loan-offer-entry {
 
 li.loan-offer-entry:hover {
     background-color: #ecfff4;
+    cursor: pointer;
 }
 
 li.loan-offer-entry:nth-child(odd) {
@@ -162,6 +168,7 @@ li.loan-offer-entry:nth-child(odd) {
 
 li.loan-offer-entry:nth-child(odd):hover {
     background-color: #ecfff4;
+    cursor: pointer;
 }
 
 li.loan-offer-entry img {
