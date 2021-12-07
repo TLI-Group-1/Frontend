@@ -39,7 +39,7 @@ var api = {
 
     search: async function(searchQueryStr) {
         // send the search query to the backend API
-        const response = await fetch(this.API_URL + '/search?' + searchQueryStr);
+        const response = await fetch(this.API_URL + '/search' + searchQueryStr);
 
         // retrieve the returned cars/offers
         const results = await response.json();

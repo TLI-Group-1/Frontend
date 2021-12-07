@@ -14,11 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-var searchParams = new URLSearchParams();
-searchParams.set('downpayment', '');
-searchParams.set('budget_mo', '');
-searchParams.set('sort_by', 'apr');
-searchParams.set('sort_asc', 'true');
 
 /*
     Always called when the discovery page is loaded.
@@ -27,9 +22,31 @@ async function onPageLoad() {
     // display loading text in the cars/offers container
     setCarsOffersLoading();
 
+    // configure their default search preferences if none provided in URL
+    // configure default sort key
+    let sortByURL = fetchQueryParamByKey('sort_by');
+    if (sortByURL === null) {
+        appendPairToQuery('sort_by', 'apr');
+    }
+    else {
+        appendPairToQuery('sort_by', sortByURL);
+    }
+    // configure default sort order
+    let sortAscURL = fetchQueryParamByKey('sort_asc');
+    if (sortAscURL === null) {
+        appendPairToQuery('sort_asc', 'true');
+    }
+    else {
+        appendPairToQuery('sort_asc', sortAscURL);
+    }
+
     // check for user ID on page load, and log in if present
     const userIDCurr = fetchQueryParamByKey('user_id');
     if (userIDCurr === null) {
+        // initialize empty user_id, downpayment, monthly budget for the car display search
+        appendPairToQuery('downpayment', '');
+        appendPairToQuery('budget_mo', '');
+        appendPairToQuery('user_id', '');
         submitSearch();
     }
     else {
@@ -42,20 +59,21 @@ async function onPageLoad() {
     Login/agreement feature
 */
 async function userLogin() {
-    // check whether an existing user_id is given
+    // check whether an existing user_id is given; generte a new user ID if none provided
     let userID = fetchQueryParamByKey('user_id');
-
-    // generte a new user ID if none is provided
-    if (userID === null) {
+    if (userID === null || userID === '') {
         userID = genNewUserID();
         appendPairToQuery('user_id', userID);
     }
 
     // try to log in the user and fetch their financial information
     try {
+        // call the API to log in the user
         const userParams = await api.login(userID);
-        searchParams.set('budget_mo', userParams["budget_mo"]);
-        searchParams.set('downpayment', userParams["down_payment"]);
+
+        // update their financial information
+        appendPairToQuery('budget_mo', userParams["budget_mo"]);
+        appendPairToQuery('downpayment', userParams["down_payment"]);
         document.querySelector('input[name="budget_mo"]').value = userParams["budget_mo"];
         document.querySelector('input[name="down_payment"]').value = userParams["down_payment"];
     }
@@ -108,19 +126,19 @@ async function displayLoggedInView() {
 */
 function toggleSortOrder() {
     const sortIcon = document.getElementById('sortIcon');
-    if (searchParams.get('sort_asc') == 'false') {
+    if (fetchQueryParamByKey('sort_asc') == 'false') {
         // for ascending order, flip icon vertically
-        searchParams.set('sort_asc', 'true');
+        appendPairToQuery('sort_asc', 'true');
         sortIcon.style.transform = 'scaleY(-1)';
         // configure the search params to set ascending search order to true
-        searchParams.set('sort_asc', true);
+        appendPairToQuery('sort_asc', true);
     }
     else {
         // for ascending order, do not flip icon
-        searchParams.set('sort_asc', 'false');
+        appendPairToQuery('sort_asc', 'false');
         sortIcon.style.transform = 'none';
         // configure the search params to set ascending search order to false
-        searchParams.set('sort_asc', false);
+        appendPairToQuery('sort_asc', false);
     }
 }
 
@@ -132,7 +150,7 @@ function setSortBy() {
     const sortBySelect = document.getElementById('sortBy');
     const sortByVal = sortBySelect.options[sortBySelect.selectedIndex].value;
     // configure the search params to set desired sort-by value
-    searchParams.set('sort_by', sortByVal);
+    appendPairToQuery('sort_by', sortByVal);
 }
 
 /*
@@ -145,25 +163,22 @@ async function submitSearch() {
     // retrieve and update finanical info
     const formFinancials = document.getElementById('form-finanicals');
     const financialInfo = new FormData(formFinancials);
-    searchParams.set('downpayment', financialInfo.get('down_payment'));
-    searchParams.set('budget_mo', financialInfo.get('budget_mo'));
+    appendPairToQuery('downpayment', financialInfo.get('down_payment'));
+    appendPairToQuery('budget_mo', financialInfo.get('budget_mo'));
 
-    // create a search query by inclduing the user_id
-    let searchQuery = new URLSearchParams(searchParams.toString());
-    searchQuery.set('user_id', fetchQueryParamByKey('user_id'));
-
+    // attempt to send the search query to the backend API
     try {
         // DEBUG: log search string
-        console.log(searchQuery.toString());
+        console.log(window.location.search);
 
         // make the API call
-        let results = await api.search(searchQuery.toString());
+        let results = await api.search(window.location.search);
         // display the results if successful
         displayCarsOrOffers(results);
     }
     catch (e) {
         console.log(e);
-        console.log(searchQuery.toString());
+        console.log(window.location.search);
     }
 }
 
@@ -180,13 +195,8 @@ function displayCarsOrOffers(listings) {
     removeAllCarsOffers();
     for (const item of listings) {
         addCarToContainer(
-            item['id'],
-            item['brand'],
-            item['model'],
-            item['year'],
-            item['kms'],
-            item['price'],
-            item['apr']
+            item['id'], item['brand'], item['model'], item['year'],
+            item['kms'], item['price'], item['apr']
         )
     }
 }
