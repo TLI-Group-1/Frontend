@@ -55,6 +55,11 @@ section.sec-inputs header {
 
 section.sec-inputs h1 {
     color: #36cf9b;
+    transition: all 250ms ease;
+}
+
+section.sec-inputs h1:hover {
+    transform: translateX(0.5rem);
 }
 
 section.sec-inputs img {
@@ -145,19 +150,25 @@ section.sec-claimed-offers ul.loan-offers {
 }
 
 li.loan-offer-entry {
+    transition: all 250ms ease;
+}
+li.loan-offer-entry:hover {
+    background-color: #ecfff4;
+    cursor: pointer;
+}
+
+li.loan-offer-entry a {
+    text-decoration: none;
+    color: inherit;
     padding: 0.5rem 1rem;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     column-gap: 1rem;
-    transition: all 250ms ease;
 }
 
-li.loan-offer-entry:hover {
-    background-color: #ecfff4;
-    cursor: pointer;
-}
+
 
 li.loan-offer-entry:nth-child(odd) {
     background-color: #efefef;
@@ -188,7 +199,7 @@ li.loan-offer-entry span.offer-loan-info {
     color: #333333;
 }
 
-section.sec-claimed-offers a {
+section.sec-claimed-offers a.round-empty-pill {
     align-self: center;
     margin: 1rem;
     color: #1d2345;
@@ -196,7 +207,7 @@ section.sec-claimed-offers a {
     transition: all 250ms ease;
 }
 
-section.sec-claimed-offers a:hover {
+section.sec-claimed-offers a.round-empty-pill:hover {
     background-color: #1d2345;
     color: #ffffff;
 }
