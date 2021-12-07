@@ -67,6 +67,20 @@ async function userLogin() {
 }
 
 /*
+    Generate a new user ID randomly, with the last three digits being the credit score
+*/
+function genNewUserID() {
+    const cs_min = 300; // minimum credit score
+    const cs_max = 900; // maximum credit score
+    const utc_string = JSON.stringify(new Date().getTime()); // current UTC timestamp
+    // generate a random number between cs_min and cs_max
+    const rand_credit_score = JSON.stringify(
+        Math.floor(Math.random() * (cs_max - cs_min)) + cs_min
+    );
+    return 'u' + utc_string + rand_credit_score;
+}
+
+/*
     Display the view appropriate for after the user has logged in
 */
 async function displayLoggedInView() {
@@ -89,37 +103,43 @@ async function displayLoggedInView() {
     Search features
 */
 
+/*
+    Toggle search result sort order between true and false
+*/
 function toggleSortOrder() {
     const sortIcon = document.getElementById('sortIcon');
     if (searchParams.get('sort_asc') == 'false') {
+        // for ascending order, flip icon vertically
         searchParams.set('sort_asc', 'true');
         sortIcon.style.transform = 'scaleY(-1)';
-
-        // DEMO CODE: REMOVE WHEN NO LONGER NEEDED
-        console.log('toggle sort order: ASC');
+        // configure the search params to set ascending search order to true
+        searchParams.set('sort_asc', true);
     }
     else {
+        // for ascending order, do not flip icon
         searchParams.set('sort_asc', 'false');
         sortIcon.style.transform = 'none';
-
-        // DEMO CODE: REMOVE WHEN NO LONGER NEEDED
-        console.log('toggle sort order: DESC');
+        // configure the search params to set ascending search order to false
+        searchParams.set('sort_asc', false);
     }
 }
 
+/*
+    Set search result sort key according to input selection
+*/
 function setSortBy() {
+    // fetch input sort-by value
     const sortBySelect = document.getElementById('sortBy');
     const sortByVal = sortBySelect.options[sortBySelect.selectedIndex].value;
+    // configure the search params to set desired sort-by value
     searchParams.set('sort_by', sortByVal);
-
-    // DEMO CODE: REMOVE WHEN NO LONGER NEEDED
-    console.log('set sort by: ' + searchParams.get('sort_by'));
 }
 
 /*
     Search for cars/offers from the backend API
 */
 async function submitSearch() {
+    // show that cars are loading
     setCarsOffersLoading();
 
     // retrieve and update finanical info
@@ -133,7 +153,12 @@ async function submitSearch() {
     searchQuery.set('user_id', fetchQueryParamByKey('user_id'));
 
     try {
+        // DEBUG: log search string
+        console.log(searchQuery.toString());
+
+        // make the API call
         let results = await api.search(searchQuery.toString());
+        // display the results if successful
         displayCarsOrOffers(results);
     }
     catch (e) {
@@ -144,22 +169,8 @@ async function submitSearch() {
 
 
 /*
-    Get cars and loan offers
+    Cars and loan offers operations
 */
-
-/*
-    Generate a new user ID randomly, with the last three digits being the credit score
-*/
-function genNewUserID() {
-    const cs_min = 300; // minimum credit score
-    const cs_max = 900; // maximum credit score
-    const utc_string = JSON.stringify(new Date().getTime()); // current UTC timestamp
-    // generate a random number between cs_min and cs_max
-    const rand_credit_score = JSON.stringify(
-        Math.floor(Math.random() * (cs_max - cs_min)) + cs_min
-    );
-    return 'u' + utc_string + rand_credit_score;
-}
 
 /*
     Accept a list of cars/offers returned from the backend and call addCarToContainer()
@@ -255,7 +266,7 @@ function setCarsOffersLoading() {
 }
 
 /*
-    Claim loan offers
+    Claim loan offers: TODO
 */
 
 async function claimOffer(id) {

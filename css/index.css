@@ -180,6 +180,7 @@ nav.search-bar {
     justify-content: space-between;
     align-items: center;
     row-gap: 1rem;
+    column-gap: 1rem;
     margin-bottom: 2rem;
 }
 
