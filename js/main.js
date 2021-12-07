@@ -15,11 +15,6 @@ limitations under the License.
 */
 
 /*
-    The URL root of the API backend
-*/
-var API_URL = "https://api.autodirect.tech"
-
-/*
     Get a URL query string parameter by its key. Return null if non-existent.
 */
 function fetchQueryParamByKey(key) {

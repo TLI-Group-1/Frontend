@@ -14,17 +14,26 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+var searchParams = new URLSearchParams();
+searchParams.set('downpayment', '');
+searchParams.set('budget_mo', '');
+searchParams.set('sort_by', 'apr');
+searchParams.set('sort_asc', 'true');
+
 /*
     Always called when the discovery page is loaded.
 */
 async function onPageLoad() {
+    // display loading text in the cars/offers container
+    setCarsOffersLoading();
+
     // check for user ID on page load, and log in if present
     const userIDCurr = fetchQueryParamByKey('user_id');
     if (userIDCurr === null) {
         submitSearch();
     }
     else {
-        displayLoggedInView();
+        userLogin();
     }
 }
 
@@ -33,17 +42,28 @@ async function onPageLoad() {
     Login/agreement feature
 */
 async function userLogin() {
-    // check and possibly generate user ID
-    const userIDCurr = fetchQueryParamByKey('user_id');
-    if (userIDCurr === null) {
-        const userIDNew = genNewUserID();
-        appendPairToQuery('user_id', userIDNew);
+    // check whether an existing user_id is given
+    let userID = fetchQueryParamByKey('user_id');
+
+    // generte a new user ID if none is provided
+    if (userID === null) {
+        userID = genNewUserID();
+        appendPairToQuery('user_id', userID);
+    }
+
+    // try to log in the user and fetch their financial information
+    try {
+        const userParams = await api.login(userID);
+        searchParams.set('budget_mo', userParams["budget_mo"]);
+        searchParams.set('downpayment', userParams["down_payment"]);
+        document.querySelector('input[name="budget_mo"]').value = userParams["budget_mo"];
+        document.querySelector('input[name="down_payment"]').value = userParams["down_payment"];
+    }
+    catch (e) {
+        console.log(e);
     }
 
     displayLoggedInView();
-
-    // DEMO CODE: REMOVE WHEN NO LONGER NEEDED
-    console.log('login');
 }
 
 /*
@@ -57,33 +77,17 @@ async function displayLoggedInView() {
     financialParams.style.display = 'block';
 
     // add cars with loan offer info
-    // submitSearch();
-    demoAddDummyCarsWithLoan();
+    submitSearch();
 
     // display the claimed offers widget
     const claimOffers = document.getElementById('claimedOffersWidget');
     claimOffers.style.display = 'flex';
 }
 
-// DEMO CODE: REMOVE WHEN NO LONGER NEEDED
-function demoAddDummyCarsWithLoan() {
-    removeAllCarsOffers();
-    for (let i = 0; i < 10; i++) {
-        addCarToContainer(123, "Honda", "Civic", 2019, 0, 15000, 5.2, 250, 8, 21050);
-    }
-}
-
 
 /*
-    Search bar features
+    Search features
 */
-
-var searchParams = new URLSearchParams();
-searchParams.set('down_payment', '');
-searchParams.set('budget_mo', '');
-searchParams.set('sort_by', 'apr');
-searchParams.set('sort_asc', 'true');
-searchParams.set('keywords', '');
 
 function toggleSortOrder() {
     const sortIcon = document.getElementById('sortIcon');
@@ -116,14 +120,12 @@ function setSortBy() {
     Search for cars/offers from the backend API
 */
 async function submitSearch() {
-    // retrieve search keywords
-    const searchBox = document.getElementById('searchBox');
-    searchParams.set('keywords', searchBox.value);
+    setCarsOffersLoading();
 
     // retrieve and update finanical info
     const formFinancials = document.getElementById('form-finanicals');
     const financialInfo = new FormData(formFinancials);
-    searchParams.set('down_payment', financialInfo.get('down_payment'));
+    searchParams.set('downpayment', financialInfo.get('down_payment'));
     searchParams.set('budget_mo', financialInfo.get('budget_mo'));
 
     // create a search query by inclduing the user_id
@@ -131,14 +133,8 @@ async function submitSearch() {
     searchQuery.set('user_id', fetchQueryParamByKey('user_id'));
 
     try {
-        // POST the search query to the backend API
-        const response = await fetch(API_URL + '/search?' + searchQuery.toString());
-
-        // retrieve the returned cars/offers
-        const results = await response.json();
-
-        // display the results
-        displayCarsOrOffers(results.slice(100, 110));
+        let results = await api.search(searchQuery.toString());
+        displayCarsOrOffers(results);
     }
     catch (e) {
         console.log(e);
@@ -250,6 +246,13 @@ function removeAllCarsOffers() {
     carsContainer.innerHTML = '';
 }
 
+/*
+    Put loading text in cars/offers container.
+*/
+function setCarsOffersLoading() {
+    let carsContainer = document.getElementById('carsContainer');
+    carsContainer.innerHTML = '<center style="font-size: 2rem;">Loading...</center>';
+}
 
 /*
     Claim loan offers
