@@ -27,7 +27,7 @@ function fetchQueryParamByKey(key) {
 /*
     Append a key-value pair to the page URL query string
 */
-function appendPairToQuery(key, value) {
+function setPairInQuery(key, value) {
     // get the querystring from the url bar and parse parameters
     var query_string = window.location.search;
     var url_params = new URLSearchParams(query_string);

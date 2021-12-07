@@ -26,27 +26,27 @@ async function onPageLoad() {
     // configure default sort key
     let sortByURL = fetchQueryParamByKey('sort_by');
     if (sortByURL === null) {
-        appendPairToQuery('sort_by', 'apr');
+        setPairInQuery('sort_by', 'apr');
     }
     else {
-        appendPairToQuery('sort_by', sortByURL);
+        setPairInQuery('sort_by', sortByURL);
     }
     // configure default sort order
     let sortAscURL = fetchQueryParamByKey('sort_asc');
     if (sortAscURL === null) {
-        appendPairToQuery('sort_asc', 'true');
+        setPairInQuery('sort_asc', 'true');
     }
     else {
-        appendPairToQuery('sort_asc', sortAscURL);
+        setPairInQuery('sort_asc', sortAscURL);
     }
 
     // check for user ID on page load, and log in if present
     const userIDCurr = fetchQueryParamByKey('user_id');
     if (userIDCurr === null) {
         // initialize empty user_id, downpayment, monthly budget for the car display search
-        appendPairToQuery('downpayment', '');
-        appendPairToQuery('budget_mo', '');
-        appendPairToQuery('user_id', '');
+        setPairInQuery('downpayment', '');
+        setPairInQuery('budget_mo', '');
+        setPairInQuery('user_id', '');
         submitSearch();
     }
     else {
@@ -63,7 +63,7 @@ async function userLogin() {
     let userID = fetchQueryParamByKey('user_id');
     if (userID === null || userID === '') {
         userID = genNewUserID();
-        appendPairToQuery('user_id', userID);
+        setPairInQuery('user_id', userID);
     }
 
     // try to log in the user and fetch their financial information
@@ -72,8 +72,8 @@ async function userLogin() {
         const userParams = await api.login(userID);
 
         // update their financial information
-        appendPairToQuery('budget_mo', userParams["budget_mo"]);
-        appendPairToQuery('downpayment', userParams["down_payment"]);
+        setPairInQuery('budget_mo', userParams["budget_mo"]);
+        setPairInQuery('downpayment', userParams["down_payment"]);
         document.querySelector('input[name="budget_mo"]').value = userParams["budget_mo"];
         document.querySelector('input[name="down_payment"]').value = userParams["down_payment"];
     }
@@ -82,20 +82,6 @@ async function userLogin() {
     }
 
     displayLoggedInView();
-}
-
-/*
-    Generate a new user ID randomly, with the last three digits being the credit score
-*/
-function genNewUserID() {
-    const cs_min = 300; // minimum credit score
-    const cs_max = 900; // maximum credit score
-    const utc_string = JSON.stringify(new Date().getTime()); // current UTC timestamp
-    // generate a random number between cs_min and cs_max
-    const rand_credit_score = JSON.stringify(
-        Math.floor(Math.random() * (cs_max - cs_min)) + cs_min
-    );
-    return 'u' + utc_string + rand_credit_score;
 }
 
 /*
@@ -116,6 +102,20 @@ async function displayLoggedInView() {
     claimOffers.style.display = 'flex';
 }
 
+/*
+    Generate a new user ID randomly, with the last three digits being the credit score
+*/
+function genNewUserID() {
+    const cs_min = 300; // minimum credit score
+    const cs_max = 900; // maximum credit score
+    const utc_string = JSON.stringify(new Date().getTime()); // current UTC timestamp
+    // generate a random number between cs_min and cs_max
+    const rand_credit_score = JSON.stringify(
+        Math.floor(Math.random() * (cs_max - cs_min)) + cs_min
+    );
+    return 'u' + utc_string + rand_credit_score;
+}
+
 
 /*
     Search features
@@ -128,17 +128,17 @@ function toggleSortOrder() {
     const sortIcon = document.getElementById('sortIcon');
     if (fetchQueryParamByKey('sort_asc') == 'false') {
         // for ascending order, flip icon vertically
-        appendPairToQuery('sort_asc', 'true');
+        setPairInQuery('sort_asc', 'true');
         sortIcon.style.transform = 'scaleY(-1)';
         // configure the search params to set ascending search order to true
-        appendPairToQuery('sort_asc', true);
+        setPairInQuery('sort_asc', true);
     }
     else {
         // for ascending order, do not flip icon
-        appendPairToQuery('sort_asc', 'false');
+        setPairInQuery('sort_asc', 'false');
         sortIcon.style.transform = 'none';
         // configure the search params to set ascending search order to false
-        appendPairToQuery('sort_asc', false);
+        setPairInQuery('sort_asc', false);
     }
 }
 
@@ -150,7 +150,7 @@ function setSortBy() {
     const sortBySelect = document.getElementById('sortBy');
     const sortByVal = sortBySelect.options[sortBySelect.selectedIndex].value;
     // configure the search params to set desired sort-by value
-    appendPairToQuery('sort_by', sortByVal);
+    setPairInQuery('sort_by', sortByVal);
 }
 
 /*
@@ -163,8 +163,8 @@ async function submitSearch() {
     // retrieve and update finanical info
     const formFinancials = document.getElementById('form-finanicals');
     const financialInfo = new FormData(formFinancials);
-    appendPairToQuery('downpayment', financialInfo.get('down_payment'));
-    appendPairToQuery('budget_mo', financialInfo.get('budget_mo'));
+    setPairInQuery('downpayment', financialInfo.get('down_payment'));
+    setPairInQuery('budget_mo', financialInfo.get('budget_mo'));
 
     // attempt to send the search query to the backend API
     try {
