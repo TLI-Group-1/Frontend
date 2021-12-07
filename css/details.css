@@ -18,13 +18,15 @@ main {
     width: 60rem;
     max-width: 90%;
     max-height: 60rem;
-    margin: 5rem auto;
+    margin: 2rem auto 5rem auto;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: stretch;
 }
+
+/* header styles */
 
 header {
     flex-grow: 0;
@@ -43,8 +45,9 @@ header div {
 
 header div.go-back {
     padding-left: 2rem;
+    padding-top: 1rem;
     min-width: 15rem;
-    max-width: 32%;
+    max-width: 20rem;
     border-radius: 1.1rem 0 0 0;
     display: flex;
     flex-direction: row;
@@ -76,6 +79,8 @@ header img {
     padding-left: 2px;
 }
 
+/* nav bar styles */
+
 main > nav {
     flex-grow: 0;
     padding: 1rem 2rem;
@@ -91,7 +96,9 @@ main > div {
 
 main > div aside {
     flex-grow: 1;
-    /* overflow-y: auto; */
+    max-width: 20rem;
+    max-height: 60rem;
+    overflow-y: auto;
 }
 
 main > div section {

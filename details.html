@@ -49,8 +49,18 @@ limitations under the License. -->
         </nav>
         <div>
             <aside>
-                <div class="region-dark" style="height: 4rem;">
-                </div>
+                <ul class="loan-offers">
+                    <li class="loan-offer-entry">
+                        <a href="./details.html?offerSelected={offer_id}">
+                            <img src="./assets/img/car-1.jpg" alt="">
+                            <div class="loan-offer-summary">
+                                <span class="offer-car-info">{{make}} {{model}} {{year}}</span>
+                                <span class="offer-loan-info">${{mon_pay}}/mo {{term}} years {{apr}}%</span>
+                            </div>
+                        </a>
+                    </li>
+
+                </ul>
             </aside>
             <section class="region-dark">
                 <div id="demo_field"></div>
