@@ -14,18 +14,26 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-function demoDayAPICall(){
-    fetch("http://localhost:8080/demo?budget=200")
-        // store response from the API in JSON
-        .then(response => response.json())
-        // write the response to the demo field
-        .then(responseData => {
-            populateDemoDiv(responseData.body);
-        });
+/*
+    Get a URL query string parameter by its key. Return null if non-existent.
+*/
+function fetchQueryParamByKey(key) {
+    // get the querystring from the url bar and parse parameters
+    var query_string = window.location.search;
+    var url_params = new URLSearchParams(query_string);
+    return url_params.get(key);
 }
 
-function populateDemoDiv(content){
-    document.getElementById("demo_field").innerHTML=content;
+/*
+    Append a key-value pair to the page URL query string
+*/
+function setPairInQuery(key, value) {
+    // get the querystring from the url bar and parse parameters
+    var query_string = window.location.search;
+    var url_params = new URLSearchParams(query_string);
+    // append the given key-value pair to the query
+    url_params.set(key, value);
+    // place the amended query string at the browser address bar
+    var new_params = '?' + url_params.toString();
+    window.history.replaceState(null, null, new_params);
 }
-
-demoDayAPICall()

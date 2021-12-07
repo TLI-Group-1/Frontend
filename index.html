@@ -26,11 +26,96 @@ limitations under the License. -->
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/minireset.min.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/index.css">
     <!-- Scripts -->
-    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/mustache-4.2.0.min.js" defer></script>
+    <script type="text/javascript" src="js/main.js" defer></script>
+    <script type="text/javascript" src="js/api.js" defer></script>
+    <script type="text/javascript" src="js/discover.js" defer></script>
 </head>
 <body>
-
+    <main>
+        <aside>
+            <section class="card border-thin sec-inputs">
+                <header>
+                    <img src="assets/icons/senso_logo_text_dark-min.svg" alt="senso-logo">
+                    <h1><a href="/">AutoDirect</a></h1>
+                </header>
+                <article id="side-agreement">
+                    <div class="inset-content">
+                        <h3>You will be able to:</h3>
+                        <ul>
+                            <li>Browse cars that you can afford</li>
+                            <li>Get exclusive loan offers at competitive rates tailored for you</li>
+                        </ul>
+                        <h3>You need to:</h3>
+                        <ul>
+                            <li>Agree to share your credit proﬁle with us</li>
+                            <li>Agree to our terms of service</li>
+                        </ul>
+                        <button type="button" name="login" class="btn-red" onclick="userLogin();">
+                            Agree & continue
+                        </button>
+                    </div>
+                </article>
+                <article id="side-params" style="display: none;">
+                    <form id="form-finanicals" onsubmit="submitSearch(); return false;">
+                        <div class="inset-content">
+                            <label for="budget_mo"><h3>Monthly budget:</h3></label>
+                            <input class="round-empty-pill" type="number" name="budget_mo" placeholder="300.00">
+                            <label for="down_payment"><h3>Down payment:</h3></label>
+                            <input class="round-empty-pill" type="number" name="down_payment" placeholder="1000.00">
+                        </div>
+                        <button type="submit" name="updateFinancials" class="btn-green rounded-bottom">
+                            Find your car
+                        </button>
+                    </form>
+                </article>
+            </section>
+            <section class="card border-thin sec-claimed-offers" id="claimedOffersWidget" style="display: none;">
+                <header class="region-dark">
+                    <img src="./assets/icons/heart-filled-red-min.svg" alt="">
+                    <h3>Your loan offers</h3>
+                </header>
+                <ul class="loan-offers">
+                    <li class="loan-offer-entry">
+                        <a href="./details.html?offerSelected={offer_id}">
+                            <img src="./assets/img/car-1.jpg" alt="">
+                            <div class="loan-offer-summary">
+                                <span class="offer-car-info">{{make}} {{model}} {{year}}</span>
+                                <span class="offer-loan-info">${{mon_pay}}/mo {{term}} years {{apr}}%</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <a class="round-empty-pill" href="./details.html">See all offer details</a>
+            </section>
+        </aside>
+        <section>
+            <nav class="search-bar card region-dark">
+                <span class="sort-combo">
+                    <button type="button" name="sortOrder" id="sortOrder" onclick="toggleSortOrder();">
+                            <img id="sortIcon" src="assets/icons/sort-top-down-min.svg" alt="Sort by" />
+                    </button>
+                    <select name="sortBy" id="sortBy" onchange="setSortBy();">
+                        <option value="apr" selected>Interest rate</option>
+                        <option value="payment_mo">Monthly payment</option>
+                        <option value="price">Retail price</option>
+                        <option value="total_sum">Total cost</option>
+                        <option value="term_length">Loan term length</option>
+                    </select>
+                </span>
+                <form class="search-container" onsubmit="submitSearch(); return false;">
+                    <button type="submit">
+                        <img src="assets/icons/search-icon-min.svg" alt="Search" />
+                    </button>
+                    <input type="text" id="searchBox">
+                </form>
+            </nav>
+            <div class="cars-container" id="carsContainer" onload="demoAddDummyCars();">
+            </div>
+        </section>
+    </main>
 
     <footer class="region-dark">
         <div class="footer-spacer"></div>
@@ -72,5 +157,69 @@ limitations under the License. -->
         </aside>
         <div class="footer-spacer"></div>
     </footer>
+
+    <!-- Mustache templates below; rendered in JavaScript -->
+    <script type="text/html" id="tmpl_CarOffer">
+        <div class="car-offer card border-thin">
+            <img src="assets/img/car-1.jpg" alt="Car Picture">
+            <article>
+                {{&car_info}}
+                {{&loan_info}}
+            </article>
+            {{&button}}
+        </div>
+    </script>
+    <script type="text/html" id="tmpl_CarOfferCarInfo">
+        <div class="car-info-pair">
+            <h5>Make:</h5>
+            <span>{{make}}</span>
+        </div>
+        <div class="car-info-pair">
+            <h5>Model:</h5>
+            <span>{{model}}</span>
+        </div>
+        <div class="car-info-pair">
+            <h5>Year:</h5>
+            <span>{{year}}</span>
+        </div>
+        <div class="car-info-pair">
+            <h5>Usage:</h5>
+            <span>{{kms}} km</span>
+        </div>
+        <div class="car-info-pair">
+            <h5>Retail price:</h5>
+            <span>&#36;{{price}}</span>
+        </div>
+        <div class="car-info-pair" style="visibility: hidden;"></div>
+    </script>
+    <script type="text/html" id="tmpl_CarOfferLoanInfo">
+        <div class="car-info-pair">
+            <h5>Interest rate:</h5>
+            <span class="green-text">{{apr}}&#37;</span>
+        </div>
+        <div class="car-info-pair">
+            <h5>You pay:</h5>
+            <span class="green-text">&#36;{{payment_mo}}/mo</span>
+        </div>
+        <div class="car-info-pair">
+            <h5>Loan term:</h5>
+            <span class="green-text">{{loan_term}} years</span>
+        </div>
+        <div class="car-info-pair">
+            <h5>Total cost:</h5>
+            <span class="green-text">&#36;{{total_sum}}</span>
+        </div>
+    </script>
+    <script type="text/html" id="tmpl_CarOfferBtnUnavailable">
+        <button type="button" class="region-gray rounded-bottom claim-unavailable">
+            Agree to view offers
+        </button>
+    </script>
+    <script type="text/html" id="tmpl_CarOfferBtnAvailable">
+        <button type="button" class="claim-btn rounded-bottom" name="{{id}}" onclick="claimOffer(this.name);">
+            <span class="btn-dark-blue claim-text">Claim this offer</span>
+            <span class="btn-red bg-heart-empty claim-heart"></span>
+        </button>
+    </script>
 </body>
 </html>

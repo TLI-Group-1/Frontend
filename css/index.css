@@ -1,0 +1,362 @@
+/*
+Copyright (c) 2021 Ruofan Chen, Samm Du, Nada Eldin, Shalev Lifshitz
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at:
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+main {
+    width: 70rem;
+    max-width: 90%;
+    margin: 2rem auto 5rem auto;
+    background-color: inherit;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    flex-wrap: wrap;
+    row-gap: 2rem;
+    column-gap: 2rem;
+}
+
+/* right-side styles: interaction widget & claimed loans */
+
+main > aside {
+    flex-grow: 1;
+    flex-shrink: 0;
+    width: 18rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: flex-start;
+    column-gap: 2rem;
+    row-gap: 2rem;
+}
+
+main > aside > section {
+    background-color: #ffffff;
+    width: 40%;
+    min-width: 20rem;
+}
+
+section.sec-inputs header {
+    padding: 2rem 1.5rem 0.5rem 1.5rem;
+}
+
+section.sec-inputs h1 {
+    color: #36cf9b;
+    transition: all 250ms ease;
+}
+
+section.sec-inputs h1:hover {
+    transform: translateX(0.5rem);
+}
+
+section.sec-inputs img {
+    height: 1.5em;
+    width: auto;
+    padding-left: 2px;
+}
+
+section.sec-inputs article div.inset-content {
+    margin: 0 1.5rem 0 1.5rem;
+}
+
+section.sec-inputs ul {
+    list-style-type: disc;
+    margin: 0.5em 0 0 1.5em;
+}
+
+section.sec-inputs ul li {
+    margin-bottom: 0.5em;
+}
+
+section.sec-inputs button {
+    width: 100%;
+}
+
+section.sec-inputs button[name="login"] {
+    border-radius: 0.5rem;
+    /* width: 100%; */
+    min-width: 15.5rem;
+    margin: 1rem auto 1.5rem auto;
+    padding: 1rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    transition: all 250ms ease;
+}
+section.sec-inputs button[name="login"]:hover {
+    transform: translateY(-0.2rem);
+}
+section.sec-inputs button[name="login"]:active {
+    transform: none;
+}
+
+section.sec-inputs article form label {
+    display: inline-block;
+    margin: 0 0 0.5rem 0.15rem;
+}
+
+section.sec-inputs article form input {
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+section.sec-inputs button[name="updateFinancials"] {
+    margin: 1rem 0 0 0;
+    padding: 1rem;
+    transition: all 250ms ease;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+section.sec-claimed-offers {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+section.sec-claimed-offers header {
+    width: 100%;
+    border-radius: 1.1rem 1.1rem 0 0;
+    padding: 1rem 1.5rem;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 1rem;
+}
+
+section.sec-claimed-offers header img {
+    height: 1.5em;
+    width: auto;
+    padding-left: 2px;
+}
+
+section.sec-claimed-offers ul.loan-offers {
+    max-height: 18rem;
+    overflow-y: auto;
+}
+
+section.sec-claimed-offers a.round-empty-pill {
+    align-self: center;
+    margin: 1rem;
+    color: #1d2345;
+    font-weight: 500;
+    transition: all 250ms ease;
+}
+
+section.sec-claimed-offers a.round-empty-pill:hover {
+    background-color: #1d2345;
+    color: #ffffff;
+}
+
+/* left-side styles: search bar */
+
+main > section {
+    min-height: 5rem;
+    flex-grow: 3;
+    width: 35rem;
+}
+
+nav.search-bar {
+    min-height: 4rem;
+    padding: 1rem 2rem;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    row-gap: 1rem;
+    column-gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+nav.search-bar span.sort-combo {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 1em;
+}
+
+nav.search-bar span.sort-combo img {
+    -webkit-transform: scaleY(-1);
+    -moz-transform: scaleY(-1);
+    transform: scaleY(-1);
+}
+
+nav.search-bar button {
+    background-color: rgba(0, 0, 0, 0);
+    margin: 0;
+    padding: 0;
+    line-height: 1em;
+    font-size: 1em;
+    color: #ffffff;
+}
+
+nav.search-bar select {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background-color: #1d2345;
+    background-color: rgba(0, 0, 0, 0);
+    color: #ffffff;
+    border: none;
+    padding: 0;
+    font-size: 1.2em;
+}
+nav.search-bar select:hover {
+    cursor: pointer;
+}
+
+nav.search-bar form.search-container {
+    flex-grow: 1;
+    max-width: 20rem;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+nav.search-bar form.search-container button {
+    background-color: #ffffff;
+    padding: 0 0.5rem 0 0.5rem;
+    height: 2.2rem;
+    border-radius: 1.1rem 0 0 1.1rem;
+    display: inline-flex;
+    align-items: center;
+}
+
+nav.search-bar form.search-container button img {
+    flex-shrink: 0;
+    height: 1.5rem;
+    width: auto;
+}
+
+nav.search-bar form.search-container input {
+    flex-grow: 2;
+    border: none;
+    width: 10rem;
+    height: 2.2rem;
+    padding: 0.25em;
+    border-radius: 0 1.1rem 1.1rem 0;
+}
+
+/* left-side styles: car listings - loan offers */
+
+div.cars-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    align-content: flex-start;
+    row-gap: 1.5rem;
+    column-gap: 1rem;
+}
+
+.car-offer {
+    flex-grow: 1;
+    flex-shrink: 1;
+    width: 40%;
+    max-width: 25rem;
+    min-width: 18rem;
+}
+
+.car-offer > img {
+    border-radius: 1.1rem;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.car-offer article {
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    column-gap: 1rem;
+    row-gap: 0.5rem;
+}
+
+.car-offer article .car-info-pair {
+    flex-shrink: 1;
+    min-width: 5rem;
+    width: 42%;
+}
+
+.car-offer article .car-info-pair > span {
+    font-size: 1.2rem;
+    text-transform: capitalize;
+}
+
+.car-offer button {
+    font-size: 1.2rem;
+    width: 100%;
+    padding: 0;
+}
+
+.car-offer button.claim-unavailable {
+    padding: 1rem;
+    cursor: default;
+}
+
+.car-offer button.claim-btn {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.car-offer button.claim-btn * {
+    transition: all 250ms ease;
+}
+
+.car-offer button.claim-btn span.claim-text {
+    width: 100%;
+    border-radius: 0 0 0 1.1rem;
+    padding: 1rem;
+    font-weight: 500;
+}
+.car-offer button.claim-btn span.claim-text:hover {
+    width: 80%;
+}
+
+.car-offer button.claim-btn span.claim-heart {
+    width: 5rem;
+    border-radius: 0 0 1.1rem 0;
+}
+.car-offer button.claim-btn span.claim-heart:hover{
+    width: 7rem;
+}
+
+/* either makes the background image a filled heart or empty heart */
+.bg-heart-filled {
+    background-image: url("../assets/icons/heart-filled-min.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 2rem;
+}
+.bg-heart-empty {
+    background-image: url("../assets/icons/heart-unfilled-min.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 2rem;
+}
