@@ -128,17 +128,15 @@ function toggleSortOrder() {
     const sortIcon = document.getElementById('sortIcon');
     if (fetchQueryParamByKey('sort_asc') == 'false') {
         // for ascending order, flip icon vertically
-        setPairInQuery('sort_asc', 'true');
         sortIcon.style.transform = 'scaleY(-1)';
         // configure the search params to set ascending search order to true
-        setPairInQuery('sort_asc', true);
+        setPairInQuery('sort_asc', 'true');
     }
     else {
         // for ascending order, do not flip icon
-        setPairInQuery('sort_asc', 'false');
         sortIcon.style.transform = 'none';
         // configure the search params to set ascending search order to false
-        setPairInQuery('sort_asc', false);
+        setPairInQuery('sort_asc', 'false');
     }
 }
 
