@@ -29,8 +29,9 @@ limitations under the License. -->
     <link rel="stylesheet" href="css/details.css">
     <!-- Scripts -->
     <script type="text/javascript" src="js/mustache-4.2.0.min.js" defer></script>
-    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/main.js" defer></script>
     <script type="text/javascript" src="js/api.js" defer></script>
+    <script type="text/javascript" src="js/details.js" defer></script>
 </head>
 <body>
     <main class="card border-thin">
@@ -49,21 +50,62 @@ limitations under the License. -->
         </nav>
         <div>
             <aside>
-                <ul class="loan-offers">
-                    <li class="loan-offer-entry">
-                        <a href="./details.html?offerSelected={offer_id}">
-                            <img src="./assets/img/car-1.jpg" alt="">
-                            <div class="loan-offer-summary">
-                                <span class="offer-car-info">{{make}} {{model}} {{year}}</span>
-                                <span class="offer-loan-info">${{mon_pay}}/mo {{term}} years {{apr}}%</span>
-                            </div>
-                        </a>
-                    </li>
-
+                <ul class="loan-offers" id="loanOffersContainer">
                 </ul>
             </aside>
             <section class="region-dark">
-                <div id="demo_field"></div>
+                <div class="car-hero">
+                    <img src="./assets/img/car-1.jpg" alt="Car Hero Image">
+                </div>
+                <div class="loan-offer-details">
+                    <ul class="car-info">
+                        <li class="car-info-pair">
+                            <h4>Make:</h4>
+                            <span>{{make}}</span>
+                        </li>
+                        <li class="car-info-pair">
+                            <h4>Model:</h4>
+                            <span>{{model}}</span>
+                        </li>
+                        <li class="car-info-pair">
+                            <h4>Year:</h4>
+                            <span>{{year}}</span>
+                        </li>
+                        <li class="car-info-pair">
+                            <h4>Usage:</h4>
+                            <span>{{kms}} km</span>
+                        </li>
+                        <li class="car-info-pair">
+                            <h4>Retail price:</h4>
+                            <span>&#36;{{price}}</span>
+                        </li>
+                    </ul>
+                    <form id="form-update-principal" onsubmit="submitNewPrincipal(); return false;">
+                        <label for="loan-principal"><h4>Loan principal:</h4></label>
+                        <input class="round-empty-pill" type="number" name="loan-principal">
+                        <button type="submit" name="updatePrincipal" class="btn-green">
+                            Update
+                        </button>
+                    </form>
+                    <ul class="loan-info">
+                        <li class="car-info-pair">
+                            <h4>Interest rate:</h4>
+                            <span>{{apr}}&#37;</span>
+                        </li>
+                        <li class="car-info-pair">
+                            <h4>You pay:</h4>
+                            <span>&#36;{{payment_mo}}/mo</span>
+                        </li>
+                        <li class="car-info-pair">
+                            <h4>Loan term:</h4>
+                            <span>{{loan_term}} years</span>
+                        </li>
+                        <li class="car-info-pair">
+                            <h4>Total cost:</h4>
+                            <span>&#36;{{total_sum}}</span>
+                        </li>
+                    </ul>
+                </div>
             </section>
         </div>
     </main>
@@ -108,5 +150,18 @@ limitations under the License. -->
         </aside>
         <div class="footer-spacer"></div>
     </footer>
+
+    <!-- Mustache templates below; rendered in JavaScript -->
+    <script type="text/html" id="tmpl_LoanOffer">
+        <li class="loan-offer-entry">
+            <a href="./details.html?offerSelected={{offer_id}}">
+                <img src="./assets/img/car-1.jpg" alt="">
+                <div class="loan-offer-summary">
+                    <span class="offer-car-info">{{make}} {{model}} {{year}}</span>
+                    <span class="offer-loan-info">${{payment_mo}}/mo &middot; {{loan_term}} months &middot; {{apr}}%</span>
+                </div>
+            </a>
+        </li>
+    </script>
 </body>
 </html>
