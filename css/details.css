@@ -17,7 +17,6 @@ limitations under the License.
 main {
     width: 60rem;
     max-width: 90%;
-    max-height: 60rem;
     margin: 2rem auto 5rem auto;
 
     display: flex;
@@ -92,31 +91,46 @@ main > nav {
 }
 
 main > div {
+    height: 48rem;
     display: flex;
     flex-direction: row;
+    flex-wrap: nowrap;
     justify-content: space-between;
     align-items: stretch;
     overflow: hidden;
 }
 
+@media (max-width: 670px) {
+    main > div {
+        height: auto;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+    }
+}
+
 /* claimed loan offers sidebar styles */
 
 main > div aside {
-    flex-grow: 1;
-    max-width: 20rem;
-    max-height: 40rem;
+    height: 100%;
+    flex: 1 0 auto;
+    border-radius: 0 0 0 1.1rem;
     overflow-y: auto;
     overscroll-behavior-y: contain;
+}
+
+@media (max-width: 670px) {
+    main > div aside {
+        height: 20rem;
+    }
 }
 
 /* loan offer detail display styling */
 
 main > div section {
-    flex-grow: 2;
-    border-radius: 0 0 1.1rem 0;
-    padding: 2rem;
-    max-width: 75%;
+    flex: 10 1 auto;
     min-height: 30rem;
+    border-radius: 0 0 1.1rem 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -124,7 +138,28 @@ main > div section {
     row-gap: 2rem;
 }
 
-main > div section div.car-hero {
+@media (max-width: 670px) {
+    main > div section {
+        border-radius: 0 0 1.1rem 1.1rem;
+    }
+}
+
+section div.loan-offer-details {
+    padding: 2rem;
+    border-radius: 0 0 1.1rem 0;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+}
+
+section div.loan-offer-details h4 {
+    font-weight: 500;
+    color: #faa500;
+}
+
+div.loan-offer-details div.car-hero {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -133,21 +168,10 @@ main > div section div.car-hero {
     height: 15rem;
 }
 
-main > div section div.car-hero img {
+div.loan-offer-details div.car-hero img {
     height: 100%;
     width: auto;
     border-radius: 1rem;
-}
-
-main > div section div.loan-offer-details {
-    display: flex;
-    flex-direction: column;
-    row-gap: 1rem;
-}
-
-main > div section div.loan-offer-details h4 {
-    font-weight: 500;
-    color: #faa500;
 }
 
 div.loan-offer-details ul {

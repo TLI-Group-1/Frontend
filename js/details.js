@@ -20,7 +20,7 @@ limitations under the License.
 */
 async function onPageLoad() {
     // DEMO
-    for (let i = 0; i != 10; i++) {
+    for (let i = 0; i != 20; i++) {
         addOfferToContainer(
             "offer123", "Honda", "Civic", 2018, 250, 320, 3.2
         );
