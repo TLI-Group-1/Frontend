@@ -204,6 +204,9 @@ function displayCarsOrOffers(listings) {
 
     // add all car/loan offer listings to the container
     for (const item of listings) {
+        if ('mileage' in item) {
+            item['kms'] = item['mileage'];
+        }
         addCarToContainer(
             item['offer_id'], item['brand'], item['model'], item['year'], item['kms'],
             item['price'], item['interest_rate'], item['payment_mo'], item['term_mo'],
