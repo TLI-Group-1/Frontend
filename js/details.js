@@ -22,10 +22,15 @@ async function onPageLoad() {
     // fetch the user_id from the URL
     let userID = fetchQueryParamByKey('user_id');
     // fetch all claimed offers for this user
-    await fetchClaimedOffers(userID);
+    const firstOfferID = await fetchClaimedOffers(userID);
 
     // find the selected offer for this user
     let offerSelected = fetchQueryParamByKey('offerSelected');
+    // select the first offer if none are specified
+    if (offerSelected === null || offerSelected === '') {
+        offerSelected = firstOfferID;
+        setPairInQuery('offerSelected', offerSelected);
+    }
     // show details for the specified offer
     await getOfferDetails(userID, offerSelected);
 }
@@ -33,36 +38,6 @@ async function onPageLoad() {
 /*
     Claimed offers list operations
 */
-
-/*
-    Get the list of offers for a specific user
-*/
-async function fetchClaimedOffers(userID) {
-    try {
-        // call the API to get the user's claimed offers
-        const userClaimedOffers = await api.getClaimedOffers(userID);
-
-        // populate the sidebar with user's claimed offers
-        displayClaimedOffers(userClaimedOffers, userID);
-    }
-    catch (e) {
-        console.log(e);
-        console.log(window.location.search);
-    }
-}
-
-/*
-    Display the given list of claimed offers
-*/
-function displayClaimedOffers(offers, userID) {
-    removeAllLoanOffers();
-    for (const offer of offers) {
-        addOfferToContainer(
-            userID, offer['offerId'], offer['brand'], offer['model'], offer['year'],
-            offer['interestRate'], offer['termMo'], offer['totalSum']
-        );
-    }
-}
 
 /*
     Highlight an offer (purely cosmetically)

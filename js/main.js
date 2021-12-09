@@ -44,6 +44,39 @@ function setPairInQuery(key, value) {
 */
 
 /*
+    Get the list of offers for a specific user
+*/
+async function fetchClaimedOffers(userID) {
+    try {
+        // call the API to get the user's claimed offers
+        const userClaimedOffers = await api.getClaimedOffers(userID);
+
+        // populate the sidebar with user's claimed offers
+        displayClaimedOffers(userClaimedOffers, userID);
+
+        // return the first offer ID as selection default
+        return userClaimedOffers[0]['offerId'];
+    }
+    catch (e) {
+        console.log(e);
+        console.log(window.location.search);
+    }
+}
+
+/*
+    Display the given list of claimed offers
+*/
+function displayClaimedOffers(offers, userID) {
+    removeAllLoanOffers();
+    for (const offer of offers) {
+        addOfferToContainer(
+            userID, offer['offerId'], offer['brand'], offer['model'], offer['year'],
+            offer['interestRate'], offer['termMo'], offer['totalSum']
+        );
+    }
+}
+
+/*
     Add a loan offer to the loan offers container
 */
 function addOfferToContainer(
