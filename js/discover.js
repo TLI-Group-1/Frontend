@@ -30,9 +30,6 @@ async function onPageLoad() {
     if (sortAscURL === null) {
         setPairInQuery('sort_asc', 'true');
     }
-    else {
-        setPairInQuery('sort_asc', sortAscURL);
-    }
 
     // check for user ID on page load, and log in if present
     const userIDCurr = fetchQueryParamByKey('user_id');
@@ -44,7 +41,8 @@ async function onPageLoad() {
         submitSearch();
     }
     else {
-        userLogin();
+        await userLogin();
+        await fetchClaimedOffers(fetchQueryParamByKey('user_id'));
     }
 }
 
@@ -79,7 +77,8 @@ async function userLogin() {
         console.log(e);
     }
 
-    displayLoggedInView();
+    // after loggin in, show the loan offers available to this user
+    await displayLoggedInView();
 }
 
 /*
@@ -180,7 +179,7 @@ async function submitSearch() {
 
 
 /*
-    Cars and loan offers operations
+    Cars and loan offers (left side results) operations
 */
 
 /*
@@ -192,7 +191,8 @@ function displayCarsOrOffers(listings) {
     for (const item of listings) {
         addCarToContainer(
             item['offer_id'], item['brand'], item['model'], item['year'], item['kms'],
-            item['price'], item['interest_rate'], item['term_mo'], item['total_sum']
+            item['price'], item['apr'], item['payment_mo'], item['term_length'],
+            item['total_sum']
         )
     }
 }
@@ -206,7 +206,7 @@ function displayCarsOrOffers(listings) {
         - this option should be used before agreement/login
 */
 function addCarToContainer(
-    id, make, model, year, kms, price, apr, loan_term, total_sum
+    id, make, model, year, kms, price, apr, payment_mo, loan_term, total_sum
 ) {
     // get render target
     let carsContainer = document.getElementById('carsContainer');
@@ -230,7 +230,7 @@ function addCarToContainer(
     if ((apr !== '') && (apr !== null) && (apr !== undefined)) {
         const loanData = {
             apr: Math.round(apr * 100) / 100,
-            payment_mo: Math.round((total_sum / loan_term) * 100) / 100,
+            payment_mo: Math.round(payment_mo * 100) / 100,
             loan_term: loan_term,
             total_sum: total_sum
         };
@@ -271,10 +271,19 @@ function setCarsOffersLoading() {
     carsContainer.innerHTML = '<center style="font-size: 2rem;">Loading...</center>';
 }
 
+
 /*
-    Claim loan offers: TODO
+    Claimed loan offers operations
 */
 
+/*
+
+*/
+
+
+/*
+    TODO: claim a given loan offer
+*/
 async function claimOffer(id) {
     console.log('Claiming ' + id);
 }

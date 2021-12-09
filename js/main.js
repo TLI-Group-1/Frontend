@@ -51,11 +51,17 @@ async function fetchClaimedOffers(userID) {
         // call the API to get the user's claimed offers
         const userClaimedOffers = await api.getClaimedOffers(userID);
 
-        // populate the sidebar with user's claimed offers
-        displayClaimedOffers(userClaimedOffers, userID);
+        // if no claimed offers, return null
+        if (userClaimedOffers.length === 0) {
+            return null;
+        }
+        else {
+            // populate the sidebar with user's claimed offers
+            displayClaimedOffers(userClaimedOffers, userID);
 
-        // return the first offer ID as selection default
-        return userClaimedOffers[0]['offerId'];
+            // return the first offer ID as selection default
+            return userClaimedOffers[0]['offerId'];
+        }
     }
     catch (e) {
         console.log(e);
