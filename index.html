@@ -79,7 +79,9 @@ limitations under the License. -->
                 </header>
                 <ul class="loan-offers" id="loanOffersContainer">
                 </ul>
-                <a id="offersDetailsLink" class="round-empty-pill" href="./details.html">See all offer details</a>
+                <a id="offersDetailsLink" class="round-empty-pill" href="./details.html" style="visibility: hidden;">
+                    See all offer details
+                </a>
             </section>
         </aside>
         <section>
@@ -207,7 +209,7 @@ limitations under the License. -->
         </button>
     </script>
     <script type="text/html" id="tmpl_CarOfferBtnAvailable">
-        <button type="button" class="claim-btn rounded-bottom" name="{{id}}" onclick="claimOffer(this.name);">
+        <button type="button" class="claim-btn rounded-bottom" name="{{id}}" onclick="toggleClaimOffer(this.name);">
             <span class="btn-dark-blue claim-text">Claim this offer</span>
             <span class="btn-red bg-heart-empty claim-heart"></span>
         </button>

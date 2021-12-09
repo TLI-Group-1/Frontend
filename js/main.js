@@ -44,6 +44,45 @@ function setPairInQuery(key, value) {
 */
 
 /*
+    Get the list of offers for a specific user
+*/
+async function fetchClaimedOffers(userID) {
+    try {
+        // call the API to get the user's claimed offers
+        const userClaimedOffers = await api.getClaimedOffers(userID);
+
+        // if no claimed offers, return null
+        if (userClaimedOffers.length === 0) {
+            return null;
+        }
+        else {
+            // populate the sidebar with user's claimed offers
+            displayClaimedOffers(userClaimedOffers, userID);
+
+            // return the first offer ID as selection default
+            return userClaimedOffers[0]['offerId'];
+        }
+    }
+    catch (e) {
+        console.log(e);
+        console.log(window.location.search);
+    }
+}
+
+/*
+    Display the given list of claimed offers
+*/
+function displayClaimedOffers(offers, userID) {
+    removeAllLoanOffers();
+    for (const offer of offers) {
+        addOfferToContainer(
+            userID, offer['offer_id'], offer['brand'], offer['model'], offer['year'],
+            offer['interest_rate'], offer['term_mo'], offer['total_sum']
+        );
+    }
+}
+
+/*
     Add a loan offer to the loan offers container
 */
 function addOfferToContainer(
@@ -76,6 +115,6 @@ function addOfferToContainer(
     Remove all loan offers in the claimed offers container.
 */
 function removeAllLoanOffers() {
-    let carsContainer = document.getElementById('loanOffersContainer');
-    carsContainer.innerHTML = '';
+    let loanOffersContainer = document.getElementById('loanOffersContainer');
+    loanOffersContainer.innerHTML = '';
 }

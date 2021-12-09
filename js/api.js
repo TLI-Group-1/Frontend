@@ -85,5 +85,35 @@ var api = {
             console.log(response);
             throw "HTTP status: " + response.status;
         }
+    },
+
+    claimOffer: async function(userID, OfferID) {
+        // send the search query to the backend API
+        const response = await fetch(
+            this.API_URL + '/claimOffer?user_id=' + userID + '&offer_id=' + OfferID
+        );
+
+        if (response.status == 200) {
+            return;
+        }
+        else {
+            console.log(response);
+            throw "HTTP status: " + response.status;
+        }
+    },
+
+    unclaimOffer: async function(userID, OfferID) {
+        // send the search query to the backend API
+        const response = await fetch(
+            this.API_URL + '/unclaimOffer?user_id=' + userID + '&offer_id=' + OfferID
+        );
+
+        if (response.status == 200) {
+            return;
+        }
+        else {
+            console.log(response);
+            throw "HTTP status: " + response.status;
+        }
     }
 };
