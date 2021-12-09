@@ -60,6 +60,10 @@ async function userLogin() {
         setPairInQuery('user_id', userID);
     }
 
+    // set the link of the offers details page with userID
+    const offersDetailsLink = document.getElementById('offersDetailsLink');
+    offersDetailsLink.href = './details.html?user_id=' + userID;
+
     // try to log in the user and fetch their financial information
     try {
         // call the API to log in the user

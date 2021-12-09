@@ -20,11 +20,12 @@ limitations under the License.
 */
 async function onPageLoad() {
     // DEMO
-    for (let i = 0; i != 20; i++) {
-        addOfferToContainer(
-            "offer123", "Honda", "Civic", 2018, 250, 320, 3.2
-        );
-    }
+    // for (let i = 0; i != 20; i++) {
+    //     addOfferToContainer(
+    //         "offer123", "Honda", "Civic", 2018, 250, 320, 3.2
+    //     );
+    // }
+    fetchClaimedOffers();
 }
 
 /*
@@ -32,10 +33,42 @@ async function onPageLoad() {
 */
 
 /*
+    Get the list of offers for a specific user
+*/
+async function fetchClaimedOffers() {
+    // fetch the user_id from the URL
+    let userID = fetchQueryParamByKey('user_id');
+
+    try {
+        // call the API to get the user's claimed offers
+        const userClaimedOffers = await api.getClaimedOffers(userID);
+
+        // populate the sidebar with user's claimed offers
+        removeAllLoanOffers();
+        for (const offer of userClaimedOffers) {
+            console.log(offer);
+            // DEMO
+            offer['brand'] = 'Honda';
+            offer['model'] = 'Civic';
+            offer['year'] = 2018;
+
+            addOfferToContainer(
+                offer['offerId'], offer['brand'], offer['model'], offer['year'],
+                offer['interestRate'], offer['termMo'], offer['totalSum']
+            );
+        }
+    }
+    catch (e) {
+        console.log(e);
+        console.log(window.location.search);
+    }
+}
+
+/*
     Add a loan offer to the loan offers container
 */
 function addOfferToContainer(
-    offer_id, make, model, year, payment_mo, loan_term, apr
+    offer_id, make, model, year, apr, loan_term, total_sum
 ) {
     // get render target
     let offersContainer = document.getElementById('loanOffersContainer');
@@ -49,9 +82,9 @@ function addOfferToContainer(
         make: make,
         model: model,
         year: year,
-        payment_mo: payment_mo,
+        payment_mo: Math.round((total_sum / loan_term) * 100) / 100,
         loan_term: loan_term,
-        apr: apr
+        apr: Math.round(apr * 100) / 100
     };
     const loanOfferRendered = Mustache.render(tmpl_LoanOffer, loanOfferData);
 
@@ -69,7 +102,7 @@ function removeAllLoanOffers() {
 
 
 /*
-    ..
+    Offer details operations
 */
 
 /*

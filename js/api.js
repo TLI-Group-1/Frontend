@@ -51,5 +51,21 @@ var api = {
             console.log(response);
             throw "HTTP status: " + response.status;
         }
+    },
+
+    getClaimedOffers: async function(userID) {
+        // send the search query to the backend API
+        const response = await fetch(this.API_URL + '/getClaimedOffers?user_id=' + userID);
+
+        // retrieve the returned cars/offers
+        const results = await response.json();
+
+        if (response.status == 200) {
+            return results;
+        }
+        else {
+            console.log(response);
+            throw "HTTP status: " + response.status;
+        }
     }
 };
