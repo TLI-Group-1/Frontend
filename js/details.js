@@ -54,11 +54,11 @@ async function fetchClaimedOffers(userID) {
 /*
     Display the given list of claimed offers
 */
-function displayClaimedOffers(offers, user_id) {
+function displayClaimedOffers(offers, userID) {
     removeAllLoanOffers();
     for (const offer of offers) {
         addOfferToContainer(
-            user_id, offer['offerId'], offer['brand'], offer['model'], offer['year'],
+            userID, offer['offerId'], offer['brand'], offer['model'], offer['year'],
             offer['interestRate'], offer['termMo'], offer['totalSum']
         );
     }
@@ -67,9 +67,9 @@ function displayClaimedOffers(offers, user_id) {
 /*
     Highlight an offer (purely cosmetically)
 */
-function highlightOffer(offer_id) {
+function highlightOffer(offerID) {
     // give the offer a "selected" style
-    const offerEntry = document.querySelector('li[name="' + offer_id +'"]');
+    const offerEntry = document.querySelector('li[name="' + offerID +'"]');
     offerEntry.className += " offer-selected";
     // scroll the offer entry into view (if not already in-view)
     offerEntry.scrollIntoView(false);
@@ -83,14 +83,14 @@ function highlightOffer(offer_id) {
 /*
     Fetch and display an offer's details based on the given offer ID
 */
-async function getOfferDetails(user_id, offer_id) {
+async function getOfferDetails(userID, offerID) {
     // attempt to fetch the specified offer's details from the backend API
     try {
         // make the API call
-        let details = await api.getOfferDetails(user_id, offer_id);
+        let details = await api.getOfferDetails(userID, offerID);
 
         // highlight the chosen offer
-        highlightOffer(offer_id);
+        highlightOffer(offerID);
 
         // display the offer details
         renderOfferDetails(
