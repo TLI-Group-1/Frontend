@@ -37,3 +37,45 @@ function setPairInQuery(key, value) {
     var new_params = '?' + url_params.toString();
     window.history.replaceState(null, null, new_params);
 }
+
+
+/*
+    Claimed offers list operations
+*/
+
+/*
+    Add a loan offer to the loan offers container
+*/
+function addOfferToContainer(
+    user_id, offer_id, make, model, year, apr, loan_term, total_sum
+) {
+    // get render target
+    let offersContainer = document.getElementById('loanOffersContainer');
+
+    // get mustache template
+    const tmpl_LoanOffer = document.getElementById('tmpl_LoanOffer').innerHTML;
+
+    // render loan offer info
+    const loanOfferData = {
+        user_id: user_id,
+        offer_id: offer_id,
+        make: make,
+        model: model,
+        year: year,
+        payment_mo: Math.round((total_sum / loan_term) * 100) / 100,
+        loan_term: loan_term,
+        apr: Math.round(apr * 100) / 100
+    };
+    const loanOfferRendered = Mustache.render(tmpl_LoanOffer, loanOfferData);
+
+    // append loan offer element to offers container
+    offersContainer.innerHTML += loanOfferRendered;
+}
+
+/*
+    Remove all loan offers in the claimed offers container.
+*/
+function removeAllLoanOffers() {
+    let carsContainer = document.getElementById('loanOffersContainer');
+    carsContainer.innerHTML = '';
+}

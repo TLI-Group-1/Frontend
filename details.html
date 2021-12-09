@@ -153,8 +153,8 @@ limitations under the License. -->
 
     <!-- Mustache templates below; rendered in JavaScript -->
     <script type="text/html" id="tmpl_LoanOffer">
-        <li class="loan-offer-entry">
-            <a href="./details.html?offerSelected={{offer_id}}">
+        <li class="loan-offer-entry" name="{{offer_id}}">
+            <a href="./details.html?user_id={{user_id}}&offerSelected={{offer_id}}">
                 <img src="./assets/img/car-1.jpg" alt="">
                 <div class="loan-offer-summary">
                     <span class="offer-car-info">{{make}} {{model}} {{year}}</span>

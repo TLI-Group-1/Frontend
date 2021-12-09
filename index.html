@@ -78,15 +78,6 @@ limitations under the License. -->
                     <h3>Your loan offers</h3>
                 </header>
                 <ul class="loan-offers" id="loanOffersContainer">
-                    <li class="loan-offer-entry">
-                        <a href="./details.html?offerSelected={offer_id}">
-                            <img src="./assets/img/car-1.jpg" alt="">
-                            <div class="loan-offer-summary">
-                                <span class="offer-car-info">{{make}} {{model}} {{year}}</span>
-                                <span class="offer-loan-info">${{mon_pay}}/mo {{term}} years {{apr}}%</span>
-                            </div>
-                        </a>
-                    </li>
                 </ul>
                 <a id="offersDetailsLink" class="round-empty-pill" href="./details.html">See all offer details</a>
             </section>
@@ -220,6 +211,17 @@ limitations under the License. -->
             <span class="btn-dark-blue claim-text">Claim this offer</span>
             <span class="btn-red bg-heart-empty claim-heart"></span>
         </button>
+    </script>
+    <script type="text/html" id="tmpl_LoanOffer">
+        <li class="loan-offer-entry">
+            <a href="./details.html?user_id={{user_id}}&offerSelected={{offer_id}}">
+                <img src="./assets/img/car-1.jpg" alt="">
+                <div class="loan-offer-summary">
+                    <span class="offer-car-info">{{make}} {{model}} {{year}}</span>
+                    <span class="offer-loan-info">${{payment_mo}}/mo &middot; {{loan_term}} months &middot; {{apr}}%</span>
+                </div>
+            </a>
+        </li>
     </script>
 </body>
 </html>

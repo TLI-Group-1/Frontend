@@ -149,6 +149,14 @@ main > div aside {
     }
 }
 
+.offer-selected, .offer-selected > * {
+    background-color: #1d2345 !important;
+    color: #ffffff;
+}
+.offer-selected .offer-loan-info {
+    color: #3ee3ac !important;
+}
+
 /* loan offer detail display styling */
 
 main > div section {

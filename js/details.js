@@ -44,19 +44,10 @@ async function fetchClaimedOffers() {
         const userClaimedOffers = await api.getClaimedOffers(userID);
 
         // populate the sidebar with user's claimed offers
-        removeAllLoanOffers();
-        for (const offer of userClaimedOffers) {
-            console.log(offer);
-            // DEMO
-            offer['brand'] = 'Honda';
-            offer['model'] = 'Civic';
-            offer['year'] = 2018;
+        displayClaimedOffers(userClaimedOffers, userID);
 
-            addOfferToContainer(
-                offer['offerId'], offer['brand'], offer['model'], offer['year'],
-                offer['interestRate'], offer['termMo'], offer['totalSum']
-            );
-        }
+        // highlight the specified offer
+        highlightOffer(fetchQueryParamByKey('offerSelected'));
     }
     catch (e) {
         console.log(e);
@@ -65,39 +56,41 @@ async function fetchClaimedOffers() {
 }
 
 /*
-    Add a loan offer to the loan offers container
+    Display the given list of claimed offers
 */
-function addOfferToContainer(
-    offer_id, make, model, year, apr, loan_term, total_sum
-) {
-    // get render target
-    let offersContainer = document.getElementById('loanOffersContainer');
+function displayClaimedOffers(offers, userID) {
+    removeAllLoanOffers();
+    for (const offer of offers) {
+        // DEMO
+        // console.log(offer);
+        offer['brand'] = 'Honda';
+        offer['model'] = 'Civic';
+        offer['year'] = 2018;
 
-    // get mustache template
-    const tmpl_LoanOffer = document.getElementById('tmpl_LoanOffer').innerHTML;
-
-    // render loan offer info
-    const loanOfferData = {
-        offer_id: offer_id,
-        make: make,
-        model: model,
-        year: year,
-        payment_mo: Math.round((total_sum / loan_term) * 100) / 100,
-        loan_term: loan_term,
-        apr: Math.round(apr * 100) / 100
-    };
-    const loanOfferRendered = Mustache.render(tmpl_LoanOffer, loanOfferData);
-
-    // append loan offer element to offers container
-    offersContainer.innerHTML += loanOfferRendered;
+        addOfferToContainer(
+            userID, offer['offerId'], offer['brand'], offer['model'], offer['year'],
+            offer['interestRate'], offer['termMo'], offer['totalSum']
+        );
+    }
 }
 
 /*
-    Remove all loan offers in the claimed offers container.
+    Highlight an offer (purely cosmetically)
 */
-function removeAllLoanOffers() {
-    let carsContainer = document.getElementById('loanOffersContainer');
-    carsContainer.innerHTML = '';
+function highlightOffer(offer_id) {
+    // give the offer a "selected" style
+    const offerEntry = document.querySelector('li[name="' + offer_id +'"]');
+    offerEntry.className += " offer-selected";
+    // scroll the offer entry into view (if not already in-view)
+    offerEntry.scrollIntoView(false);
+}
+
+
+/*
+    Highlight an offer and display its details
+*/
+async function showOfferDetails() {
+
 }
 
 

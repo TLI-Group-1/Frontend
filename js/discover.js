@@ -46,6 +46,11 @@ async function onPageLoad() {
     else {
         userLogin();
     }
+
+    // DEMO
+    addOfferToContainer(
+        "u1639018896514634", "offer123", "Honda", "Civic", 2018, 250, 320, 3.2
+    );
 }
 
 
