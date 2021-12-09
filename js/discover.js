@@ -24,13 +24,7 @@ async function onPageLoad() {
 
     // configure their default search preferences if none provided in URL
     // configure default sort key
-    let sortByURL = fetchQueryParamByKey('sort_by');
-    if (sortByURL === null) {
-        setPairInQuery('sort_by', 'apr');
-    }
-    else {
-        setPairInQuery('sort_by', sortByURL);
-    }
+    setSortBy();
     // configure default sort order
     let sortAscURL = fetchQueryParamByKey('sort_asc');
     if (sortAscURL === null) {
@@ -193,8 +187,8 @@ function displayCarsOrOffers(listings) {
     removeAllCarsOffers();
     for (const item of listings) {
         addCarToContainer(
-            item['id'], item['brand'], item['model'], item['year'],
-            item['kms'], item['price'], item['apr']
+            item['offer_id'], item['brand'], item['model'], item['year'], item['kms'],
+            item['price'], item['interest_rate'], item['term_mo'], item['total_sum']
         )
     }
 }
@@ -208,7 +202,7 @@ function displayCarsOrOffers(listings) {
         - this option should be used before agreement/login
 */
 function addCarToContainer(
-    id, make, model, year, kms, price, apr, payment_mo, loan_term, total_sum
+    id, make, model, year, kms, price, apr, loan_term, total_sum
 ) {
     // get render target
     let carsContainer = document.getElementById('carsContainer');
@@ -231,8 +225,8 @@ function addCarToContainer(
     // if given loan data, render loan info with available button
     if ((apr !== '') && (apr !== null) && (apr !== undefined)) {
         const loanData = {
-            apr: apr,
-            payment_mo: payment_mo,
+            apr: Math.round(apr * 100) / 100,
+            payment_mo: Math.round((total_sum / loan_term) * 100) / 100,
             loan_term: loan_term,
             total_sum: total_sum
         };

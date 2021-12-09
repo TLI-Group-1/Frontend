@@ -17,7 +17,7 @@ limitations under the License.
 main {
     width: 60rem;
     max-width: 90%;
-    margin: 2rem auto 5rem auto;
+    margin: 2rem auto 3rem auto;
 
     display: flex;
     flex-direction: column;
@@ -91,7 +91,7 @@ main > nav {
 }
 
 main > div {
-    height: 48rem;
+    height: 42rem;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;

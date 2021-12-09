@@ -98,9 +98,9 @@ limitations under the License. -->
                             <img id="sortIcon" src="assets/icons/sort-top-down-min.svg" alt="Sort by" />
                     </button>
                     <select name="sortBy" id="sortBy" onchange="setSortBy();">
-                        <option value="apr" selected>Interest rate</option>
+                        <option value="price" selected>Retail price</option>
+                        <option value="apr">Interest rate</option>
                         <option value="payment_mo">Monthly payment</option>
-                        <option value="price">Retail price</option>
                         <option value="total_sum">Total cost</option>
                         <option value="term_length">Loan term length</option>
                     </select>
@@ -203,7 +203,7 @@ limitations under the License. -->
         </div>
         <div class="car-info-pair">
             <h5>Loan term:</h5>
-            <span class="green-text">{{loan_term}} years</span>
+            <span class="green-text">{{loan_term}} months</span>
         </div>
         <div class="car-info-pair">
             <h5>Total cost:</h5>
