@@ -53,59 +53,7 @@ limitations under the License. -->
                 <ul class="loan-offers" id="loanOffersContainer">
                 </ul>
             </aside>
-            <section class="region-dark">
-                <div class="loan-offer-details">
-                    <div class="car-hero">
-                        <img src="./assets/img/car-1.jpg" alt="Car Hero Image">
-                    </div>
-                    <ul class="car-info">
-                        <li class="car-info-pair">
-                            <h4>Make:</h4>
-                            <span>{{make}}</span>
-                        </li>
-                        <li class="car-info-pair">
-                            <h4>Model:</h4>
-                            <span>{{model}}</span>
-                        </li>
-                        <li class="car-info-pair">
-                            <h4>Year:</h4>
-                            <span>{{year}}</span>
-                        </li>
-                        <li class="car-info-pair">
-                            <h4>Usage:</h4>
-                            <span>{{kms}} km</span>
-                        </li>
-                        <li class="car-info-pair">
-                            <h4>Retail price:</h4>
-                            <span>&#36;{{price}}</span>
-                        </li>
-                    </ul>
-                    <form id="form-update-principal" onsubmit="submitNewPrincipal(); return false;">
-                        <label for="loan-principal"><h4>Loan principal:</h4></label>
-                        <input class="round-empty-pill" type="number" name="loan-principal">
-                        <button type="submit" name="updatePrincipal" class="btn-green">
-                            Update
-                        </button>
-                    </form>
-                    <ul class="loan-info">
-                        <li class="car-info-pair">
-                            <h4>Interest rate:</h4>
-                            <span>{{apr}}&#37;</span>
-                        </li>
-                        <li class="car-info-pair">
-                            <h4>You pay:</h4>
-                            <span>&#36;{{payment_mo}}/mo</span>
-                        </li>
-                        <li class="car-info-pair">
-                            <h4>Loan term:</h4>
-                            <span>{{loan_term}} years</span>
-                        </li>
-                        <li class="car-info-pair">
-                            <h4>Total cost:</h4>
-                            <span>&#36;{{total_sum}}</span>
-                        </li>
-                    </ul>
-                </div>
+            <section class="region-dark" id="offerDetailsContainer">
             </section>
         </div>
     </main>
@@ -162,6 +110,61 @@ limitations under the License. -->
                 </div>
             </a>
         </li>
+    </script>
+
+    <script type="text/html" id="tmpl_LoanDetails">
+        <div class="loan-offer-details">
+            <div class="car-hero">
+                <img src="./assets/img/car-1.jpg" alt="Car Hero Image">
+            </div>
+            <ul class="car-info">
+                <li class="car-info-pair">
+                    <h4>Make:</h4>
+                    <span>{{make}}</span>
+                </li>
+                <li class="car-info-pair">
+                    <h4>Model:</h4>
+                    <span>{{model}}</span>
+                </li>
+                <li class="car-info-pair">
+                    <h4>Year:</h4>
+                    <span>{{year}}</span>
+                </li>
+                <li class="car-info-pair">
+                    <h4>Usage:</h4>
+                    <span>{{kms}} km</span>
+                </li>
+                <li class="car-info-pair">
+                    <h4>Retail price:</h4>
+                    <span>&#36;{{price}}</span>
+                </li>
+            </ul>
+            <form id="form-update-principal" onsubmit="submitNewPrincipal(); return false;">
+                <label for="loan-principal"><h4>Loan principal:</h4></label>
+                <input class="round-empty-pill" type="number" name="loan-principal" value="{{principal}}">
+                <button type="submit" name="updatePrincipal" class="btn-green">
+                    Update
+                </button>
+            </form>
+            <ul class="loan-info">
+                <li class="car-info-pair">
+                    <h4>Interest rate:</h4>
+                    <span>{{apr}}&#37;</span>
+                </li>
+                <li class="car-info-pair">
+                    <h4>You pay:</h4>
+                    <span>&#36;{{payment_mo}}/mo</span>
+                </li>
+                <li class="car-info-pair">
+                    <h4>Loan term:</h4>
+                    <span>{{loan_term}} months</span>
+                </li>
+                <li class="car-info-pair">
+                    <h4>Total cost:</h4>
+                    <span>&#36;{{total_sum}}</span>
+                </li>
+            </ul>
+        </div>
     </script>
 </body>
 </html>

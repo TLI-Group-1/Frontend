@@ -19,13 +19,15 @@ limitations under the License.
     Always called when the details page is loaded.
 */
 async function onPageLoad() {
-    // DEMO
-    // for (let i = 0; i != 20; i++) {
-    //     addOfferToContainer(
-    //         "offer123", "Honda", "Civic", 2018, 250, 320, 3.2
-    //     );
-    // }
-    fetchClaimedOffers();
+    // fetch the user_id from the URL
+    let userID = fetchQueryParamByKey('user_id');
+    // fetch all claimed offers for this user
+    await fetchClaimedOffers(userID);
+
+    // find the selected offer for this user
+    let offerSelected = fetchQueryParamByKey('offerSelected');
+    // show details for the specified offer
+    await getOfferDetails(userID, offerSelected);
 }
 
 /*
@@ -35,19 +37,13 @@ async function onPageLoad() {
 /*
     Get the list of offers for a specific user
 */
-async function fetchClaimedOffers() {
-    // fetch the user_id from the URL
-    let userID = fetchQueryParamByKey('user_id');
-
+async function fetchClaimedOffers(userID) {
     try {
         // call the API to get the user's claimed offers
         const userClaimedOffers = await api.getClaimedOffers(userID);
 
         // populate the sidebar with user's claimed offers
         displayClaimedOffers(userClaimedOffers, userID);
-
-        // highlight the specified offer
-        highlightOffer(fetchQueryParamByKey('offerSelected'));
     }
     catch (e) {
         console.log(e);
@@ -58,17 +54,11 @@ async function fetchClaimedOffers() {
 /*
     Display the given list of claimed offers
 */
-function displayClaimedOffers(offers, userID) {
+function displayClaimedOffers(offers, user_id) {
     removeAllLoanOffers();
     for (const offer of offers) {
-        // DEMO
-        // console.log(offer);
-        offer['brand'] = 'Honda';
-        offer['model'] = 'Civic';
-        offer['year'] = 2018;
-
         addOfferToContainer(
-            userID, offer['offerId'], offer['brand'], offer['model'], offer['year'],
+            user_id, offer['offerId'], offer['brand'], offer['model'], offer['year'],
             offer['interestRate'], offer['termMo'], offer['totalSum']
         );
     }
@@ -87,16 +77,64 @@ function highlightOffer(offer_id) {
 
 
 /*
-    Highlight an offer and display its details
-*/
-async function showOfferDetails() {
-
-}
-
-
-/*
     Offer details operations
 */
+
+/*
+    Fetch and display an offer's details based on the given offer ID
+*/
+async function getOfferDetails(user_id, offer_id) {
+    // attempt to fetch the specified offer's details from the backend API
+    try {
+        // make the API call
+        let details = await api.getOfferDetails(user_id, offer_id);
+
+        // highlight the chosen offer
+        highlightOffer(offer_id);
+
+        // display the offer details
+        renderOfferDetails(
+            details['brand'], details['model'], details['year'], details['kms'],
+            details['price'], details['loanAmount'], details['interestRate'], details['termMo'],
+            details['totalSum']
+        )
+    }
+    catch (e) {
+        console.log(e);
+        console.log(window.location.search);
+    }
+}
+
+/*
+    Present a given offer's details
+*/
+function renderOfferDetails(
+    make, model, year, kms, price, principal, apr, loan_term, total_sum
+) {
+    // get render target
+    let offerDetailsContainer = document.getElementById('offerDetailsContainer');
+
+    // get mustache template
+    const tmpl_offerDetails = document.getElementById('tmpl_LoanDetails').innerHTML;
+
+    // render loan offer info
+    const offerDetailsData = {
+        make: make,
+        model: model,
+        year: year,
+        kms: Math.round(kms),
+        price: Math.round(price * 100) / 100,
+        principal: principal,
+        apr: Math.round(apr * 100) / 100,
+        payment_mo: Math.round((total_sum / loan_term) * 100) / 100,
+        loan_term: loan_term,
+        total_sum: total_sum
+    };
+    const offerDetailsRendered = Mustache.render(tmpl_offerDetails, offerDetailsData);
+
+    // append loan offer element to offers container
+    offerDetailsContainer.innerHTML = offerDetailsRendered;
+}
 
 /*
     Update the loan principal given user input

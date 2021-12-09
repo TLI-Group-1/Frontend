@@ -212,7 +212,7 @@ div.loan-offer-details ul {
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: flex-start;
-    column-gap: 1rem;
+    column-gap: 2rem;
     row-gap: 1rem;
 }
 
