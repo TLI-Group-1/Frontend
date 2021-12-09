@@ -115,6 +115,7 @@ main > nav {
 
 main > div {
     height: 42rem;
+    border-radius: 0 0 1.1rem 1.1rem;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -141,6 +142,7 @@ main > div aside {
     border-radius: 0 0 0 1.1rem;
     overflow-y: auto;
     overscroll-behavior-y: contain;
+    scrollbar-color: #ffffff #1d2345;
 }
 
 @media (max-width: 670px) {
@@ -178,9 +180,10 @@ main > div section {
 
 section div.loan-offer-details {
     padding: 2rem;
-    border-radius: 0 0 1.1rem 0;
     overflow-y: auto;
     overscroll-behavior-y: contain;
+    scrollbar-color: #36cf9b #1d2345;
+    border-radius: 0 0 1.1rem 0;
     display: flex;
     flex-direction: column;
     row-gap: 2rem;
@@ -219,6 +222,7 @@ div.loan-offer-details ul {
 div.loan-offer-details ul li span {
     font-weight: 500;
     font-size: 1.2rem;
+    text-transform: capitalize;
 }
 
 main > div section div.loan-offer-details input {

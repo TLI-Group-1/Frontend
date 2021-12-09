@@ -334,7 +334,7 @@ div.cars-container {
     width: 100%;
     border-radius: 0 0 0 1.1rem;
     padding: 1rem;
-    font-weight: 500;
+    font-weight: 600;
 }
 .car-offer button.claim-btn span.claim-text:hover {
     width: 80%;

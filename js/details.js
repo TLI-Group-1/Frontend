@@ -36,6 +36,14 @@ async function onPageLoad() {
 }
 
 /*
+    Function that takes the user back to the discovery page
+*/
+function goBack() {
+    let userID = fetchQueryParamByKey('user_id');
+    window.location.href = '/?user_id=' + userID;
+}
+
+/*
     Claimed offers list operations
 */
 
@@ -70,13 +78,12 @@ async function getOfferDetails(userID, offerID) {
         // display the offer details
         renderOfferDetails(
             details['brand'], details['model'], details['year'], details['kms'],
-            details['price'], details['loanAmount'], details['interestRate'], details['termMo'],
-            details['totalSum']
+            details['price'], details['loan_amount'], details['interest_rate'],
+            details['term_mo'], details['total_sum']
         )
     }
     catch (e) {
         console.log(e);
-        console.log(window.location.search);
     }
 }
 

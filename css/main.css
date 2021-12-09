@@ -308,6 +308,7 @@ footer div.footer-spacer {
 }
 .loan-offer-entry span.offer-car-info {
     font-weight: 600;
+    text-transform: capitalize;
 }
 .loan-offer-entry span.offer-loan-info {
     color: #333333;

@@ -203,13 +203,14 @@ async function submitSearch() {
     on each item.
 */
 function displayCarsOrOffers(listings) {
+    // clear out the cars/offers container
     removeAllCarsOffers();
 
     // add all car/loan offer listings to the container
     for (const item of listings) {
         addCarToContainer(
             item['offer_id'], item['brand'], item['model'], item['year'], item['kms'],
-            item['price'], item['apr'], item['payment_mo'], item['term_length'],
+            item['price'], item['interest_rate'], item['payment_mo'], item['term_mo'],
             item['total_sum']
         )
     }
@@ -301,15 +302,63 @@ function setCarsOffersLoading() {
 */
 
 /*
-
+    Visually toggle the specified claim button between claimed and unclaimed
 */
-
+function toggleButtonClaimed(id) {
+    let claimButton = document.querySelector('button.claim-btn[name="' + id +'"]');
+    for (let part of claimButton.children) {
+        // modify the text component
+        if (part.className.includes('claim-text')) {
+            // unclaimed state
+            if (part.className.includes('btn-dark-blue')) {
+                part.className = part.className.replace('btn-dark-blue', 'btn-red');
+                part.textContent = 'Offer claimed';
+            }
+            // claimed state
+            else {
+                part.className = part.className.replace('btn-red', 'btn-dark-blue');
+                part.textContent = 'Claim this offer';
+            }
+        }
+        // modify the heart component
+        if (part.className.includes('claim-heart')) {
+            // unclaimed state
+            if (part.className.includes('bg-heart-empty')) {
+                part.className = part.className.replace('bg-heart-empty', 'bg-heart-filled');
+                part.className = part.className.replace('btn-red', 'btn-dark-blue');
+            }
+            // claimed state
+            else {
+                part.className = part.className.replace('bg-heart-filled', 'bg-heart-empty');
+                part.className = part.className.replace('btn-dark-blue', 'btn-red');
+            }
+        }
+    }
+}
 
 /*
-    TODO: claim a given loan offer
+    Claim a given loan offer
 */
 async function claimOffer(id) {
-    console.log('Claiming ' + id);
+    const userID = fetchQueryParamByKey('user_id');
+    // attempt to claim the specified offer at the backend API
+    try {
+        // make the API call
+        await api.claimOffer(userID, id);
+
+        // display the offer details
+        toggleButtonClaimed(id);
+
+        // update the claimed offers widget, fetch and display the user's claimed offers
+        const userOffer = await fetchClaimedOffers(userID);
+        if (userOffer !== null) {
+            const offersDetailsLink = document.getElementById('offersDetailsLink');
+            offersDetailsLink.style.visibility = 'visible';
+        }
+    }
+    catch (e) {
+        console.log(e);
+    }
 }
 
 

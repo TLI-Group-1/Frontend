@@ -76,8 +76,8 @@ function displayClaimedOffers(offers, userID) {
     removeAllLoanOffers();
     for (const offer of offers) {
         addOfferToContainer(
-            userID, offer['offerId'], offer['brand'], offer['model'], offer['year'],
-            offer['interestRate'], offer['termMo'], offer['totalSum']
+            userID, offer['offer_id'], offer['brand'], offer['model'], offer['year'],
+            offer['interest_rate'], offer['term_mo'], offer['total_sum']
         );
     }
 }
