@@ -41,8 +41,14 @@ async function onPageLoad() {
         submitSearch();
     }
     else {
+        // log in the user
         await userLogin();
-        await fetchClaimedOffers(fetchQueryParamByKey('user_id'));
+        // fetch and display the user's claimed offers, if there is any
+        const userOffer = await fetchClaimedOffers(fetchQueryParamByKey('user_id'));
+        if (userOffer !== null) {
+            const offersDetailsLink = document.getElementById('offersDetailsLink');
+            offersDetailsLink.style.visibility = 'visible';
+        }
     }
 }
 
@@ -67,11 +73,21 @@ async function userLogin() {
         // call the API to log in the user
         const userParams = await api.login(userID);
 
-        // update their financial information
-        setPairInQuery('budget_mo', userParams["budget_mo"]);
-        setPairInQuery('downpayment', userParams["down_payment"]);
-        document.querySelector('input[name="budget_mo"]').value = userParams["budget_mo"];
-        document.querySelector('input[name="down_payment"]').value = userParams["down_payment"];
+        // update user budget if not given
+        let budgetMo = fetchQueryParamByKey('budget_mo');
+        if (budgetMo === null || budgetMo === '') {
+            budgetMo = userParams["budget_mo"];
+        }
+        setPairInQuery('budget_mo', budgetMo);
+        document.querySelector('input[name="budget_mo"]').value = budgetMo;
+
+        // update user down payment if not given
+        let downPayment = fetchQueryParamByKey('downpayment');
+        if (downPayment === null || downPayment === '') {
+            downPayment = userParams["down_payment"];
+        }
+        setPairInQuery('downpayment', downPayment);
+        document.querySelector('input[name="down_payment"]').value = downPayment;
     }
     catch (e) {
         console.log(e);
@@ -92,7 +108,7 @@ async function displayLoggedInView() {
     financialParams.style.display = 'block';
 
     // add cars with loan offer info
-    submitSearch();
+    await submitSearch();
 
     // display the claimed offers widget
     const claimOffers = document.getElementById('claimedOffersWidget');
@@ -188,12 +204,20 @@ async function submitSearch() {
 */
 function displayCarsOrOffers(listings) {
     removeAllCarsOffers();
+
+    // add all car/loan offer listings to the container
     for (const item of listings) {
         addCarToContainer(
             item['offer_id'], item['brand'], item['model'], item['year'], item['kms'],
             item['price'], item['apr'], item['payment_mo'], item['term_length'],
             item['total_sum']
         )
+    }
+
+    // if there is an odd number of cars, add an invisible entry for visual pleasantness
+    if (listings.length % 2 !== 0) {
+        let carsContainer = document.getElementById('carsContainer');
+        carsContainer.innerHTML += '<div class="car-offer card border-thin" style="visibility: hidden;"></div>';
     }
 }
 
