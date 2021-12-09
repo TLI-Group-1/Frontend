@@ -147,6 +147,7 @@ section.sec-claimed-offers header img {
 section.sec-claimed-offers ul.loan-offers {
     max-height: 18rem;
     overflow-y: auto;
+    overscroll-behavior-y: contain;
 }
 
 section.sec-claimed-offers a.round-empty-pill {

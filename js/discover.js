@@ -24,13 +24,7 @@ async function onPageLoad() {
 
     // configure their default search preferences if none provided in URL
     // configure default sort key
-    let sortByURL = fetchQueryParamByKey('sort_by');
-    if (sortByURL === null) {
-        setPairInQuery('sort_by', 'apr');
-    }
-    else {
-        setPairInQuery('sort_by', sortByURL);
-    }
+    setSortBy();
     // configure default sort order
     let sortAscURL = fetchQueryParamByKey('sort_asc');
     if (sortAscURL === null) {
@@ -52,6 +46,11 @@ async function onPageLoad() {
     else {
         userLogin();
     }
+
+    // DEMO
+    addOfferToContainer(
+        "u1639018896514634", "offer123", "Honda", "Civic", 2018, 250, 320, 3.2
+    );
 }
 
 
@@ -65,6 +64,10 @@ async function userLogin() {
         userID = genNewUserID();
         setPairInQuery('user_id', userID);
     }
+
+    // set the link of the offers details page with userID
+    const offersDetailsLink = document.getElementById('offersDetailsLink');
+    offersDetailsLink.href = './details.html?user_id=' + userID;
 
     // try to log in the user and fetch their financial information
     try {
@@ -128,17 +131,15 @@ function toggleSortOrder() {
     const sortIcon = document.getElementById('sortIcon');
     if (fetchQueryParamByKey('sort_asc') == 'false') {
         // for ascending order, flip icon vertically
-        setPairInQuery('sort_asc', 'true');
         sortIcon.style.transform = 'scaleY(-1)';
         // configure the search params to set ascending search order to true
-        setPairInQuery('sort_asc', true);
+        setPairInQuery('sort_asc', 'true');
     }
     else {
         // for ascending order, do not flip icon
-        setPairInQuery('sort_asc', 'false');
         sortIcon.style.transform = 'none';
         // configure the search params to set ascending search order to false
-        setPairInQuery('sort_asc', false);
+        setPairInQuery('sort_asc', 'false');
     }
 }
 
@@ -195,8 +196,8 @@ function displayCarsOrOffers(listings) {
     removeAllCarsOffers();
     for (const item of listings) {
         addCarToContainer(
-            item['id'], item['brand'], item['model'], item['year'],
-            item['kms'], item['price'], item['apr']
+            item['offer_id'], item['brand'], item['model'], item['year'], item['kms'],
+            item['price'], item['interest_rate'], item['term_mo'], item['total_sum']
         )
     }
 }
@@ -210,7 +211,7 @@ function displayCarsOrOffers(listings) {
         - this option should be used before agreement/login
 */
 function addCarToContainer(
-    id, make, model, year, kms, price, apr, payment_mo, loan_term, total_sum
+    id, make, model, year, kms, price, apr, loan_term, total_sum
 ) {
     // get render target
     let carsContainer = document.getElementById('carsContainer');
@@ -233,8 +234,8 @@ function addCarToContainer(
     // if given loan data, render loan info with available button
     if ((apr !== '') && (apr !== null) && (apr !== undefined)) {
         const loanData = {
-            apr: apr,
-            payment_mo: payment_mo,
+            apr: Math.round(apr * 100) / 100,
+            payment_mo: Math.round((total_sum / loan_term) * 100) / 100,
             loan_term: loan_term,
             total_sum: total_sum
         };
