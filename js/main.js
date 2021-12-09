@@ -115,6 +115,6 @@ function addOfferToContainer(
     Remove all loan offers in the claimed offers container.
 */
 function removeAllLoanOffers() {
-    let carsContainer = document.getElementById('loanOffersContainer');
-    carsContainer.innerHTML = '';
+    let loanOffersContainer = document.getElementById('loanOffersContainer');
+    loanOffersContainer.innerHTML = '';
 }

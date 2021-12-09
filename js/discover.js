@@ -44,11 +44,7 @@ async function onPageLoad() {
         // log in the user
         await userLogin();
         // fetch and display the user's claimed offers, if there is any
-        const userOffer = await fetchClaimedOffers(fetchQueryParamByKey('user_id'));
-        if (userOffer !== null) {
-            const offersDetailsLink = document.getElementById('offersDetailsLink');
-            offersDetailsLink.style.visibility = 'visible';
-        }
+        await updateClaimedOffers(fetchQueryParamByKey('user_id'));
     }
 }
 
@@ -302,10 +298,24 @@ function setCarsOffersLoading() {
 */
 
 /*
+    Update the list of claimed offers and associated display
+*/
+async function updateClaimedOffers(userID) {
+    const userOffer = await fetchClaimedOffers(userID);
+    const offersDetailsLink = document.getElementById('offersDetailsLink');
+    if (userOffer !== null) {
+        offersDetailsLink.style.visibility = 'visible';
+    }
+    else {
+        removeAllLoanOffers();
+        offersDetailsLink.style.visibility = 'hidden';
+    }
+}
+
+/*
     Visually toggle the specified claim button between claimed and unclaimed
 */
-function toggleButtonClaimed(id) {
-    let claimButton = document.querySelector('button.claim-btn[name="' + id +'"]');
+function toggleButtonClaimed(claimButton) {
     for (let part of claimButton.children) {
         // modify the text component
         if (part.className.includes('claim-text')) {
@@ -339,22 +349,25 @@ function toggleButtonClaimed(id) {
 /*
     Claim a given loan offer
 */
-async function claimOffer(id) {
+async function toggleClaimOffer(id) {
+    let claimButton = document.querySelector('button.claim-btn[name="' + id +'"]');
     const userID = fetchQueryParamByKey('user_id');
     // attempt to claim the specified offer at the backend API
     try {
-        // make the API call
-        await api.claimOffer(userID, id);
+        // offer is unclaimed, so claim it
+        if (claimButton.innerHTML.includes("Claim this offer")) {
+            await api.claimOffer(userID, id);
+        }
+        // offer is claimed, so unclaim it
+        else {
+            await api.unclaimOffer(userID, id);
+        }
 
         // display the offer details
-        toggleButtonClaimed(id);
+        toggleButtonClaimed(claimButton);
 
         // update the claimed offers widget, fetch and display the user's claimed offers
-        const userOffer = await fetchClaimedOffers(userID);
-        if (userOffer !== null) {
-            const offersDetailsLink = document.getElementById('offersDetailsLink');
-            offersDetailsLink.style.visibility = 'visible';
-        }
+        await updateClaimedOffers(userID);
     }
     catch (e) {
         console.log(e);
