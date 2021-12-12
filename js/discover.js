@@ -200,9 +200,6 @@ async function submitSearch() {
 
     // attempt to send the search query to the backend API
     try {
-        // DEBUG: log search string
-        console.log(window.location.search);
-
         // make the API call
         let results = await api.search(window.location.search);
         if (results.length == 0) {
@@ -212,7 +209,7 @@ async function submitSearch() {
             let carsContainer = document.getElementById('carsContainer');
             carsContainer.innerHTML += '<p class="error-message">' +
                 'You are not offered a loan! ' +
-                'Your credit score, monthly budget, or down payment is too low.</p>'
+                'Your credit score, monthly budget, or down payment is too low.</p>';
         }
         else {
             // display the results if successful
