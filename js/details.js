@@ -126,7 +126,34 @@ async function submitNewPrincipal() {
     const formNewPrincipal = document.getElementById('form-update-principal');
     const newPrincipal = (new FormData(formNewPrincipal)).get('loan-principal');
 
-    console.log("update principal: " + newPrincipal);
+    // attempt to update the specified offer's loan amount and fetch its details from the
+    // backend API
+    try {
+        // fetch the user_id from the URL
+        let userID = fetchQueryParamByKey('user_id');
+        // fetch the offerSelected from the URL
+        let offerID = fetchQueryParamByKey('offerSelected');
+
+        // make the API call
+        let details = await api.updateLoanAmount(userID, offerID, newPrincipal);
+
+        // if the new loan amount does not lead to an offer, alert the user, and don't
+        // make changes
+        if ('error' in details) {
+            alert(details['error']);
+        }
+        else {
+            // display the offer details
+            renderOfferDetails(
+                details['brand'], details['model'], details['year'], details['kms'],
+                details['price'], details['loan_amount'], details['interest_rate'],
+                details['term_mo'], details['total_sum']
+            )
+        }
+    }
+    catch (e) {
+        console.log(e);
+    }
 }
 
 

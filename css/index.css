@@ -36,7 +36,7 @@ main > aside {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: stretch;
     align-items: flex-start;
     align-content: flex-start;
     column-gap: 2rem;
@@ -44,6 +44,7 @@ main > aside {
 }
 
 main > aside > section {
+    flex-grow: 1;
     background-color: #ffffff;
     width: 40%;
     min-width: 20rem;

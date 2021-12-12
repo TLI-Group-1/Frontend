@@ -54,7 +54,7 @@ var api = {
     },
 
     getClaimedOffers: async function(userID) {
-        // send the search query to the backend API
+        // send the claimed offers query to the backend API
         const response = await fetch(this.API_URL + '/getClaimedOffers?user_id=' + userID);
 
         // retrieve the returned cars/offers
@@ -70,12 +70,12 @@ var api = {
     },
 
     getOfferDetails: async function(userID, OfferID) {
-        // send the search query to the backend API
+        // send the offer details query to the backend API
         const response = await fetch(
             this.API_URL + '/getOfferDetails?user_id=' + userID + '&offer_id=' + OfferID
         );
 
-        // retrieve the returned cars/offers
+        // retrieve the offer details
         const results = await response.json();
 
         if (response.status == 200) {
@@ -88,7 +88,7 @@ var api = {
     },
 
     claimOffer: async function(userID, OfferID) {
-        // send the search query to the backend API
+        // send the claim query to the backend API
         const response = await fetch(
             this.API_URL + '/claimOffer?user_id=' + userID + '&offer_id=' + OfferID
         );
@@ -103,13 +103,35 @@ var api = {
     },
 
     unclaimOffer: async function(userID, OfferID) {
-        // send the search query to the backend API
+        // send the unclaim query to the backend API
         const response = await fetch(
             this.API_URL + '/unclaimOffer?user_id=' + userID + '&offer_id=' + OfferID
         );
 
         if (response.status == 200) {
             return;
+        }
+        else {
+            console.log(response);
+            throw "HTTP status: " + response.status;
+        }
+    },
+
+    updateLoanAmount: async function(userID, OfferID, loanAmount) {
+        // send the search query to the backend API
+        const response = await fetch(
+            this.API_URL + '/updateLoanAmount?user_id=' + userID + '&offer_id=' + OfferID +
+            '&loan_amount=' + loanAmount
+        );
+
+        // retrieve the new offer details
+        const results = await response.json();
+
+        if (response.status == 200) {
+            return results;
+        }
+        else if (response.status == 406) {
+            return {'error': 'New principal does not result in a loan offer!'};
         }
         else {
             console.log(response);
