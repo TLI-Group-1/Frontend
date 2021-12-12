@@ -86,7 +86,7 @@ function displayClaimedOffers(offers, userID) {
     Add a loan offer to the loan offers container
 */
 function addOfferToContainer(
-    user_id, offer_id, make, model, year, apr, loan_term, total_sum
+    user_id, offer_id, make, model, year, interest_rate, loan_term, total_sum
 ) {
     // get render target
     let offersContainer = document.getElementById('loanOffersContainer');
@@ -103,7 +103,7 @@ function addOfferToContainer(
         year: year,
         payment_mo: Math.round((total_sum / loan_term) * 100) / 100,
         loan_term: loan_term,
-        apr: Math.round(apr * 100) / 100
+        interest_rate: Math.round(interest_rate * 100) / 100
     };
     const loanOfferRendered = Mustache.render(tmpl_LoanOffer, loanOfferData);
 

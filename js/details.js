@@ -91,7 +91,7 @@ async function getOfferDetails(userID, offerID) {
     Present a given offer's details
 */
 function renderOfferDetails(
-    make, model, year, kms, price, principal, apr, loan_term, total_sum
+    make, model, year, kms, price, principal, interest_rate, loan_term, total_sum
 ) {
     // get render target
     let offerDetailsContainer = document.getElementById('offerDetailsContainer');
@@ -107,7 +107,7 @@ function renderOfferDetails(
         kms: Math.round(kms),
         price: Math.round(price * 100) / 100,
         principal: principal,
-        apr: Math.round(apr * 100) / 100,
+        interest_rate: Math.round(interest_rate * 100) / 100,
         payment_mo: Math.round((total_sum / loan_term) * 100) / 100,
         loan_term: loan_term,
         total_sum: total_sum

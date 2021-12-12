@@ -22,18 +22,35 @@ async function onPageLoad() {
     // display loading text in the cars/offers container
     setCarsOffersLoading();
 
-    // configure their default search preferences if none provided in URL
     // configure default sort key
-    setSortBy();
+    let sortByURL = fetchQueryParamByKey('sort_by');
+    if (sortByURL === null || sortByURL === 'price') {
+        setSortByFromElement();
+    }
+    else {
+        // change the input element selected value to reflect URL selection
+        const sortBySelect = document.getElementById('sortBy');
+        let options = sortBySelect.options;
+        for (let opt, i = 0; opt = options[i]; i++) {
+            if (opt.value == sortByURL) {
+                sortBySelect.selectedIndex = i;
+                break;
+            }
+        }
+    }
+
     // configure default sort order
     let sortAscURL = fetchQueryParamByKey('sort_asc');
     if (sortAscURL === null) {
         setPairInQuery('sort_asc', 'true');
     }
+    else if (sortAscURL == 'false') {
+        document.getElementById('sortIcon').style.transform = 'none';
+    }
 
     // check for user ID on page load, and log in if present
     const userIDCurr = fetchQueryParamByKey('user_id');
-    if (userIDCurr === null) {
+    if (userIDCurr === null || userIDCurr === '') {
         // initialize empty user_id, downpayment, monthly budget for the car display search
         setPairInQuery('downpayment', '');
         setPairInQuery('budget_mo', '');
@@ -152,7 +169,7 @@ function toggleSortOrder() {
 /*
     Set search result sort key according to input selection
 */
-function setSortBy() {
+function setSortByFromElement() {
     // fetch input sort-by value
     const sortBySelect = document.getElementById('sortBy');
     const sortByVal = sortBySelect.options[sortBySelect.selectedIndex].value;
@@ -225,12 +242,12 @@ function displayCarsOrOffers(listings) {
     Add a car offer card to the car offers container.
     - if all parameters provided, then construct an available car offer
         - this option should be used after agreement/login
-    - if the apr field is null or '', then construct an unavailable car offer with
+    - if the interest_rate field is null or '', then construct an unavailable car offer with
       car info only
         - this option should be used before agreement/login
 */
 function addCarToContainer(
-    id, make, model, year, kms, price, apr, payment_mo, loan_term, total_sum
+    id, make, model, year, kms, price, interest_rate, payment_mo, loan_term, total_sum
 ) {
     // get render target
     let carsContainer = document.getElementById('carsContainer');
@@ -251,9 +268,9 @@ function addCarToContainer(
     const carInfoRendered = Mustache.render(tmpl_CarOfferCarInfo, carData);
 
     // if given loan data, render loan info with available button
-    if ((apr !== '') && (apr !== null) && (apr !== undefined)) {
+    if ((interest_rate !== '') && (interest_rate !== null) && (interest_rate !== undefined)) {
         const loanData = {
-            apr: Math.round(apr * 100) / 100,
+            interest_rate: Math.round(interest_rate * 100) / 100,
             payment_mo: Math.round(payment_mo * 100) / 100,
             loan_term: loan_term,
             total_sum: total_sum

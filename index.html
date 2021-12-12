@@ -90,12 +90,12 @@ limitations under the License. -->
                     <button type="button" name="sortOrder" id="sortOrder" onclick="toggleSortOrder();">
                             <img id="sortIcon" src="assets/icons/sort-top-down-min.svg" alt="Sort by" />
                     </button>
-                    <select name="sortBy" id="sortBy" onchange="setSortBy();">
+                    <select name="sortBy" id="sortBy" onchange="setSortByFromElement();">
                         <option value="price" selected>Retail price</option>
-                        <option value="apr">Interest rate</option>
+                        <option value="interest_rate">Interest rate</option>
                         <option value="payment_mo">Monthly payment</option>
                         <option value="total_sum">Total cost</option>
-                        <option value="term_length">Loan term length</option>
+                        <option value="term_mo">Loan term length</option>
                     </select>
                 </span>
                 <form class="search-container" onsubmit="submitSearch(); return false;">
@@ -188,7 +188,7 @@ limitations under the License. -->
     <script type="text/html" id="tmpl_CarOfferLoanInfo">
         <div class="car-info-pair">
             <h5>Interest rate:</h5>
-            <span class="green-text">{{apr}}&#37;</span>
+            <span class="green-text">{{interest_rate}}&#37;</span>
         </div>
         <div class="car-info-pair">
             <h5>You pay:</h5>
@@ -220,7 +220,7 @@ limitations under the License. -->
                 <img src="./assets/img/car-1.jpg" alt="">
                 <div class="loan-offer-summary">
                     <span class="offer-car-info">{{make}} {{model}} {{year}}</span>
-                    <span class="offer-loan-info">${{payment_mo}}/mo &middot; {{loan_term}} months &middot; {{apr}}%</span>
+                    <span class="offer-loan-info">${{payment_mo}}/mo &middot; {{loan_term}} months &middot; {{interest_rate}}%</span>
                 </div>
             </a>
         </li>
