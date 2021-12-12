@@ -60,7 +60,7 @@ async function fetchClaimedOffers(userID) {
             displayClaimedOffers(userClaimedOffers, userID);
 
             // return the first offer ID as selection default
-            return userClaimedOffers[0]['offerId'];
+            return userClaimedOffers[0]['offer_id'];
         }
     }
     catch (e) {
