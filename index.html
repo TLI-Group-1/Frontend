@@ -38,7 +38,7 @@ limitations under the License. -->
         <aside>
             <section class="card border-thin sec-inputs">
                 <header>
-                    <img src="assets/icons/senso_logo_text_dark-min.svg" alt="senso-logo">
+                    <img src="assets/icons/senso_logo_text_dark-min.svg" alt="Senso.AI logo">
                     <h1><a href="/">AutoDirect</a></h1>
                 </header>
                 <article id="side-agreement">
@@ -74,7 +74,7 @@ limitations under the License. -->
             </section>
             <section class="card border-thin sec-claimed-offers" id="claimedOffersWidget" style="display: none;">
                 <header class="region-dark">
-                    <img src="./assets/icons/heart-filled-red-min.svg" alt="">
+                    <img src="./assets/icons/heart-filled-red-min.svg" alt="Heart icon">
                     <h3>Your loan offers</h3>
                 </header>
                 <ul class="loan-offers" id="loanOffersContainer">
@@ -88,7 +88,7 @@ limitations under the License. -->
             <nav class="search-bar card region-dark">
                 <span class="sort-combo">
                     <button type="button" name="sortOrder" id="sortOrder" onclick="toggleSortOrder();">
-                            <img id="sortIcon" src="assets/icons/sort-top-down-min.svg" alt="Sort by" />
+                            <img id="sortIcon" src="assets/icons/sort-top-down-min.svg" alt="Sort order toggle" />
                     </button>
                     <select name="sortBy" id="sortBy" onchange="setSortByFromElement();">
                         <option value="price" selected>Retail price</option>
@@ -129,13 +129,13 @@ limitations under the License. -->
             <div class="attrib-child">
                 <h3>Source code at:</h3>
                 <a href="https://github.com/TLI-Group-1" target="_blank" rel="noopener">
-                    <img src="assets/icons/github_button-min.svg" alt="GitHub" class="btn-shifty">
+                    <img src="assets/icons/github_button-min.svg" alt="GitHub logo" class="btn-shifty">
                 </a>
             </div>
             <div class="attrib-child">
                 <h3>Powered by:</h3>
                 <a href="https://senso.ai/" target="_blank" rel="noopener">
-                    <img src="assets/icons/senso_logo_text_light-min.svg" alt="Senso.AI" class="btn-shifty">
+                    <img src="assets/icons/senso_logo_text_light-min.svg" alt="Senso.AI logo" class="btn-shifty">
                 </a>
             </div>
         </aside>
@@ -153,7 +153,7 @@ limitations under the License. -->
 
     <script type="text/html" id="tmpl_CarOffer">
         <div class="car-offer card border-thin">
-            <img src="assets/img/car-1.jpg" alt="Car Picture">
+            <img src="assets/img/car-1.jpg" alt="Placeholder car image">
             <article>
                 {{&car_info}}
                 {{&loan_info}}
@@ -221,7 +221,7 @@ limitations under the License. -->
     <script type="text/html" id="tmpl_LoanOffer">
         <li class="loan-offer-entry">
             <a href="./details.html?user_id={{user_id}}&offerSelected={{offer_id}}">
-                <img src="./assets/img/car-1.jpg" alt="">
+                <img src="./assets/img/car-1.jpg" alt="Placeholder car image">
                 <div class="loan-offer-summary">
                     <span class="offer-car-info">{{make}} {{model}} {{year}}</span>
                     <span class="offer-loan-info">${{payment_mo}}/mo &middot; {{loan_term}} months &middot; {{interest_rate}}%</span>
