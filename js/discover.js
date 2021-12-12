@@ -210,7 +210,9 @@ async function submitSearch() {
             removeAllCarsOffers();
             // show the user an error
             let carsContainer = document.getElementById('carsContainer');
-            carsContainer.innerHTML += '<p class="error-message">Your credit score, monthly budget, or down payment is too low!</p>'
+            carsContainer.innerHTML += '<p class="error-message">' +
+                'You are not offered a loan! ' +
+                'Your credit score, monthly budget, or down payment is too low.</p>'
         }
         else {
             // display the results if successful
