@@ -33,10 +33,11 @@ main > aside {
     flex-grow: 1;
     flex-shrink: 0;
     width: 18rem;
+    max-width: 30rem;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: stretch;
+    justify-content: center;
     align-items: flex-start;
     align-content: flex-start;
     column-gap: 2rem;
