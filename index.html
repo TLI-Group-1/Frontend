@@ -92,10 +92,7 @@ limitations under the License. -->
                     </button>
                     <select name="sortBy" id="sortBy" onchange="setSortByFromElement();">
                         <option value="price" selected>Retail price</option>
-                        <option value="interest_rate">Interest rate</option>
-                        <option value="payment_mo">Monthly payment</option>
-                        <option value="total_sum">Total cost</option>
-                        <option value="term_mo">Loan term length</option>
+
                     </select>
                 </span>
             </nav>
@@ -146,6 +143,14 @@ limitations under the License. -->
     </footer>
 
     <!-- Mustache templates below; rendered in JavaScript -->
+
+    <script type="text/html" id="tmpl_SortOptions">
+        <option value="interest_rate">Interest rate</option>
+        <option value="payment_mo">Monthly payment</option>
+        <option value="total_sum">Total cost</option>
+        <option value="term_mo">Loan term length</option>
+    </script>
+
     <script type="text/html" id="tmpl_CarOffer">
         <div class="car-offer card border-thin">
             <img src="assets/img/car-1.jpg" alt="Car Picture">
@@ -156,6 +161,7 @@ limitations under the License. -->
             {{&button}}
         </div>
     </script>
+
     <script type="text/html" id="tmpl_CarOfferCarInfo">
         <div class="car-info-pair">
             <h5>Make:</h5>
@@ -179,6 +185,7 @@ limitations under the License. -->
         </div>
         <div class="car-info-pair" style="visibility: hidden;"></div>
     </script>
+
     <script type="text/html" id="tmpl_CarOfferLoanInfo">
         <div class="car-info-pair">
             <h5>Interest rate:</h5>
@@ -197,17 +204,20 @@ limitations under the License. -->
             <span class="green-text">&#36;{{total_sum}}</span>
         </div>
     </script>
+
     <script type="text/html" id="tmpl_CarOfferBtnUnavailable">
         <button type="button" class="region-gray rounded-bottom claim-unavailable">
             Agree to view offers
         </button>
     </script>
+
     <script type="text/html" id="tmpl_CarOfferBtnAvailable">
         <button type="button" class="claim-btn rounded-bottom" name="{{id}}" onclick="toggleClaimOffer(this.name);">
             <span class="btn-dark-blue claim-text">Claim this offer</span>
             <span class="btn-red bg-heart-empty claim-heart"></span>
         </button>
     </script>
+
     <script type="text/html" id="tmpl_LoanOffer">
         <li class="loan-offer-entry">
             <a href="./details.html?user_id={{user_id}}&offerSelected={{offer_id}}">

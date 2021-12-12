@@ -120,6 +120,10 @@ async function displayLoggedInView() {
     const financialParams = document.getElementById('side-params');
     financialParams.style.display = 'block';
 
+    // show more sort options
+    const sortByContainer = document.getElementById('sortBy');
+    sortByContainer.innerHTML += document.getElementById('tmpl_SortOptions').innerHTML;
+
     // add cars with loan offer info
     await submitSearch();
 

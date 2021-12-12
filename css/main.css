@@ -315,8 +315,9 @@ footer div.footer-spacer {
 }
 
 .error-message {
+    color: #d81b43;
+    text-align: center;
     font-size: 1.1rem;
     word-wrap: break-word;
     word-break: normal;
-    color: #d81b43;
 }
