@@ -215,6 +215,12 @@ async function submitSearch() {
             // display the results if successful
             displayCarsOrOffers(results);
         }
+
+        // update the list of claimed offers upon every search after login
+        const userID = fetchQueryParamByKey('user_id');
+        if (userID !== '' && userID !== null) {
+            updateClaimedOffers(userID);
+        }
     }
     catch (e) {
         console.log(e);
