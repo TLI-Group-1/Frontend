@@ -131,7 +131,10 @@ var api = {
             return results;
         }
         else if (response.status == 406) {
-            return {'error': 'New principal does not result in a loan offer!'};
+            return {
+                'error': 'New loan principal does not result in a loan offer! ' +
+                         'Please try a lower amount.'
+            };
         }
         else {
             console.log(response);
