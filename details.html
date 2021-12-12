@@ -100,13 +100,14 @@ limitations under the License. -->
     </footer>
 
     <!-- Mustache templates below; rendered in JavaScript -->
+
     <script type="text/html" id="tmpl_LoanOffer">
         <li class="loan-offer-entry" name="{{offer_id}}">
             <a href="./details.html?user_id={{user_id}}&offerSelected={{offer_id}}">
                 <img src="./assets/img/car-1.jpg" alt="">
                 <div class="loan-offer-summary">
                     <span class="offer-car-info">{{make}} {{model}} {{year}}</span>
-                    <span class="offer-loan-info">${{payment_mo}}/mo &middot; {{loan_term}} months &middot; {{apr}}%</span>
+                    <span class="offer-loan-info">${{payment_mo}}/mo &middot; {{loan_term}} months &middot; {{interest_rate}}%</span>
                 </div>
             </a>
         </li>
@@ -149,7 +150,7 @@ limitations under the License. -->
             <ul class="loan-info">
                 <li class="car-info-pair">
                     <h4>Interest rate:</h4>
-                    <span>{{apr}}&#37;</span>
+                    <span>{{interest_rate}}&#37;</span>
                 </li>
                 <li class="car-info-pair">
                     <h4>You pay:</h4>

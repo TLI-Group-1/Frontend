@@ -91,7 +91,7 @@ async function getOfferDetails(userID, offerID) {
     Present a given offer's details
 */
 function renderOfferDetails(
-    make, model, year, kms, price, principal, apr, loan_term, total_sum
+    make, model, year, kms, price, principal, interest_rate, loan_term, total_sum
 ) {
     // get render target
     let offerDetailsContainer = document.getElementById('offerDetailsContainer');
@@ -107,7 +107,7 @@ function renderOfferDetails(
         kms: Math.round(kms),
         price: Math.round(price * 100) / 100,
         principal: principal,
-        apr: Math.round(apr * 100) / 100,
+        interest_rate: Math.round(interest_rate * 100) / 100,
         payment_mo: Math.round((total_sum / loan_term) * 100) / 100,
         loan_term: loan_term,
         total_sum: total_sum
@@ -126,7 +126,34 @@ async function submitNewPrincipal() {
     const formNewPrincipal = document.getElementById('form-update-principal');
     const newPrincipal = (new FormData(formNewPrincipal)).get('loan-principal');
 
-    console.log("update principal: " + newPrincipal);
+    // attempt to update the specified offer's loan amount and fetch its details from the
+    // backend API
+    try {
+        // fetch the user_id from the URL
+        let userID = fetchQueryParamByKey('user_id');
+        // fetch the offerSelected from the URL
+        let offerID = fetchQueryParamByKey('offerSelected');
+
+        // make the API call
+        let details = await api.updateLoanAmount(userID, offerID, newPrincipal);
+
+        // if the new loan amount does not lead to an offer, alert the user, and don't
+        // make changes
+        if ('error' in details) {
+            alert(details['error']);
+        }
+        else {
+            // display the offer details
+            renderOfferDetails(
+                details['brand'], details['model'], details['year'], details['kms'],
+                details['price'], details['loan_amount'], details['interest_rate'],
+                details['term_mo'], details['total_sum']
+            )
+        }
+    }
+    catch (e) {
+        console.log(e);
+    }
 }
 
 
