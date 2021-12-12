@@ -24,8 +24,8 @@ async function onPageLoad() {
 
     // configure default sort key
     let sortByURL = fetchQueryParamByKey('sort_by');
-    if (sortByURL === null || sortByURL === 'price') {
-        setSortByFromElement();
+    if (sortByURL === null) {
+        setPairInQuery('sort_by', 'price');
     }
     else {
         // change the input element selected value to reflect URL selection
@@ -164,6 +164,8 @@ function toggleSortOrder() {
         // configure the search params to set ascending search order to false
         setPairInQuery('sort_asc', 'false');
     }
+    // trigger a search
+    submitSearch();
 }
 
 /*
@@ -175,6 +177,8 @@ function setSortByFromElement() {
     const sortByVal = sortBySelect.options[sortBySelect.selectedIndex].value;
     // configure the search params to set desired sort-by value
     setPairInQuery('sort_by', sortByVal);
+    // trigger a search
+    submitSearch();
 }
 
 /*
