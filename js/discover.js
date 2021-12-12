@@ -201,8 +201,17 @@ async function submitSearch() {
 
         // make the API call
         let results = await api.search(window.location.search);
-        // display the results if successful
-        displayCarsOrOffers(results);
+        if (results.length == 0) {
+            // clear out the cars/offers container
+            removeAllCarsOffers();
+            // show the user an error
+            let carsContainer = document.getElementById('carsContainer');
+            carsContainer.innerHTML += '<p class="error-message">Your credit score, monthly budget, or down payment is too low!</p>'
+        }
+        else {
+            // display the results if successful
+            displayCarsOrOffers(results);
+        }
     }
     catch (e) {
         console.log(e);

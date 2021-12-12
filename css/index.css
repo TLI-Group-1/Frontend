@@ -223,40 +223,6 @@ nav.search-bar select:hover {
     cursor: pointer;
 }
 
-nav.search-bar form.search-container {
-    flex-grow: 1;
-    max-width: 20rem;
-    display: inline-flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-}
-
-nav.search-bar form.search-container button {
-    background-color: #ffffff;
-    padding: 0 0.5rem 0 0.5rem;
-    height: 2.2rem;
-    border-radius: 1.1rem 0 0 1.1rem;
-    display: inline-flex;
-    align-items: center;
-}
-
-nav.search-bar form.search-container button img {
-    flex-shrink: 0;
-    height: 1.5rem;
-    width: auto;
-}
-
-nav.search-bar form.search-container input {
-    flex-grow: 2;
-    border: none;
-    width: 10rem;
-    height: 2.2rem;
-    padding: 0.25em;
-    border-radius: 0 1.1rem 1.1rem 0;
-}
-
 /* left-side styles: car listings - loan offers */
 
 div.cars-container {

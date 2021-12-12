@@ -313,3 +313,10 @@ footer div.footer-spacer {
 .loan-offer-entry span.offer-loan-info {
     color: #333333;
 }
+
+.error-message {
+    font-size: 1.1rem;
+    word-wrap: break-word;
+    word-break: normal;
+    color: #d81b43;
+}
