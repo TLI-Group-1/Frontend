@@ -250,6 +250,15 @@ function displayCarsOrOffers(listings) {
             item['term_mo'],
             item['total_sum']
         );
+
+        // check to see if the offer is claimed
+        if (item['claimed'] === true) {
+            // set the claim button to claimed
+            let claimButton = document.querySelector(
+                'button.claim-btn[name="' + item['offer_id'] + '"]'
+            );
+            toggleButtonClaimed(claimButton);
+        }
     }
 
     // if there is an odd number of cars, add an invisible entry for visual pleasantness
@@ -445,7 +454,7 @@ async function toggleClaimOffer(id) {
             await api.unclaimOffer(userID, id);
         }
 
-        // display the offer details
+        // set the claim button to claimed
         toggleButtonClaimed(claimButton);
 
         // update the claimed offers widget, fetch and display the user's claimed offers
