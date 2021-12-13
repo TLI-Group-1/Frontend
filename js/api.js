@@ -19,9 +19,9 @@ limitations under the License.
 */
 var api = {
     // The URL root of the API backend
-    API_URL: "https://api.autodirect.tech",
+    API_URL: 'https://api.autodirect.tech',
 
-    login: async function(userID) {
+    login: async function (userID) {
         // send the search query to the backend API
         const response = await fetch(this.API_URL + '/login?user_id=' + userID);
 
@@ -30,14 +30,13 @@ var api = {
 
         if (response.status == 200) {
             return results;
-        }
-        else {
+        } else {
             console.log(response);
-            throw "HTTP status: " + response.status;
+            throw 'HTTP status: ' + response.status;
         }
     },
 
-    search: async function(searchQueryStr) {
+    search: async function (searchQueryStr) {
         // send the search query to the backend API
         const response = await fetch(this.API_URL + '/search' + searchQueryStr);
 
@@ -46,33 +45,37 @@ var api = {
 
         if (response.status == 200) {
             return results;
-        }
-        else {
+        } else {
             console.log(response);
-            throw "HTTP status: " + response.status;
+            throw 'HTTP status: ' + response.status;
         }
     },
 
-    getClaimedOffers: async function(userID) {
+    getClaimedOffers: async function (userID) {
         // send the claimed offers query to the backend API
-        const response = await fetch(this.API_URL + '/getClaimedOffers?user_id=' + userID);
+        const response = await fetch(
+            this.API_URL + '/getClaimedOffers?user_id=' + userID
+        );
 
         // retrieve the returned cars/offers
         const results = await response.json();
 
         if (response.status == 200) {
             return results;
-        }
-        else {
+        } else {
             console.log(response);
-            throw "HTTP status: " + response.status;
+            throw 'HTTP status: ' + response.status;
         }
     },
 
-    getOfferDetails: async function(userID, OfferID) {
+    getOfferDetails: async function (userID, OfferID) {
         // send the offer details query to the backend API
         const response = await fetch(
-            this.API_URL + '/getOfferDetails?user_id=' + userID + '&offer_id=' + OfferID
+            this.API_URL +
+                '/getOfferDetails?user_id=' +
+                userID +
+                '&offer_id=' +
+                OfferID
         );
 
         // retrieve the offer details
@@ -80,48 +83,58 @@ var api = {
 
         if (response.status == 200) {
             return results;
-        }
-        else {
+        } else {
             console.log(response);
-            throw "HTTP status: " + response.status;
+            throw 'HTTP status: ' + response.status;
         }
     },
 
-    claimOffer: async function(userID, OfferID) {
+    claimOffer: async function (userID, OfferID) {
         // send the claim query to the backend API
         const response = await fetch(
-            this.API_URL + '/claimOffer?user_id=' + userID + '&offer_id=' + OfferID
+            this.API_URL +
+                '/claimOffer?user_id=' +
+                userID +
+                '&offer_id=' +
+                OfferID
         );
 
         if (response.status == 200) {
             return;
-        }
-        else {
+        } else {
             console.log(response);
-            throw "HTTP status: " + response.status;
+            throw 'HTTP status: ' + response.status;
         }
     },
 
-    unclaimOffer: async function(userID, OfferID) {
+    unclaimOffer: async function (userID, OfferID) {
         // send the unclaim query to the backend API
         const response = await fetch(
-            this.API_URL + '/unclaimOffer?user_id=' + userID + '&offer_id=' + OfferID
+            this.API_URL +
+                '/unclaimOffer?user_id=' +
+                userID +
+                '&offer_id=' +
+                OfferID
         );
 
         if (response.status == 200) {
             return;
-        }
-        else {
+        } else {
             console.log(response);
-            throw "HTTP status: " + response.status;
+            throw 'HTTP status: ' + response.status;
         }
     },
 
-    updateLoanAmount: async function(userID, OfferID, loanAmount) {
+    updateLoanAmount: async function (userID, OfferID, loanAmount) {
         // send the search query to the backend API
         const response = await fetch(
-            this.API_URL + '/updateLoanAmount?user_id=' + userID + '&offer_id=' + OfferID +
-            '&loan_amount=' + loanAmount
+            this.API_URL +
+                '/updateLoanAmount?user_id=' +
+                userID +
+                '&offer_id=' +
+                OfferID +
+                '&loan_amount=' +
+                loanAmount
         );
 
         // retrieve the new offer details
@@ -129,15 +142,13 @@ var api = {
 
         if (response.status == 200) {
             return results;
-        }
-        else if (response.status == 406) {
+        } else if (response.status == 406) {
             return {
-                'error': 'New loan principal does not result in a loan offer!'
+                'error': 'New loan principal does not result in a loan offer!',
             };
-        }
-        else {
+        } else {
             console.log(response);
-            throw "HTTP status: " + response.status;
+            throw 'HTTP status: ' + response.status;
         }
-    }
+    },
 };
