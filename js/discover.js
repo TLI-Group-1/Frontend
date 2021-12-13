@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-
 /*
     Always called when the discovery page is loaded.
 */
@@ -26,12 +25,11 @@ async function onPageLoad() {
     let sortByURL = fetchQueryParamByKey('sort_by');
     if (sortByURL === null) {
         setPairInQuery('sort_by', 'price');
-    }
-    else {
+    } else {
         // change the input element selected value to reflect URL selection
         const sortBySelect = document.getElementById('sortBy');
         let options = sortBySelect.options;
-        for (let opt, i = 0; opt = options[i]; i++) {
+        for (let opt, i = 0; (opt = options[i]); i++) {
             if (opt.value == sortByURL) {
                 sortBySelect.selectedIndex = i;
                 break;
@@ -43,8 +41,7 @@ async function onPageLoad() {
     let sortAscURL = fetchQueryParamByKey('sort_asc');
     if (sortAscURL === null) {
         setPairInQuery('sort_asc', 'true');
-    }
-    else if (sortAscURL == 'false') {
+    } else if (sortAscURL == 'false') {
         document.getElementById('sortIcon').style.transform = 'none';
     }
 
@@ -56,15 +53,13 @@ async function onPageLoad() {
         setPairInQuery('budget_mo', '');
         setPairInQuery('user_id', '');
         submitSearch();
-    }
-    else {
+    } else {
         // log in the user
         await userLogin();
         // fetch and display the user's claimed offers, if there is any
         await updateClaimedOffers(fetchQueryParamByKey('user_id'));
     }
 }
-
 
 /*
     Login/agreement feature
@@ -89,7 +84,7 @@ async function userLogin() {
         // update user budget if not given
         let budgetMo = fetchQueryParamByKey('budget_mo');
         if (budgetMo === null || budgetMo === '') {
-            budgetMo = userParams["budget_mo"];
+            budgetMo = userParams['budget_mo'];
         }
         setPairInQuery('budget_mo', budgetMo);
         document.querySelector('input[name="budget_mo"]').value = budgetMo;
@@ -97,12 +92,12 @@ async function userLogin() {
         // update user down payment if not given
         let downPayment = fetchQueryParamByKey('downpayment');
         if (downPayment === null || downPayment === '') {
-            downPayment = userParams["down_payment"];
+            downPayment = userParams['down_payment'];
         }
         setPairInQuery('downpayment', downPayment);
-        document.querySelector('input[name="down_payment"]').value = downPayment;
-    }
-    catch (e) {
+        document.querySelector('input[name="down_payment"]').value =
+            downPayment;
+    } catch (e) {
         console.log(e);
     }
 
@@ -122,7 +117,8 @@ async function displayLoggedInView() {
 
     // show more sort options
     const sortByContainer = document.getElementById('sortBy');
-    sortByContainer.innerHTML += document.getElementById('tmpl_SortOptions').innerHTML;
+    sortByContainer.innerHTML +=
+        document.getElementById('tmpl_SortOptions').innerHTML;
 
     // add cars with loan offer info
     await submitSearch();
@@ -146,7 +142,6 @@ function genNewUserID() {
     return 'u' + utc_string + rand_credit_score;
 }
 
-
 /*
     Search features
 */
@@ -161,8 +156,7 @@ function toggleSortOrder() {
         sortIcon.style.transform = 'scaleY(-1)';
         // configure the search params to set ascending search order to true
         setPairInQuery('sort_asc', 'true');
-    }
-    else {
+    } else {
         // for ascending order, do not flip icon
         sortIcon.style.transform = 'none';
         // configure the search params to set ascending search order to false
@@ -207,11 +201,11 @@ async function submitSearch() {
             removeAllCarsOffers();
             // show the user an error
             let carsContainer = document.getElementById('carsContainer');
-            carsContainer.innerHTML += '<p class="error-message">' +
+            carsContainer.innerHTML +=
+                '<p class="error-message">' +
                 'You are not offered a loan! ' +
                 'Your credit score, monthly budget, or down payment is too low.</p>';
-        }
-        else {
+        } else {
             // display the results if successful
             displayCarsOrOffers(results);
         }
@@ -221,13 +215,11 @@ async function submitSearch() {
         if (userID !== '' && userID !== null) {
             updateClaimedOffers(userID);
         }
-    }
-    catch (e) {
+    } catch (e) {
         console.log(e);
         console.log(window.location.search);
     }
 }
-
 
 /*
     Cars and loan offers (left side results) operations
@@ -247,16 +239,24 @@ function displayCarsOrOffers(listings) {
             item['kms'] = item['mileage'];
         }
         addCarToContainer(
-            item['offer_id'], item['brand'], item['model'], item['year'], item['kms'],
-            item['price'], item['interest_rate'], item['payment_mo'], item['term_mo'],
+            item['offer_id'],
+            item['brand'],
+            item['model'],
+            item['year'],
+            item['kms'],
+            item['price'],
+            item['interest_rate'],
+            item['payment_mo'],
+            item['term_mo'],
             item['total_sum']
-        )
+        );
     }
 
     // if there is an odd number of cars, add an invisible entry for visual pleasantness
     if (listings.length % 2 !== 0) {
         let carsContainer = document.getElementById('carsContainer');
-        carsContainer.innerHTML += '<div class="car-offer card border-thin" style="visibility: hidden;"></div>';
+        carsContainer.innerHTML +=
+            '<div class="car-offer card border-thin" style="visibility: hidden;"></div>';
     }
 }
 
@@ -269,15 +269,28 @@ function displayCarsOrOffers(listings) {
         - this option should be used before agreement/login
 */
 function addCarToContainer(
-    id, make, model, year, kms, price, interest_rate, payment_mo, loan_term, total_sum
+    id,
+    make,
+    model,
+    year,
+    kms,
+    price,
+    interest_rate,
+    payment_mo,
+    loan_term,
+    total_sum
 ) {
     // get render target
     let carsContainer = document.getElementById('carsContainer');
 
     // get mustache templates
     const tmpl_CarOffer = document.getElementById('tmpl_CarOffer').innerHTML;
-    const tmpl_CarOfferCarInfo = document.getElementById('tmpl_CarOfferCarInfo').innerHTML;
-    const tmpl_CarOfferLoanInfo = document.getElementById('tmpl_CarOfferLoanInfo').innerHTML;
+    const tmpl_CarOfferCarInfo = document.getElementById(
+        'tmpl_CarOfferCarInfo'
+    ).innerHTML;
+    const tmpl_CarOfferLoanInfo = document.getElementById(
+        'tmpl_CarOfferLoanInfo'
+    ).innerHTML;
 
     // render car info
     const carData = {
@@ -285,33 +298,41 @@ function addCarToContainer(
         model: model,
         year: year,
         kms: Math.round(kms),
-        price: Math.round(price * 100) / 100
+        price: Math.round(price * 100) / 100,
     };
     const carInfoRendered = Mustache.render(tmpl_CarOfferCarInfo, carData);
 
     // if given loan data, render loan info with available button
-    if ((interest_rate !== '') && (interest_rate !== null) && (interest_rate !== undefined)) {
+    if (
+        interest_rate !== '' &&
+        interest_rate !== null &&
+        interest_rate !== undefined
+    ) {
         const loanData = {
             interest_rate: Math.round(interest_rate * 100) / 100,
             payment_mo: Math.round(payment_mo * 100) / 100,
             loan_term: loan_term,
-            total_sum: total_sum
+            total_sum: total_sum,
         };
         var loanInfoRendered = Mustache.render(tmpl_CarOfferLoanInfo, loanData);
-        var carOfferBtn = document.getElementById('tmpl_CarOfferBtnAvailable').innerHTML;
+        var carOfferBtn = document.getElementById(
+            'tmpl_CarOfferBtnAvailable'
+        ).innerHTML;
     }
     // otherwise, provide empty loan info and an unavailable button
     else {
         var loanInfoRendered = '';
-        var carOfferBtn = document.getElementById('tmpl_CarOfferBtnUnavailable').innerHTML;
+        var carOfferBtn = document.getElementById(
+            'tmpl_CarOfferBtnUnavailable'
+        ).innerHTML;
     }
 
     // assemble car offer
     const carOfferData = {
         car_info: carInfoRendered,
         loan_info: loanInfoRendered,
-        button: Mustache.render(carOfferBtn, {id: id})
-    }
+        button: Mustache.render(carOfferBtn, {id: id}),
+    };
     const carOfferRendered = Mustache.render(tmpl_CarOffer, carOfferData);
 
     // append car offer element to cars container
@@ -331,9 +352,9 @@ function removeAllCarsOffers() {
 */
 function setCarsOffersLoading() {
     let carsContainer = document.getElementById('carsContainer');
-    carsContainer.innerHTML = '<center style="font-size: 2rem;">Loading...</center>';
+    carsContainer.innerHTML =
+        '<center style="font-size: 2rem;">Loading...</center>';
 }
-
 
 /*
     Claimed loan offers operations
@@ -347,8 +368,7 @@ async function updateClaimedOffers(userID) {
     const offersDetailsLink = document.getElementById('offersDetailsLink');
     if (userOffer !== null) {
         offersDetailsLink.style.visibility = 'visible';
-    }
-    else {
+    } else {
         removeAllLoanOffers();
         offersDetailsLink.style.visibility = 'hidden';
     }
@@ -363,12 +383,18 @@ function toggleButtonClaimed(claimButton) {
         if (part.className.includes('claim-text')) {
             // unclaimed state
             if (part.className.includes('btn-dark-blue')) {
-                part.className = part.className.replace('btn-dark-blue', 'btn-red');
+                part.className = part.className.replace(
+                    'btn-dark-blue',
+                    'btn-red'
+                );
                 part.textContent = 'Offer claimed';
             }
             // claimed state
             else {
-                part.className = part.className.replace('btn-red', 'btn-dark-blue');
+                part.className = part.className.replace(
+                    'btn-red',
+                    'btn-dark-blue'
+                );
                 part.textContent = 'Claim this offer';
             }
         }
@@ -376,13 +402,25 @@ function toggleButtonClaimed(claimButton) {
         if (part.className.includes('claim-heart')) {
             // unclaimed state
             if (part.className.includes('bg-heart-empty')) {
-                part.className = part.className.replace('bg-heart-empty', 'bg-heart-filled');
-                part.className = part.className.replace('btn-red', 'btn-dark-blue');
+                part.className = part.className.replace(
+                    'bg-heart-empty',
+                    'bg-heart-filled'
+                );
+                part.className = part.className.replace(
+                    'btn-red',
+                    'btn-dark-blue'
+                );
             }
             // claimed state
             else {
-                part.className = part.className.replace('bg-heart-filled', 'bg-heart-empty');
-                part.className = part.className.replace('btn-dark-blue', 'btn-red');
+                part.className = part.className.replace(
+                    'bg-heart-filled',
+                    'bg-heart-empty'
+                );
+                part.className = part.className.replace(
+                    'btn-dark-blue',
+                    'btn-red'
+                );
             }
         }
     }
@@ -392,12 +430,14 @@ function toggleButtonClaimed(claimButton) {
     Claim a given loan offer
 */
 async function toggleClaimOffer(id) {
-    let claimButton = document.querySelector('button.claim-btn[name="' + id +'"]');
+    let claimButton = document.querySelector(
+        'button.claim-btn[name="' + id + '"]'
+    );
     const userID = fetchQueryParamByKey('user_id');
     // attempt to claim the specified offer at the backend API
     try {
         // offer is unclaimed, so claim it
-        if (claimButton.innerHTML.includes("Claim this offer")) {
+        if (claimButton.innerHTML.includes('Claim this offer')) {
             await api.claimOffer(userID, id);
         }
         // offer is claimed, so unclaim it
@@ -410,12 +450,10 @@ async function toggleClaimOffer(id) {
 
         // update the claimed offers widget, fetch and display the user's claimed offers
         await updateClaimedOffers(userID);
-    }
-    catch (e) {
+    } catch (e) {
         console.log(e);
     }
 }
-
 
 // always call this function on page load
 onPageLoad();

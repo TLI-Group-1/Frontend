@@ -151,7 +151,8 @@ main > div aside {
     }
 }
 
-.offer-selected, .offer-selected > * {
+.offer-selected,
+.offer-selected > * {
     background-color: #1d2345 !important;
     color: #ffffff;
 }

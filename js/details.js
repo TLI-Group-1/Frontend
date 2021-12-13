@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-
 /*
     Always called when the details page is loaded.
 */
@@ -52,12 +51,11 @@ function goBack() {
 */
 function highlightOffer(offerID) {
     // give the offer a "selected" style
-    const offerEntry = document.querySelector('li[name="' + offerID +'"]');
-    offerEntry.className += " offer-selected";
+    const offerEntry = document.querySelector('li[name="' + offerID + '"]');
+    offerEntry.className += ' offer-selected';
     // scroll the offer entry into view (if not already in-view)
     offerEntry.scrollIntoView(false);
 }
-
 
 /*
     Offer details operations
@@ -77,12 +75,17 @@ async function getOfferDetails(userID, offerID) {
 
         // display the offer details
         renderOfferDetails(
-            details['brand'], details['model'], details['year'], details['kms'],
-            details['price'], details['loan_amount'], details['interest_rate'],
-            details['term_mo'], details['total_sum']
-        )
-    }
-    catch (e) {
+            details['brand'],
+            details['model'],
+            details['year'],
+            details['kms'],
+            details['price'],
+            details['loan_amount'],
+            details['interest_rate'],
+            details['term_mo'],
+            details['total_sum']
+        );
+    } catch (e) {
         console.log(e);
     }
 }
@@ -91,13 +94,24 @@ async function getOfferDetails(userID, offerID) {
     Present a given offer's details
 */
 function renderOfferDetails(
-    make, model, year, kms, price, principal, interest_rate, loan_term, total_sum
+    make,
+    model,
+    year,
+    kms,
+    price,
+    principal,
+    interest_rate,
+    loan_term,
+    total_sum
 ) {
     // get render target
-    let offerDetailsContainer = document.getElementById('offerDetailsContainer');
+    let offerDetailsContainer = document.getElementById(
+        'offerDetailsContainer'
+    );
 
     // get mustache template
-    const tmpl_offerDetails = document.getElementById('tmpl_LoanDetails').innerHTML;
+    const tmpl_offerDetails =
+        document.getElementById('tmpl_LoanDetails').innerHTML;
 
     // render loan offer info
     const offerDetailsData = {
@@ -110,9 +124,12 @@ function renderOfferDetails(
         interest_rate: Math.round(interest_rate * 100) / 100,
         payment_mo: Math.round((total_sum / loan_term) * 100) / 100,
         loan_term: loan_term,
-        total_sum: total_sum
+        total_sum: total_sum,
     };
-    const offerDetailsRendered = Mustache.render(tmpl_offerDetails, offerDetailsData);
+    const offerDetailsRendered = Mustache.render(
+        tmpl_offerDetails,
+        offerDetailsData
+    );
 
     // append loan offer element to offers container
     offerDetailsContainer.innerHTML = offerDetailsRendered;
@@ -124,7 +141,7 @@ function renderOfferDetails(
 async function submitNewPrincipal() {
     // retrieve new principal info
     const formNewPrincipal = document.getElementById('form-update-principal');
-    const newPrincipal = (new FormData(formNewPrincipal)).get('loan-principal');
+    const newPrincipal = new FormData(formNewPrincipal).get('loan-principal');
 
     // attempt to update the specified offer's loan amount and fetch its details from the
     // backend API
@@ -141,21 +158,24 @@ async function submitNewPrincipal() {
         // make changes
         if ('error' in details) {
             alert(details['error']);
-        }
-        else {
+        } else {
             // display the offer details
             renderOfferDetails(
-                details['brand'], details['model'], details['year'], details['kms'],
-                details['price'], details['loan_amount'], details['interest_rate'],
-                details['term_mo'], details['total_sum']
-            )
+                details['brand'],
+                details['model'],
+                details['year'],
+                details['kms'],
+                details['price'],
+                details['loan_amount'],
+                details['interest_rate'],
+                details['term_mo'],
+                details['total_sum']
+            );
         }
-    }
-    catch (e) {
+    } catch (e) {
         console.log(e);
     }
 }
-
 
 // always call this function on page load
 onPageLoad();

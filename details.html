@@ -15,157 +15,217 @@ See the License for the specific language governing permissions and
 limitations under the License. -->
 
 <html lang="en" dir="ltr">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AutoDirect</title>
-    <!--[if IE]><link rel="shortcut icon" href="assets/icons/favicon.ico"><![endif]-->
-    <link rel="apple-touch-icon" href="assets/icons/favicon_180.png">
-    <link rel="icon" href="assets/icons/favicon_196.png">
-    <meta name="theme-color" content="#36cf9b"/>
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/minireset.min.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/details.css">
-    <!-- Scripts -->
-    <script type="text/javascript" src="js/mustache-4.2.0.min.js" defer></script>
-    <script type="text/javascript" src="js/main.js" defer></script>
-    <script type="text/javascript" src="js/api.js" defer></script>
-    <script type="text/javascript" src="js/details.js" defer></script>
-</head>
-<body>
-    <main class="card border-thin">
-        <header>
-            <div class="region-dark go-back" onclick="goBack();">
-                <img src="./assets/icons/arrow-back-min.svg" alt="Go back">
-                <h3>Return to your search</h3>
-            </div>
-            <div class="details-title">
-                <img src="assets/icons/senso_logo_text_dark-min.svg" alt="Senso.AI logo">
-                <h1>AutoDirect</h1>
-            </div>
-        </header>
-        <nav>
-            <h2>Your loan offer details</h2>
-        </nav>
-        <div>
-            <aside>
-                <ul class="loan-offers" id="loanOffersContainer">
-                </ul>
-            </aside>
-            <section class="region-dark" id="offerDetailsContainer">
-            </section>
-        </div>
-    </main>
-
-    <footer class="region-dark">
-        <div class="footer-spacer"></div>
-        <section class="license">
-            <article>
-                <p><b>Copyright &copy; 2021 Ruofan Chen, Samm Du, Nada Eldin, Shalev Lifshitz</b></p>
-                <p>
-                    Licensed under the Apache License, Version 2.0 (the "License");
-                    you may not use this file except in compliance with the License.
-                    You may obtain a copy of the License at:
-                </p>
-                <p class="indented">
-                    <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" class="link-light" rel="noopener">
-                        https://www.apache.org/licenses/LICENSE-2.0
-                    </a>
-                </p>
-                <p>
-                    Unless required by applicable law or agreed to in writing, software
-                    distributed under the License is distributed on an "AS IS" BASIS,
-                    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-                    See the License for the specific language governing permissions and
-                    limitations under the License.
-                </p>
-            </article>
-        </section>
-        <aside class="attrib">
-            <div class="attrib-child">
-                <h3>Source code at:</h3>
-                <a href="https://github.com/TLI-Group-1" target="_blank" rel="noopener">
-                    <img src="assets/icons/github_button-min.svg" alt="GitHub logo" class="btn-shifty">
-                </a>
-            </div>
-            <div class="attrib-child">
-                <h3>Powered by:</h3>
-                <a href="https://senso.ai/" target="_blank" rel="noopener">
-                    <img src="assets/icons/senso_logo_text_light-min.svg" alt="Senso.AI logo" class="btn-shifty">
-                </a>
-            </div>
-        </aside>
-        <div class="footer-spacer"></div>
-    </footer>
-
-    <!-- Mustache templates below; rendered in JavaScript -->
-
-    <script type="text/html" id="tmpl_LoanOffer">
-        <li class="loan-offer-entry" name="{{offer_id}}">
-            <a href="./details.html?user_id={{user_id}}&offerSelected={{offer_id}}">
-                <img src="./assets/img/car-1.jpg" alt="Placeholder car image">
-                <div class="loan-offer-summary">
-                    <span class="offer-car-info">{{make}} {{model}} {{year}}</span>
-                    <span class="offer-loan-info">${{payment_mo}}/mo &middot; {{loan_term}} months &middot; {{interest_rate}}%</span>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>AutoDirect</title>
+        <!--[if IE
+            ]><link rel="shortcut icon" href="assets/icons/favicon.ico"
+        /><![endif]-->
+        <link rel="apple-touch-icon" href="assets/icons/favicon_180.png" />
+        <link rel="icon" href="assets/icons/favicon_196.png" />
+        <meta name="theme-color" content="#36cf9b" />
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="css/minireset.min.css" />
+        <link rel="stylesheet" href="css/main.css" />
+        <link rel="stylesheet" href="css/details.css" />
+        <!-- Scripts -->
+        <script
+            type="text/javascript"
+            src="js/mustache-4.2.0.min.js"
+            defer
+        ></script>
+        <script type="text/javascript" src="js/main.js" defer></script>
+        <script type="text/javascript" src="js/api.js" defer></script>
+        <script type="text/javascript" src="js/details.js" defer></script>
+    </head>
+    <body>
+        <main class="card border-thin">
+            <header>
+                <div class="region-dark go-back" onclick="goBack();">
+                    <img
+                        src="./assets/icons/arrow-back-min.svg"
+                        alt="Go back"
+                    />
+                    <h3>Return to your search</h3>
                 </div>
-            </a>
-        </li>
-    </script>
-
-    <script type="text/html" id="tmpl_LoanDetails">
-        <div class="loan-offer-details">
-            <div class="car-hero">
-                <img src="./assets/img/car-1.jpg" alt="Placeholder car image">
+                <div class="details-title">
+                    <img
+                        src="assets/icons/senso_logo_text_dark-min.svg"
+                        alt="Senso.AI logo"
+                    />
+                    <h1>AutoDirect</h1>
+                </div>
+            </header>
+            <nav>
+                <h2>Your loan offer details</h2>
+            </nav>
+            <div>
+                <aside>
+                    <ul class="loan-offers" id="loanOffersContainer"></ul>
+                </aside>
+                <section
+                    class="region-dark"
+                    id="offerDetailsContainer"
+                ></section>
             </div>
-            <ul class="car-info">
-                <li class="car-info-pair">
-                    <h4>Make:</h4>
-                    <span>{{make}}</span>
-                </li>
-                <li class="car-info-pair">
-                    <h4>Model:</h4>
-                    <span>{{model}}</span>
-                </li>
-                <li class="car-info-pair">
-                    <h4>Year:</h4>
-                    <span>{{year}}</span>
-                </li>
-                <li class="car-info-pair">
-                    <h4>Usage:</h4>
-                    <span>{{kms}} km</span>
-                </li>
-                <li class="car-info-pair">
-                    <h4>Retail price:</h4>
-                    <span>&#36;{{price}}</span>
-                </li>
-            </ul>
-            <form id="form-update-principal" onsubmit="submitNewPrincipal(); return false;">
-                <label for="loan-principal"><h4>Loan principal:</h4></label>
-                <input class="round-empty-pill" type="number" name="loan-principal" value="{{principal}}">
-                <button type="submit" name="updatePrincipal" class="btn-green">
-                    Update
-                </button>
-            </form>
-            <ul class="loan-info">
-                <li class="car-info-pair">
-                    <h4>Interest rate:</h4>
-                    <span>{{interest_rate}}&#37;</span>
-                </li>
-                <li class="car-info-pair">
-                    <h4>You pay:</h4>
-                    <span>&#36;{{payment_mo}}/mo</span>
-                </li>
-                <li class="car-info-pair">
-                    <h4>Loan term:</h4>
-                    <span>{{loan_term}} months</span>
-                </li>
-                <li class="car-info-pair">
-                    <h4>Total cost:</h4>
-                    <span>&#36;{{total_sum}}</span>
-                </li>
-            </ul>
-        </div>
-    </script>
-</body>
+        </main>
+
+        <footer class="region-dark">
+            <div class="footer-spacer"></div>
+            <section class="license">
+                <article>
+                    <p>
+                        <b>
+                            Copyright &copy; 2021 Ruofan Chen, Samm Du, Nada
+                            Eldin, Shalev Lifshitz
+                        </b>
+                    </p>
+                    <p>
+                        Licensed under the Apache License, Version 2.0 (the
+                        "License"); you may not use this file except in
+                        compliance with the License. You may obtain a copy of
+                        the License at:
+                    </p>
+                    <p class="indented">
+                        <a
+                            href="https://www.apache.org/licenses/LICENSE-2.0"
+                            target="_blank"
+                            class="link-light"
+                            rel="noopener"
+                        >
+                            https://www.apache.org/licenses/LICENSE-2.0
+                        </a>
+                    </p>
+                    <p>
+                        Unless required by applicable law or agreed to in
+                        writing, software distributed under the License is
+                        distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+                        CONDITIONS OF ANY KIND, either express or implied. See
+                        the License for the specific language governing
+                        permissions and limitations under the License.
+                    </p>
+                </article>
+            </section>
+            <aside class="attrib">
+                <div class="attrib-child">
+                    <h3>Source code at:</h3>
+                    <a
+                        href="https://github.com/TLI-Group-1"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        <img
+                            src="assets/icons/github_button-min.svg"
+                            alt="GitHub logo"
+                            class="btn-shifty"
+                        />
+                    </a>
+                </div>
+                <div class="attrib-child">
+                    <h3>Powered by:</h3>
+                    <a href="https://senso.ai/" target="_blank" rel="noopener">
+                        <img
+                            src="assets/icons/senso_logo_text_light-min.svg"
+                            alt="Senso.AI logo"
+                            class="btn-shifty"
+                        />
+                    </a>
+                </div>
+            </aside>
+            <div class="footer-spacer"></div>
+        </footer>
+
+        <!-- Mustache templates below; rendered in JavaScript -->
+
+        <script type="text/html" id="tmpl_LoanOffer">
+            <li class="loan-offer-entry" name="{{offer_id}}">
+                <a href="./details.html?user_id={{user_id}}&offerSelected={{offer_id}}">
+                    <img
+                        src="./assets/img/car-1.jpg"
+                        alt="Placeholder car image"
+                    />
+                    <div class="loan-offer-summary">
+                        <span class="offer-car-info"
+                            >{{make}} {{model}} {{year}}</span
+                        >
+                        <span class="offer-loan-info"
+                            >${{payment_mo}}/mo &middot; {{loan_term}} months
+                            &middot; {{interest_rate}}%</span
+                        >
+                    </div>
+                </a>
+            </li>
+        </script>
+
+        <script type="text/html" id="tmpl_LoanDetails">
+            <div class="loan-offer-details">
+                <div class="car-hero">
+                    <img
+                        src="./assets/img/car-1.jpg"
+                        alt="Placeholder car image"
+                    />
+                </div>
+                <ul class="car-info">
+                    <li class="car-info-pair">
+                        <h4>Make:</h4>
+                        <span>{{make}}</span>
+                    </li>
+                    <li class="car-info-pair">
+                        <h4>Model:</h4>
+                        <span>{{model}}</span>
+                    </li>
+                    <li class="car-info-pair">
+                        <h4>Year:</h4>
+                        <span>{{year}}</span>
+                    </li>
+                    <li class="car-info-pair">
+                        <h4>Usage:</h4>
+                        <span>{{kms}} km</span>
+                    </li>
+                    <li class="car-info-pair">
+                        <h4>Retail price:</h4>
+                        <span>&#36;{{price}}</span>
+                    </li>
+                </ul>
+                <form
+                    id="form-update-principal"
+                    onsubmit="submitNewPrincipal(); return false;"
+                >
+                    <label for="loan-principal"><h4>Loan principal:</h4></label>
+                    <input
+                        class="round-empty-pill"
+                        type="number"
+                        name="loan-principal"
+                        value="{{principal}}"
+                    />
+                    <button
+                        type="submit"
+                        name="updatePrincipal"
+                        class="btn-green"
+                    >
+                        Update
+                    </button>
+                </form>
+                <ul class="loan-info">
+                    <li class="car-info-pair">
+                        <h4>Interest rate:</h4>
+                        <span>{{interest_rate}}&#37;</span>
+                    </li>
+                    <li class="car-info-pair">
+                        <h4>You pay:</h4>
+                        <span>&#36;{{payment_mo}}/mo</span>
+                    </li>
+                    <li class="car-info-pair">
+                        <h4>Loan term:</h4>
+                        <span>{{loan_term}} months</span>
+                    </li>
+                    <li class="car-info-pair">
+                        <h4>Total cost:</h4>
+                        <span>&#36;{{total_sum}}</span>
+                    </li>
+                </ul>
+            </div>
+        </script>
+    </body>
 </html>

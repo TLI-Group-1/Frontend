@@ -17,11 +17,12 @@ limitations under the License.
 /* import the Poppins font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
-html, body {
+html,
+body {
     background-color: #f6fbfd;
     color: #1d2345;
-    font-family: "Poppins", "Poppins Latin", "Now",
-                 "Roboto", "Helvetica", "Arial", sans-serif;
+    font-family: 'Poppins', 'Poppins Latin', 'Now', 'Roboto', 'Helvetica',
+        'Arial', sans-serif;
     font-size: 14px;
 }
 
@@ -120,18 +121,19 @@ button:hover {
     border-radius: 0 0 1.1rem 1.1rem;
 }
 
-input, select {
+input,
+select {
     font-family: inherit;
     font-size: 1em;
 }
 
 /* remove increment arrows from number fields */
-input[type="number"] {
+input[type='number'] {
     -moz-appearance: textfield;
     appearance: textfield;
 }
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
@@ -221,8 +223,7 @@ footer div.footer-spacer {
 
 .card {
     background-color: #ffffff;
-    box-shadow:
-        0 0.08rem 0.06rem -0.62rem rgba(0, 0, 0, 0.065),
+    box-shadow: 0 0.08rem 0.06rem -0.62rem rgba(0, 0, 0, 0.065),
         0 0.28rem 0.21rem -0.62rem rgba(0, 0, 0, 0.095),
         0 1.25rem 0.93rem -0.62rem rgba(0, 0, 0, 0.17);
     border-radius: 1.2rem;
@@ -252,14 +253,12 @@ footer div.footer-spacer {
     word-break: break-all;
 }
 .link-light:link,
-.link-light:visited
-{
+.link-light:visited {
     text-decoration: underline;
     color: inherit;
 }
 .link-light:hover,
-.link-light:active
-{
+.link-light:active {
     text-decoration: none;
 }
 

@@ -38,7 +38,6 @@ function setPairInQuery(key, value) {
     window.history.replaceState(null, null, new_params);
 }
 
-
 /*
     Claimed offers list operations
 */
@@ -54,16 +53,14 @@ async function fetchClaimedOffers(userID) {
         // if no claimed offers, return null
         if (userClaimedOffers.length === 0) {
             return null;
-        }
-        else {
+        } else {
             // populate the sidebar with user's claimed offers
             displayClaimedOffers(userClaimedOffers, userID);
 
             // return the first offer ID as selection default
             return userClaimedOffers[0]['offer_id'];
         }
-    }
-    catch (e) {
+    } catch (e) {
         console.log(e);
         console.log(window.location.search);
     }
@@ -76,8 +73,14 @@ function displayClaimedOffers(offers, userID) {
     removeAllLoanOffers();
     for (const offer of offers) {
         addOfferToContainer(
-            userID, offer['offer_id'], offer['brand'], offer['model'], offer['year'],
-            offer['interest_rate'], offer['term_mo'], offer['total_sum']
+            userID,
+            offer['offer_id'],
+            offer['brand'],
+            offer['model'],
+            offer['year'],
+            offer['interest_rate'],
+            offer['term_mo'],
+            offer['total_sum']
         );
     }
 }
@@ -86,7 +89,14 @@ function displayClaimedOffers(offers, userID) {
     Add a loan offer to the loan offers container
 */
 function addOfferToContainer(
-    user_id, offer_id, make, model, year, interest_rate, loan_term, total_sum
+    user_id,
+    offer_id,
+    make,
+    model,
+    year,
+    interest_rate,
+    loan_term,
+    total_sum
 ) {
     // get render target
     let offersContainer = document.getElementById('loanOffersContainer');
@@ -103,7 +113,7 @@ function addOfferToContainer(
         year: year,
         payment_mo: Math.round((total_sum / loan_term) * 100) / 100,
         loan_term: loan_term,
-        interest_rate: Math.round(interest_rate * 100) / 100
+        interest_rate: Math.round(interest_rate * 100) / 100,
     };
     const loanOfferRendered = Mustache.render(tmpl_LoanOffer, loanOfferData);
 
