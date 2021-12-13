@@ -87,7 +87,7 @@ section.sec-inputs button {
     width: 100%;
 }
 
-section.sec-inputs button[name="login"] {
+section.sec-inputs button[name='login'] {
     border-radius: 0.5rem;
     /* width: 100%; */
     min-width: 15.5rem;
@@ -97,10 +97,10 @@ section.sec-inputs button[name="login"] {
     font-weight: 500;
     transition: all 250ms ease;
 }
-section.sec-inputs button[name="login"]:hover {
+section.sec-inputs button[name='login']:hover {
     transform: translateY(-0.2rem);
 }
-section.sec-inputs button[name="login"]:active {
+section.sec-inputs button[name='login']:active {
     transform: none;
 }
 
@@ -114,7 +114,7 @@ section.sec-inputs article form input {
     width: 100%;
 }
 
-section.sec-inputs button[name="updateFinancials"] {
+section.sec-inputs button[name='updateFinancials'] {
     margin: 1rem 0 0 0;
     padding: 1rem;
     transition: all 250ms ease;
@@ -312,19 +312,19 @@ div.cars-container {
     width: 5rem;
     border-radius: 0 0 1.1rem 0;
 }
-.car-offer button.claim-btn span.claim-heart:hover{
+.car-offer button.claim-btn span.claim-heart:hover {
     width: 7rem;
 }
 
 /* either makes the background image a filled heart or empty heart */
 .bg-heart-filled {
-    background-image: url("../assets/icons/heart-filled-min.svg");
+    background-image: url('../assets/icons/heart-filled-min.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 2rem;
 }
 .bg-heart-empty {
-    background-image: url("../assets/icons/heart-unfilled-min.svg");
+    background-image: url('../assets/icons/heart-unfilled-min.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 2rem;
